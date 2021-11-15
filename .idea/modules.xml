@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/V2B5-Food.iml" filepath="$PROJECT_DIR$/.idea/V2B5-Food.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/module1/module1.iml" filepath="$PROJECT_DIR$/modules/module1/module1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/module2/module2.iml" filepath="$PROJECT_DIR$/modules/module2/module2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/module3/module3.iml" filepath="$PROJECT_DIR$/modules/module3/module3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/module4/module4.iml" filepath="$PROJECT_DIR$/modules/module4/module4.iml" />
+    </modules>
+  </component>
+</project>
