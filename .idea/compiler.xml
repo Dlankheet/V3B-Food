@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="rabbitMQ" />
+        <module name="NoSQL" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="NoSQL" target="17" />
       <module name="rabbitMQ" target="17" />
     </bytecodeTargetLevel>
   </component>

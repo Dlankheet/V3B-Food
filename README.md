@@ -2,8 +2,6 @@
 For al your tasty needs.
 
 # Mogelijke functionaliteiten
-
----------------
 * Registreren / inloggen verschillende rollen 
 * Bestellen van één of meer gerechten 
 * Aannemen of afwijzen van bestelling door keuken 
@@ -20,8 +18,6 @@ For al your tasty needs.
 * Overzicht financiële gegevens voor restauranthouder
 
 # Eisen/Verplichtingen
-
----------------
 * Gebruik van GitHub of Gitlab volgens een geschikte workflow
 * Maak 4 of meer verschillende (micro)services
 * Minstens 4 (micro)services moeten in Java zijn geschreven
@@ -34,7 +30,6 @@ For al your tasty needs.
 
 
 # Aanbevolen:
-
 * Maak gebruik van tactical patterns uit Domain Driven Design (DDD)
 * Structureer elke (micro)service volgens een dependency inversion architecture zoals Hexagonal Architecture, Onion Architecture of Clean Architecture
 * De code is voldoende geautomatiseerd getest, bijvoorbeeld met unit en/of integration tests
