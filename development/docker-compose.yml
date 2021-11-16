@@ -7,8 +7,7 @@ services:
       - "5672:5672"
       - "15672:15672"
     volumes:
-      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+      - ./data/rabbitmq_data:/var/lib/rabbitmq/
 
   mongodb:
     image: mongo:latest
@@ -18,7 +17,4 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data_container:/data/db
-
-volumes:
-  mongodb_data_container:
+      - ./data/mongodb_data_container:/data/db
