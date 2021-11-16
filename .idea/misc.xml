@@ -4,7 +4,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/rabbitMQ/pom.xml" />
-        <option value="$PROJECT_DIR$/NoSQL/pom.xml" />
+        <option value="$PROJECT_DIR$/mongoDemo/pom.xml" />
       </list>
     </option>
   </component>
