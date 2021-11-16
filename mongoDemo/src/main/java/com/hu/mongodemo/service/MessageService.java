@@ -2,7 +2,6 @@ package com.hu.mongodemo.service;
 
 import com.hu.mongodemo.domain.Log;
 import com.hu.mongodemo.domain.LogRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
