@@ -1,7 +1,7 @@
 # V2B5-Food
 For al your tasty needs.
 
-#Mogelijke functionaliteiten
+# Mogelijke functionaliteiten
 
 ---------------
 * Registreren / inloggen verschillende rollen 
@@ -19,7 +19,7 @@ For al your tasty needs.
 * Overzicht verkochte gerechten voor restauranthouder 
 * Overzicht financiële gegevens voor restauranthouder
 
-#Eisen/Verplichtingen
+# Eisen/Verplichtingen
 
 ---------------
 * Gebruik van GitHub of Gitlab volgens een geschikte workflow
@@ -33,7 +33,7 @@ For al your tasty needs.
 * De code is netjes, leesbaar en niet nodeloos gecompliceerd
 
 
-Aanbevolen:
+# Aanbevolen:
 
 * Maak gebruik van tactical patterns uit Domain Driven Design (DDD)
 * Structureer elke (micro)service volgens een dependency inversion architecture zoals Hexagonal Architecture, Onion Architecture of Clean Architecture
