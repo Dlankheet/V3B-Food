@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  mongodb:
+    extends: 
+      file: ../development/docker-compose.yml
+      service: mongodb
+  rabbitmq:
+    extends:
+      file: ../development/docker-compose.yml
+      service: rabbitmq
+  ingredients:
+    build: ../ingredients
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_RABBITMQ_HOST: rabbitmq
