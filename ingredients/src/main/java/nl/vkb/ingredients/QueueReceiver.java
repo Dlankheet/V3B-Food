@@ -1,5 +1,7 @@
 package nl.vkb.ingredients;
 
+import nl.vkb.ingredients.dto.ModifyIngredient;
+import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +18,10 @@ public class QueueReceiver {
     public Jackson2JsonMessageConverter converter() {
         return new Jackson2JsonMessageConverter();
     }
-    @RabbitListener(queues = "ingredient.subtract")
-    public void subtractReceive(String in) {
-        System.out.println(" [x] Received '" + in + "'");
-    }
-    @RabbitListener(queues = "ingredient.create")
-    public void createReceive(Ingredient ingredient) {
-        this.repository.save(ingredient);
+    @RabbitListener(queuesToDeclare = @Queue("ingredient.subtract"))
+    public void subtractReceive(ModifyIngredient modifyIngredient) {
+        Ingredient ingredient=repository.findById(modifyIngredient.id).get();
+        ingredient.stock+= modifyIngredient.action;
+        repository.save(ingredient);
     }
 }
