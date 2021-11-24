@@ -8,4 +8,5 @@ public class Ingredient {
 	@Id
 	public String id;
 	public String name;
+	public int stock;
 }
