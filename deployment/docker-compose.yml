@@ -11,7 +11,7 @@ services:
   ingredients:
     build: ../ingredients
     ports:
-      - "8080:8080"
+      - "8082:8082"
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
