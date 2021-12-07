@@ -1,12 +1,14 @@
-package com.hu.bep3.vkb5.user.domain;
+package com.hu.bep3.vkb5.user.core.domain.model;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -19,14 +21,14 @@ public class Customer {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private List<Address> addressList;
+	@Indexed
+	private Set<String> addresses;
 
-	public Customer(String firstName, String lastName, String email, List<Address> addressList) {
-		this.id = UUID.randomUUID();
+	public Customer(String firstName, String lastName, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.addressList = addressList;
+		this.addresses = new HashSet<>();
 	}
 
 	public void order(int orderId){
