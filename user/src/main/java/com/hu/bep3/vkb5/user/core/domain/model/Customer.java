@@ -25,6 +25,7 @@ public class Customer {
 	private Set<String> addresses;
 
 	public Customer(String firstName, String lastName, String email) {
+		this.id = UUID.randomUUID();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
