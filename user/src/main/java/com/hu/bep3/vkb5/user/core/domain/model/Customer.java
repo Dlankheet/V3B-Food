@@ -11,7 +11,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Document(collection="customers")
 @Getter
 @ToString
 @EqualsAndHashCode
@@ -20,6 +20,7 @@ public class Customer {
 	private UUID id;
 	private String firstName;
 	private String lastName;
+	@Indexed(unique = true)
 	private String email;
 	@Indexed
 	private Set<String> addresses;
