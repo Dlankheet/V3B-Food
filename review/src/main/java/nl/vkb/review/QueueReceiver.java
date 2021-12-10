@@ -1,6 +1,6 @@
 package nl.vkb.review;
 
-import nl.vkb.review.Exception.ReviewNotFoundException;
+import nl.vkb.review.Service.ReviewQueryService;
 import nl.vkb.review.domain.Review;
 import nl.vkb.review.dto.ReviewDTO;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -12,9 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class QueueReceiver {
 	private final ReviewRepository repository;
+	private final ReviewQueryService service;
 
-	public QueueReceiver(ReviewRepository repository) {
+	public QueueReceiver(ReviewRepository repository, ReviewQueryService service) {
 		this.repository = repository;
+		this.service = service;
 	}
 
 	@Bean
@@ -24,9 +26,7 @@ public class QueueReceiver {
 
 	@RabbitListener(queuesToDeclare = @Queue("review.submit"))
 	public void reviewListener(ReviewDTO reviewDTO) {
-		Review ingredient = repository.findById(reviewDTO.id).orElseThrow(
-				() -> new ReviewNotFoundException("Could not be found")
-		);
-		repository.save(ingredient);
+		Review review = service.getReview(reviewDTO.id);
+		repository.save(review);
 	}
 }
