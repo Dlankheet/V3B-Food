@@ -1,6 +1,6 @@
 package nl.vkb.review.dto;
 
-import nl.vkb.review.Rating;
+import nl.vkb.review.domain.Rating;
 
 import java.util.List;
 import java.util.UUID;

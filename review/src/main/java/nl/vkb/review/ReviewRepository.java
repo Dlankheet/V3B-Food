@@ -1,6 +1,9 @@
 package nl.vkb.review;
 
+import nl.vkb.review.domain.Review;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ReviewRepository extends MongoRepository<Review, String> {
+import java.util.UUID;
+
+public interface ReviewRepository extends MongoRepository<Review, UUID> {
 }
