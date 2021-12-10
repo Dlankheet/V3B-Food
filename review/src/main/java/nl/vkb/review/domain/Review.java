@@ -1,6 +1,7 @@
 package nl.vkb.review.domain;
 
 import lombok.Data;
+import nl.vkb.review.Exception.ReviewRatingException;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;
@@ -21,5 +22,6 @@ public class Review {
 		if (this.rating.getRating() > 0 || this.rating.getRating() < 5){
 			this.rating = rating;
 		}
+		else throw new ReviewRatingException("rating number is not between 0 and 5");
 	}
 }

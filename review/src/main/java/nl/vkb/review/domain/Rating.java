@@ -10,4 +10,6 @@ public class Rating {
 	@Id
 	private UUID id;
 	private double rating;
+
+	public Rating(double rating) {this.rating = rating;}
 }
