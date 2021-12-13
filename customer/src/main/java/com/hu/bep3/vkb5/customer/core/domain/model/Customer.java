@@ -1,6 +1,7 @@
 package com.hu.bep3.vkb5.customer.core.domain.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="customers")
@@ -22,8 +24,10 @@ public class Customer {
 	private String lastName;
 	@Indexed(unique = true)
 	private String email;
-	@Indexed
-	private Set<String> addresses;
+	@Indexed @DBRef
+	private Set<Address> addresses;
+	@DBRef
+	private OrderHistory orderHistory;
 
 	public Customer(String firstName, String lastName, String email) {
 		this.id = UUID.randomUUID();
@@ -31,10 +35,11 @@ public class Customer {
 		this.lastName = lastName;
 		this.email = email;
 		this.addresses = new HashSet<>();
+		this.orderHistory = new OrderHistory();
 	}
 
 	public void order(int orderId){
-		// do an order
+		// order food
 	}
 
 	public void reviewOrder(int orderId){
