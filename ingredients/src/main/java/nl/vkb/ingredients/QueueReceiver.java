@@ -9,19 +9,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class QueueReceiver {
-    private final IngredientRepository repository;
-
-    public QueueReceiver(IngredientRepository repository) {
-        this.repository = repository;
+    private final UpdateStockService updateStockService;
+    public QueueReceiver(UpdateStockService updateStockService) {
+        this.updateStockService = updateStockService;
     }
     @Bean
     public Jackson2JsonMessageConverter converter() {
         return new Jackson2JsonMessageConverter();
     }
-    @RabbitListener(queuesToDeclare = @Queue("ingredient.subtract"))
+    @RabbitListener(queuesToDeclare = @Queue("ingredient.updateStock"))
     public void subtractReceive(ModifyIngredient modifyIngredient) {
-        Ingredient ingredient=repository.findById(modifyIngredient.id).get();
-        ingredient.stock+= modifyIngredient.action;
-        repository.save(ingredient);
+        updateStockService.updateStorage(modifyIngredient.id,Action.ADD,modifyIngredient.action);
     }
 }
