@@ -1,8 +1,8 @@
 package nl.vkb.ingredients;
 
 public class Action {
-	public static ActionInterface SET=new SETImpl();
-	public static ActionInterface ADD=new ADDImpl();
+	public static final ActionInterface SET=new SETImpl();
+	public static final ActionInterface ADD=new ADDImpl();
 
 	public interface ActionInterface {
 		int action(int old, int action);

@@ -14,6 +14,12 @@ public class UpdateStockService {
 		this.repository = repository;
 	}
 
+	/**
+	 * Updates the stock of the item specified by id, with dependency-injection for the action.
+	 * @param id ID of the ingredient.
+	 * @param action dependency-injected {@link nl.vkb.ingredients.Action.ActionInterface}
+	 * @param stock The amount that should be used.
+	 */
 	public void updateStorage(String id, Action.ActionInterface action, int stock) {
 		Ingredient ingredient=repository.findById(id).get();
 		ingredient.stock=action.action(ingredient.stock,stock);
