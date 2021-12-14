@@ -1,7 +1,6 @@
 package com.hu.bep3.vkb5.customer.core.domain.model;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -28,6 +27,7 @@ public class Customer {
 	private Set<Address> addresses;
 	@DBRef
 	private OrderHistory orderHistory;
+	private Set<String> reviews;
 
 	public Customer(String firstName, String lastName, String email) {
 		this.id = UUID.randomUUID();
