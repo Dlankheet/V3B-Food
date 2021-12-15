@@ -3,9 +3,7 @@ package com.hu.bep3.vkb5.customer.core.domain.model;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
 @Getter
 @ToString
 @EqualsAndHashCode

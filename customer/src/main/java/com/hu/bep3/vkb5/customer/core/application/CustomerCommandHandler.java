@@ -2,6 +2,7 @@ package com.hu.bep3.vkb5.customer.core.application;
 
 import com.hu.bep3.vkb5.customer.core.application.command.AddAddress;
 import com.hu.bep3.vkb5.customer.core.application.command.RegisterCustomer;
+import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.CustomerNotFoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.EmailAlreadyExistsException;
 import com.hu.bep3.vkb5.customer.core.domain.model.Address;
@@ -29,10 +30,11 @@ public class CustomerCommandHandler {
 		return customer;
 	}
 
-	public Customer handle(AddAddress command){
-		Customer customer = this.getCandidateById(command.getCustomerId());
+	public Customer handle(AddAddress command) throws AddressAlreadyBoundException {
+		Customer customer = this.getCustomerById(command.getCustomerId());
 		Address commandAddress = command.getAddress();
-		//TODO: actual implementation
+		customer.addAddress(commandAddress);
+		repository.save(customer);
 		return customer;
 	}
 
@@ -40,7 +42,7 @@ public class CustomerCommandHandler {
 		return this.repository.findCustomerByEmailEquals(email).isPresent();
 	}
 
-	private Customer getCandidateById(UUID id) {
+	private Customer getCustomerById(UUID id) {
 		return this.repository.findById(id)
 				.orElseThrow(() -> new CustomerNotFoundException(id.toString()));
 	}

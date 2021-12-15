@@ -4,12 +4,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection="customers")
@@ -23,9 +23,7 @@ public class Customer {
 	private String lastName;
 	@Indexed(unique = true)
 	private String email;
-	@Indexed @DBRef
 	private Set<Address> addresses;
-	@DBRef
 	private OrderHistory orderHistory;
 	private Set<String> reviews;
 
@@ -51,7 +49,10 @@ public class Customer {
 	}
 
 	public void addAddress(Address address){
-		// add an address
+		boolean added = this.addresses.add(address);
+		if(!added){
+			throw new AddressAlreadyBoundException();
+		}
 	}
 
 	public void removeAddress(Address address){
