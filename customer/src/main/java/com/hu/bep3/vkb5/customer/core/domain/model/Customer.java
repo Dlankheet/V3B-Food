@@ -60,7 +60,7 @@ public class Customer {
 	}
 
 	public void removeAddress(Address address){
-		// remove an address
+		this.addresses.remove(address);
 	}
 
 	private boolean validateEmail(String email) throws InvalidEmailException {
