@@ -5,6 +5,7 @@ import com.hu.bep3.vkb5.customer.core.application.command.RegisterCustomer;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.CustomerNotFoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.EmailAlreadyExistsException;
+import com.hu.bep3.vkb5.customer.core.domain.exception.InvalidEmailException;
 import com.hu.bep3.vkb5.customer.core.domain.model.Address;
 import com.hu.bep3.vkb5.customer.core.domain.model.Customer;
 import com.hu.bep3.vkb5.customer.core.port.persistence.CustomerRepository;
@@ -21,7 +22,7 @@ public class CustomerCommandHandler {
 		this.repository = repository;
 	}
 
-	public Customer handle(RegisterCustomer command) throws EmailAlreadyExistsException{
+	public Customer handle(RegisterCustomer command) throws EmailAlreadyExistsException, InvalidEmailException {
 		if(emailAlreadyExists(command.getEmail())){
 			throw new EmailAlreadyExistsException(command.getEmail());
 		}

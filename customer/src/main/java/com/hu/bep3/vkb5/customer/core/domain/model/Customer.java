@@ -4,7 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import com.hu.bep3.vkb5.customer.Utils;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
+import com.hu.bep3.vkb5.customer.core.domain.exception.InvalidEmailException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -31,7 +33,7 @@ public class Customer {
 		this.id = UUID.randomUUID();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
+		if(this.validateEmail(email)){this.email = email;}
 		this.addresses = new HashSet<>();
 		this.orderHistory = new OrderHistory();
 	}
@@ -45,7 +47,9 @@ public class Customer {
 	}
 
 	public void changeEmail(String newEmail){
-		// change the email after some validation
+		if(this.validateEmail(newEmail)){
+			this.email = newEmail;
+		}
 	}
 
 	public void addAddress(Address address){
@@ -57,5 +61,14 @@ public class Customer {
 
 	public void removeAddress(Address address){
 		// remove an address
+	}
+
+	private boolean validateEmail(String email) throws InvalidEmailException {
+		String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+				+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+		if(Utils.patternMatches(email, regexPattern)){
+			return true;
+		}
+		throw new InvalidEmailException();
 	}
 }

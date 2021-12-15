@@ -7,6 +7,7 @@ import com.hu.bep3.vkb5.customer.core.application.command.RegisterCustomer;
 import com.hu.bep3.vkb5.customer.core.application.query.GetCustomerById;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.EmailAlreadyExistsException;
+import com.hu.bep3.vkb5.customer.core.domain.exception.InvalidEmailException;
 import com.hu.bep3.vkb5.customer.core.domain.model.Address;
 import com.hu.bep3.vkb5.customer.core.domain.model.Customer;
 import com.hu.bep3.vkb5.customer.infrastructure.driver.request.AddAddressRequest;
@@ -51,6 +52,11 @@ public class CustomerController {
 	@ExceptionHandler
 	public ResponseEntity<String> handleDuplicate(EmailAlreadyExistsException exception) {
 		return new ResponseEntity<>("A customer with that email already exists", HttpStatus.CONFLICT);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<String> handleDuplicate(InvalidEmailException exception) {
+		return new ResponseEntity<>("That is not a valid email-address", HttpStatus.CONFLICT);
 	}
 
 	@ExceptionHandler
