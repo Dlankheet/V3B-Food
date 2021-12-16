@@ -1,5 +1,5 @@
-package nl.vkb.ingredients;
-
+import nl.vkb.ingredients.core.domain.Ingredient;
+import nl.vkb.ingredients.core.ports.storage.IngredientRepository;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ public class UpdateStockService {
 	/**
 	 * Updates the stock of the item specified by id, with dependency-injection for the action.
 	 * @param id ID of the ingredient.
-	 * @param action dependency-injected {@link nl.vkb.ingredients.Action.ActionInterface}
+	 * @param action dependency-injected {@link Action.ActionInterface}
 	 * @param stock The amount that should be used.
 	 */
 	public void updateStorage(String id, Action.ActionInterface action, int stock) {

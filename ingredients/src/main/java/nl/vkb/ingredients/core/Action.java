@@ -1,4 +1,4 @@
-package nl.vkb.ingredients;
+package nl.vkb.ingredients.core;
 
 public class Action {
 	public static final ActionInterface SET=new SETImpl();

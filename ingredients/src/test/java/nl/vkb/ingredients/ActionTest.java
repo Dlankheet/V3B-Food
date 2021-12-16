@@ -1,5 +1,6 @@
 package nl.vkb.ingredients;
 
+import nl.vkb.ingredients.core.Action;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ActionTest {
 	@Test
 	void addTest() {
-		assertEquals(25,Action.ADD.action(10,15));
+		assertEquals(25, Action.ADD.action(10,15));
 	}
 	@Test
 	void setTest() {
