@@ -1,6 +1,7 @@
 package nl.vkb.ingredients.core.application;
 
 import nl.vkb.ingredients.core.application.command.AddAmount;
+import nl.vkb.ingredients.core.application.command.RegisterIngredient;
 import nl.vkb.ingredients.core.domain.Ingredient;
 import nl.vkb.ingredients.core.domain.event.StockEvent;
 import nl.vkb.ingredients.core.domain.exception.IngredientNotFound;
@@ -24,18 +25,22 @@ public class StockCommandHandler {
 	public Ingredient handle(AddAmount command) {
 		Ingredient ingredient = this.getIngredientById(command.getId());
 		ingredient.addStock(command.getAmount());
-		this.publishEventsAndSave(ingredient);
-		return ingredient;
+		return this.publishEventsAndSave(ingredient);
+	}
+
+	public Ingredient handle(RegisterIngredient command) {
+		Ingredient ingredient = new Ingredient(command.getName(), command.getStock());
+		return this.publishEventsAndSave(ingredient);
 	}
 
 	private Ingredient getIngredientById(UUID id) {
 		return this.repository.findById(id).orElseThrow(() -> new IngredientNotFound(id.toString()));
 	}
-	private void publishEventsAndSave(Ingredient ingredient) {
+	private Ingredient publishEventsAndSave(Ingredient ingredient) {
 		List<StockEvent> events = ingredient.listEvents();
 		events.forEach(eventPublisher::publish);
 		ingredient.clearEvents();
 
-		this.repository.save(ingredient);
+		return this.repository.save(ingredient);
 	}
 }
