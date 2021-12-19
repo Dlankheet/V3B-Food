@@ -5,6 +5,5 @@ public class RegisterIngredientRequest {
 	@NotBlank
 	public String name;
 
-	@NotBlank
 	public int stock;
 }
