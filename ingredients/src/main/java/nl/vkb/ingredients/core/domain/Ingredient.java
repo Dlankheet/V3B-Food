@@ -1,5 +1,7 @@
 package nl.vkb.ingredients.core.domain;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import nl.vkb.ingredients.core.domain.event.StockEvent;
 import nl.vkb.ingredients.core.domain.event.StockUpdated;
 import org.springframework.data.annotation.Id;
@@ -11,6 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Document(collection = "ingredients")
+@Getter
+@EqualsAndHashCode
 public class Ingredient {
 	@Id
 	private UUID id;
