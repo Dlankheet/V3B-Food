@@ -2,6 +2,9 @@ package nl.vkb.ingredients.infrastructure.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.vkb.ingredients.infrastructure.driven.messaging.RabbitMqEventPublisher;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.QueueBuilder;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -22,6 +25,13 @@ public class RabbitMqConfig {
 
 	@Value("${messaging.exchange.ingredient}")
 	private String ingredientExchange;
+	@Value("${messaging.queue.stock}")
+	private String stockQueueName;
+
+	@Bean
+	public Queue stockQueue() {
+		return QueueBuilder.durable(stockQueueName).build();
+	}
 
 	@Bean
 	public RabbitMqEventPublisher EventPublisher(RabbitTemplate template) {

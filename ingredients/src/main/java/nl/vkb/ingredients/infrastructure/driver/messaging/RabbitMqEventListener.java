@@ -14,7 +14,7 @@ public class RabbitMqEventListener {
         this.commandHandler = commandHandler;
     }
 
-    @RabbitListener(queues = "#{'${messaging.queue.job-keywords}'}")
+    @RabbitListener(queues = "#{'${messaging.queue.stock}'}")
     void listen(StockModifyEvent event) {
         switch (event.eventKey) {
             case "stock.update":
