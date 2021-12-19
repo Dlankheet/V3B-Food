@@ -27,9 +27,12 @@ public class Ingredient {
 	}
 	public void addStock(int stock) {
 		this.stock+=stock;
+		this.events.add(new StockUpdated(id,this.stock));
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
 		this.events.add(new StockUpdated(id,stock));
 	}
-
 	public List<StockEvent> listEvents() {
 		return events;
 	}

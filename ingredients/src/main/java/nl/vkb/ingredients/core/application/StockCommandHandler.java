@@ -2,6 +2,7 @@ package nl.vkb.ingredients.core.application;
 
 import nl.vkb.ingredients.core.application.command.AddAmount;
 import nl.vkb.ingredients.core.application.command.RegisterIngredient;
+import nl.vkb.ingredients.core.application.command.SetAmount;
 import nl.vkb.ingredients.core.domain.Ingredient;
 import nl.vkb.ingredients.core.domain.event.StockEvent;
 import nl.vkb.ingredients.core.domain.exception.IngredientNotFound;
@@ -30,6 +31,12 @@ public class StockCommandHandler {
 
 	public Ingredient handle(RegisterIngredient command) {
 		Ingredient ingredient = new Ingredient(command.getName(), command.getStock());
+		return this.publishEventsAndSave(ingredient);
+	}
+
+	public Ingredient handle(SetAmount command) {
+		Ingredient ingredient = getIngredientById(command.getId());
+		ingredient.setStock(command.getAmount());
 		return this.publishEventsAndSave(ingredient);
 	}
 
