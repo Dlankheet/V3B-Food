@@ -1,5 +1,6 @@
 package nl.vkb.review;
 
+import nl.vkb.review.Service.Query.GetReviewById;
 import nl.vkb.review.Service.ReviewQueryService;
 import nl.vkb.review.domain.Review;
 import nl.vkb.review.domain.ReviewRepository;
@@ -26,8 +27,8 @@ public class QueueReceiver {
 	}
 
 	@RabbitListener(queuesToDeclare = @Queue("review.submit"))
-	public void reviewListener(ReviewDTO reviewDTO) {
-		Review review = service.getReview(reviewDTO.id);
+	public void reviewListener(GetReviewById command) {
+		Review review = service.handle(new GetReviewById(command.id));
 		repository.save(review);
 	}
 }

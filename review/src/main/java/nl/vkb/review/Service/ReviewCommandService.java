@@ -1,5 +1,6 @@
 package nl.vkb.review.Service;
 
+import nl.vkb.review.Service.Command.DeleteReview;
 import nl.vkb.review.Service.Command.MakeReview;
 import nl.vkb.review.domain.ReviewRepository;
 import nl.vkb.review.domain.Rating;
@@ -28,8 +29,7 @@ public class ReviewCommandService {
 	}
 
 
-
-	public void deleteReview(UUID id){
-		repository.deleteById(id);
+	public void handle(DeleteReview command){
+		repository.deleteById(command.id);
 	}
 }

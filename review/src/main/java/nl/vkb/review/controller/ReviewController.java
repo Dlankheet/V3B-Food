@@ -1,7 +1,9 @@
 package nl.vkb.review.controller;
 
 import nl.vkb.review.Exception.ReviewNotFoundException;
+import nl.vkb.review.Service.Command.DeleteReview;
 import nl.vkb.review.Service.Command.MakeReview;
+import nl.vkb.review.Service.Query.GetReviewById;
 import nl.vkb.review.Service.ReviewCommandService;
 import nl.vkb.review.Service.ReviewQueryService;
 import nl.vkb.review.controller.Request.MakeReviewRequest;
@@ -9,11 +11,11 @@ import nl.vkb.review.domain.Review;
 import nl.vkb.review.dto.ReviewDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -27,8 +29,8 @@ public class ReviewController {
 	}
 
 	@GetMapping("review/{id}")
-	public ReviewDTO getReview(UUID id) throws ReviewNotFoundException {
-		return new ReviewDTO(this.queryService.getReview(id));
+	public Review getReview(@PathVariable UUID id) throws ReviewNotFoundException {
+		return this.queryService.handle(new GetReviewById(id));
 	}
 
 	@PostMapping("/review/create")
@@ -38,5 +40,7 @@ public class ReviewController {
 	}
 
 	@PostMapping("/review/delete/{id}")
-	public void deleteReview(UUID uuid) {this.commandService.deleteReview(uuid);}
+	public void deleteReview(@PathVariable UUID id) {
+		this.commandService.handle(new DeleteReview(id));
+	}
 }
