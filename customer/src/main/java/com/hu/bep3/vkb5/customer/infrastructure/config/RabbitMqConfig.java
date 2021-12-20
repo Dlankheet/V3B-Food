@@ -21,7 +21,7 @@ public class RabbitMqConfig {
 
 	// Exchange names
 	@Value("${messaging.exchange.food}")
-	private String jobBoardExchangeName;
+	private String foodExchangeName;
 
 	// Queue names
 	@Value("${messaging.queue.customers}")
@@ -33,8 +33,8 @@ public class RabbitMqConfig {
 
 	// Exchanges
 	@Bean
-	public TopicExchange jobBoardExchange() {
-		return new TopicExchange(jobBoardExchangeName);
+	public TopicExchange foodExchange() {
+		return new TopicExchange(foodExchangeName);
 	}
 
 	// Queue's
@@ -48,14 +48,14 @@ public class RabbitMqConfig {
 	public Binding candidatesKeywordsBinding() {
 		return BindingBuilder
 				.bind(customersQueue())
-				.to(jobBoardExchange())
+				.to(foodExchange())
 				.with(customersRoutingKey);
 	}
 
 	// General RabbitMQ config
 	@Bean
 	public RabbitMqEventPublisher EventPublisher(RabbitTemplate template) {
-		return new RabbitMqEventPublisher(template, jobBoardExchangeName);
+		return new RabbitMqEventPublisher(template, foodExchangeName);
 	}
 
 	@Bean
