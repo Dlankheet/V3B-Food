@@ -1,15 +1,11 @@
 package com.order.core.application.command;
 
-import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+import java.util.UUID;
+@Getter
+@AllArgsConstructor
 public class AcceptOrder {
     private final UUID order;
-
-    public AcceptOrder (UUID order) {
-        this.order = order;
-    }
-
-    public UUID getOrder ( ) {
-        return order;
-    }
 }

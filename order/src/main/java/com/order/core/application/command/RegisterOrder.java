@@ -1,7 +1,10 @@
 package com.order.core.application.command;
 
+import lombok.Getter;
+
 import java.util.Set;
 
+@Getter
 public class RegisterOrder {
     private final String customer;
     private final Set<String > dishes;
@@ -10,13 +13,5 @@ public class RegisterOrder {
     public RegisterOrder (String customer, Set<String> dishes) {
         this.customer = customer;
         this.dishes = dishes;
-    }
-
-    public Set<String> getDishes ( ) {
-        return dishes;
-    }
-
-    public String getCustomer ( ) {
-        return customer;
     }
 }
