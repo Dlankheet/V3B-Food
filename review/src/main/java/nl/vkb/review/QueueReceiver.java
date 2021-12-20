@@ -2,6 +2,7 @@ package nl.vkb.review;
 
 import nl.vkb.review.Service.ReviewQueryService;
 import nl.vkb.review.domain.Review;
+import nl.vkb.review.domain.ReviewRepository;
 import nl.vkb.review.dto.ReviewDTO;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

@@ -1,6 +1,6 @@
 package nl.vkb.review.Service;
 
-import nl.vkb.review.ReviewRepository;
+import nl.vkb.review.domain.ReviewRepository;
 import nl.vkb.review.domain.Rating;
 import nl.vkb.review.domain.Review;
 import org.springframework.stereotype.Service;
