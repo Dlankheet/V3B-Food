@@ -23,7 +23,7 @@ public class OrderCommandHandler {
     }
     public Order handle(RegisterOrder command){
         Order order = new Order(command.getCustomer(), command.getDishes());
-        
+        this.publishEventsFor(order);
         this.repository.save(order);
         return order;
     }
@@ -31,6 +31,7 @@ public class OrderCommandHandler {
     public Order handle(AcceptOrder command) {
         Order order = this.getOrderById(command.getOrder());
         order.acceptOrder();
+        this.publishEventsFor(order);
         this.repository.save(order);
         return order;
     }
@@ -38,6 +39,7 @@ public class OrderCommandHandler {
     public Order handle(CancelOrder command) {
         Order order = this.getOrderById(command.getOrder());
         order.cancelOrder();
+        this.publishEventsFor(order);
         this.repository.save(order);
         return order;
     }
@@ -45,6 +47,7 @@ public class OrderCommandHandler {
     public Order handle(DeliveringOrder command) {
         Order order = this.getOrderById(command.getOrder());
         order.orderReadyToDelivered();
+        this.publishEventsFor(order);
         this.repository.save(order);
         return order;
     }
@@ -52,6 +55,7 @@ public class OrderCommandHandler {
     public Order handle(DenyOrder command) {
         Order order = this.getOrderById(command.getOrder());
         order.denyOrder();
+        this.publishEventsFor(order);
         this.repository.save(order);
         return order;
     }

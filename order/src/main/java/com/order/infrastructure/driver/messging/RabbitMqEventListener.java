@@ -13,7 +13,7 @@ public class RabbitMqEventListener {
         this.commandHandler = commandHandler;
     }
 
-//    @RabbitListener(queues = "#{'${messaging.queue.order}'}")
-//    void listen(OrderEvent orderEvent) {
-//    }
+    @RabbitListener(queues = "#{'${messaging.queue.order}'}")
+    void listen(OrderEvent orderEvent) {
+    }
 }
