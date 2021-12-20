@@ -1,16 +1,16 @@
 package com.hu.bep3.vkb5.customer.core.domain.model;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import com.hu.bep3.vkb5.customer.Utils;
+import com.hu.bep3.vkb5.customer.core.domain.event.CustomerEvent;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.InvalidEmailException;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,6 +28,8 @@ public class Customer {
 	private Set<Address> addresses;
 	private OrderHistory orderHistory;
 	private Set<String> reviews;
+	@Transient
+	private List<CustomerEvent> events = new ArrayList<>();
 
 	public Customer(String firstName, String lastName, String email) {
 		this.id = UUID.randomUUID();

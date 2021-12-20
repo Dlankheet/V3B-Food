@@ -2,7 +2,7 @@ package com.hu.bep3.vkb5.customer.infrastructure.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hu.bep3.vkb5.customer.infrastructure.driven.messaging.RabbitMqEventPublisher;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -19,12 +19,37 @@ public class RabbitMqConfig {
 	@Value("${spring.rabbitmq.port}")
 	private int port;
 
+	// Exchange names
 	@Value("${messaging.exchange.food}")
 	private String jobBoardExchangeName;
 
+	// Queue names
+	@Value("${messaging.queue.customers}")
+	private String customersQueueName;
+
+	// Routing key names
+	@Value("${messaging.routing-key.customers}")
+	private String customersRoutingKey;
+
+	// Exchanges
 	@Bean
 	public TopicExchange jobBoardExchange() {
 		return new TopicExchange(jobBoardExchangeName);
+	}
+
+	// Queue's
+	@Bean
+	public Queue customersQueue() {
+		return QueueBuilder.durable(customersQueueName).build();
+	}
+
+	// Bindings
+	@Bean
+	public Binding candidatesKeywordsBinding() {
+		return BindingBuilder
+				.bind(customersQueue())
+				.to(jobBoardExchange())
+				.with(customersRoutingKey);
 	}
 
 	// General RabbitMQ config
@@ -44,14 +69,10 @@ public class RabbitMqConfig {
 
 	@Bean
 	public Jackson2JsonMessageConverter converter(Jackson2ObjectMapperBuilder builder) {
-		// We need to configure a message converter to be used by RabbitTemplate.
-		// We could use any format, but we'll use JSON so it is easier to inspect.
 		ObjectMapper objectMapper = builder
 				.createXmlMapper(false)
 				.build();
 		Jackson2JsonMessageConverter converter = new Jackson2JsonMessageConverter(objectMapper);
-		// Set this in order to prevent deserialization using the sender-specific
-		// __TYPEID__ in the message header.
 		converter.setAlwaysConvertToInferredType(true);
 
 		return converter;
