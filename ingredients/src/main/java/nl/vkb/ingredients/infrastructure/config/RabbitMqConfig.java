@@ -2,8 +2,7 @@ package nl.vkb.ingredients.infrastructure.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.vkb.ingredients.infrastructure.driven.messaging.RabbitMqEventPublisher;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.QueueBuilder;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -23,19 +22,33 @@ public class RabbitMqConfig {
 	@Value("${spring.rabbitmq.port}")
 	private int port;
 
-	@Value("${messaging.exchange.ingredient}")
-	private String ingredientExchange;
+	@Value("${messaging.exchange.food}")
+	private String foodExchangeName;
 	@Value("${messaging.queue.stock}")
 	private String stockQueueName;
 
+	@Value("${messaging.routing-key.stock-update}")
+	private String stockUpdateRoutingKey;
+
+	@Bean
+	public TopicExchange foodExchange() {
+		return new TopicExchange(foodExchangeName);
+	}
 	@Bean
 	public Queue stockQueue() {
 		return QueueBuilder.durable(stockQueueName).build();
 	}
+	@Bean
+	public Binding receptStockBinding() {
+		return BindingBuilder
+				.bind(stockQueue())
+				.to(foodExchange())
+				.with(stockUpdateRoutingKey);
+	}
 
 	@Bean
 	public RabbitMqEventPublisher EventPublisher(RabbitTemplate template) {
-		return new RabbitMqEventPublisher(template, ingredientExchange);
+		return new RabbitMqEventPublisher(template, foodExchangeName);
 	}
 	@Bean
 	public RabbitTemplate rabbitTemplate(Jackson2JsonMessageConverter converter) {
