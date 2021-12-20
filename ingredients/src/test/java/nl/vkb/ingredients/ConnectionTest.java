@@ -1,5 +1,6 @@
 package nl.vkb.ingredients;
 
+import nl.vkb.ingredients.core.ports.storage.IngredientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
