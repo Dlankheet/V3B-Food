@@ -37,31 +37,31 @@ public class Order {
     public void acceptOrder(){
         checkStatus(OrderStatus.PENDING,OrderStatus.ACCEPTED );
         this.orderStatus = OrderStatus.ACCEPTED;
-        events.add(new OrderAccepted(id,orderStatus));
+        events.add(new OrderAccepted(id));
     }
 
     public void denyOrder(){
         checkStatus(OrderStatus.PENDING,OrderStatus.DENIED );
         this.orderStatus = OrderStatus.DENIED;
-        events.add(new OrderDenied(id,orderStatus));
+        events.add(new OrderDenied(id));
     }
 
     public void cancelOrder(){
         checkStatus(OrderStatus.ACCEPTED,OrderStatus.CANCELLED );
         this.orderStatus = OrderStatus.CANCELLED;
-        events.add(new OrderCancelled(id,orderStatus));
+        events.add(new OrderCancelled(id));
     }
 
     public void orderReadyToDelivered (){
         checkStatus(OrderStatus.ACCEPTED,OrderStatus.DELIVERING );
         this.orderStatus = OrderStatus.DELIVERING;
-        events.add(new OrderDelivering(id,orderStatus));
+        events.add(new OrderDelivering(id));
     }
 
     public void orderDelivered (){
         checkStatus(OrderStatus.DELIVERING,OrderStatus.DELIVERED );
         this.orderStatus = OrderStatus.DELIVERED;
-        events.add(new OrderDelivered(id,orderStatus));
+        events.add(new OrderDelivered(id));
     }
     private void checkStatus(OrderStatus beginStatus, OrderStatus endStatus){
         if (this.orderStatus != beginStatus)

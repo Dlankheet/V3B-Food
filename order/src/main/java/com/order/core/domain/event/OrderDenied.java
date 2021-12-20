@@ -6,11 +6,9 @@ import java.util.UUID;
 
 public class OrderDenied extends OrderEvent{
     private final UUID order;
-    private final OrderStatus status;
 
-    public OrderDenied (UUID order, OrderStatus status) {
+    public OrderDenied (UUID order) {
         this.order = order;
-        this.status = status;
     }
 
     @Override
@@ -22,7 +20,4 @@ public class OrderDenied extends OrderEvent{
         return order;
     }
 
-    public OrderStatus getStatus ( ) {
-        return status;
-    }
 }

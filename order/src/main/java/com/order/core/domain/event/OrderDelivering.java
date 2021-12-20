@@ -6,11 +6,10 @@ import java.util.UUID;
 
 public class OrderDelivering extends OrderEvent{
     private final UUID order;
-    private final OrderStatus status;
 
-    public OrderDelivering (UUID order, OrderStatus status) {
+
+    public OrderDelivering (UUID order) {
         this.order = order;
-        this.status = status;
     }
 
     @Override
@@ -22,7 +21,4 @@ public class OrderDelivering extends OrderEvent{
         return order;
     }
 
-    public OrderStatus getStatus ( ) {
-        return status;
-    }
 }
