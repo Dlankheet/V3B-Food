@@ -1,10 +1,10 @@
-package nl.vkb.review.Service.Query;
+package nl.vkb.review.core.Service.Command;
 
 import lombok.Data;
 
 import java.util.UUID;
 
 @Data
-public class GetReviewById {
+public class DeleteReview {
 	public final UUID id;
 }

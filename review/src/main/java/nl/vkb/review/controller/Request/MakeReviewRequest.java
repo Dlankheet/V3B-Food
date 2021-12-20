@@ -1,6 +1,6 @@
 package nl.vkb.review.controller.Request;
 
-import nl.vkb.review.domain.Rating;
+import nl.vkb.review.core.domain.Rating;
 
 import java.util.List;
 import java.util.UUID;

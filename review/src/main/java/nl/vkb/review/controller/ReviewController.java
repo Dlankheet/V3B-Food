@@ -1,14 +1,13 @@
 package nl.vkb.review.controller;
 
-import nl.vkb.review.Exception.ReviewNotFoundException;
-import nl.vkb.review.Service.Command.DeleteReview;
-import nl.vkb.review.Service.Command.MakeReview;
-import nl.vkb.review.Service.Query.GetReviewById;
-import nl.vkb.review.Service.ReviewCommandService;
-import nl.vkb.review.Service.ReviewQueryService;
 import nl.vkb.review.controller.Request.MakeReviewRequest;
-import nl.vkb.review.domain.Review;
-import nl.vkb.review.dto.ReviewDTO;
+import nl.vkb.review.core.domain.Review;
+import nl.vkb.review.core.Service.Command.DeleteReview;
+import nl.vkb.review.core.Service.Command.MakeReview;
+import nl.vkb.review.core.Service.Query.GetReviewById;
+import nl.vkb.review.core.Service.ReviewCommandService;
+import nl.vkb.review.core.Service.ReviewQueryService;
+import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

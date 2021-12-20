@@ -1,14 +1,12 @@
-package nl.vkb.review.Service;
+package nl.vkb.review.core.Service;
 
-import nl.vkb.review.Service.Command.DeleteReview;
-import nl.vkb.review.Service.Command.MakeReview;
-import nl.vkb.review.domain.ReviewRepository;
-import nl.vkb.review.domain.Rating;
-import nl.vkb.review.domain.Review;
+import nl.vkb.review.core.Service.Command.DeleteReview;
+import nl.vkb.review.core.Service.Command.MakeReview;
+
+import nl.vkb.review.core.domain.Rating;
+import nl.vkb.review.core.domain.Review;
+import nl.vkb.review.core.domain.ReviewRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class ReviewCommandService {

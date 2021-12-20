@@ -1,7 +1,7 @@
-package nl.vkb.review.domain;
+package nl.vkb.review.core.domain;
 
 import lombok.Data;
-import nl.vkb.review.Exception.ReviewRatingException;
+import nl.vkb.review.core.domain.Exception.ReviewRatingException;
 import org.springframework.data.annotation.Id;
 
 import java.util.List;

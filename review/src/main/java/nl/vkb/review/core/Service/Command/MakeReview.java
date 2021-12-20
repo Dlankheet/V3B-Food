@@ -1,8 +1,8 @@
-package nl.vkb.review.Service.Command;
+package nl.vkb.review.core.Service.Command;
 
 
 import lombok.Data;
-import nl.vkb.review.domain.Rating;
+import nl.vkb.review.core.domain.Rating;
 
 import java.util.List;
 import java.util.UUID;

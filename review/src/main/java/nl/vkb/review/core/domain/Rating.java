@@ -1,4 +1,4 @@
-package nl.vkb.review.domain;
+package nl.vkb.review.core.domain;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
