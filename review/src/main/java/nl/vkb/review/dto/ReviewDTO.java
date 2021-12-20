@@ -10,4 +10,6 @@ public class ReviewDTO {
 	public List<String> pros;
 	public List<String> cons;
 	public Rating rating;
+	public UUID orderId;
+	public UUID accountId;
 }

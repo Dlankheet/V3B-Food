@@ -17,9 +17,9 @@ public class ReviewCommandService {
 		this.repository = repository;
 	}
 
-	public void makeReview(double ratingNumber, String description, List<String> pros,List<String> cons){
+	public void makeReview(double ratingNumber, String description, List<String> pros,List<String> cons, UUID oId, UUID aId){
 		Rating rating = new Rating(ratingNumber);
-		Review review = new Review(description, pros, cons, rating);
+		Review review = new Review(description, pros, cons, rating, oId, aId);
 		this.repository.save(review);
 	}
 

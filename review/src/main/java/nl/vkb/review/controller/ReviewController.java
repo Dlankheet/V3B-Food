@@ -14,22 +14,21 @@ import java.util.UUID;
 @Controller
 public class ReviewController {
 	private final ReviewCommandService commandService;
-	private final ReviewQueryService queryservice;
+	private final ReviewQueryService queryService;
 
 	public ReviewController(ReviewCommandService commandService, ReviewQueryService queryService) {
 		this.commandService = commandService;
-		this.queryservice = queryService;
+		this.queryService = queryService;
 	}
-
 
 	@GetMapping("review/{id}")
 	public Review getReview(UUID id) throws ReviewNotFoundException {
-		return this.queryservice.getReview(id);
+		return this.queryService.getReview(id);
 	}
 
 	@PostMapping("/review/create")
-	public void createReview(double rating, String description, List<String> pros, List<String> cons) {
-		this.commandService.makeReview(rating, description, pros, cons);
+	public void createReview(double rating, String desc, List<String> pros, List<String> cons, UUID oId, UUID aId) {
+		this.commandService.makeReview(rating, desc, pros, cons, oId, aId);
 	}
 
 	@PostMapping("/review/delete/{id}")

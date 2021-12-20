@@ -14,8 +14,10 @@ public class Review {
 	private List<String> pros;
 	private List<String> cons;
 	private Rating rating;
+	private UUID orderId;
+	private UUID accountId;
 
-	public Review(String description, List<String> pros, List<String> cons, Rating rating){
+	public Review(String description, List<String> pros, List<String> cons, Rating rating, UUID orderId, UUID accountId){
 		this.description = description;
 		this.pros = pros;
 		this.cons = cons;
@@ -23,5 +25,7 @@ public class Review {
 			this.rating = rating;
 		}
 		else throw new ReviewRatingException("rating number is not between 0 and 5");
+		this.orderId = orderId;
+		this.accountId = accountId;
 	}
 }
