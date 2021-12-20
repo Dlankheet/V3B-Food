@@ -45,7 +45,7 @@ public class RabbitMqConfig {
 
 	// Bindings
 	@Bean
-	public Binding candidatesKeywordsBinding() {
+	public Binding customerBinding() {
 		return BindingBuilder
 				.bind(customersQueue())
 				.to(foodExchange())

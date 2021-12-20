@@ -3,6 +3,7 @@ package com.hu.bep3.vkb5.customer.infrastructure.driver.web;
 import com.hu.bep3.vkb5.customer.core.application.CustomerCommandHandler;
 import com.hu.bep3.vkb5.customer.core.application.CustomerQueryHandler;
 import com.hu.bep3.vkb5.customer.core.application.command.AddAddress;
+import com.hu.bep3.vkb5.customer.core.application.command.ChangeEmail;
 import com.hu.bep3.vkb5.customer.core.application.command.RegisterCustomer;
 import com.hu.bep3.vkb5.customer.core.application.query.GetCustomerById;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
@@ -10,8 +11,9 @@ import com.hu.bep3.vkb5.customer.core.domain.exception.EmailAlreadyExistsExcepti
 import com.hu.bep3.vkb5.customer.core.domain.exception.InvalidEmailException;
 import com.hu.bep3.vkb5.customer.core.domain.model.Address;
 import com.hu.bep3.vkb5.customer.core.domain.model.Customer;
-import com.hu.bep3.vkb5.customer.infrastructure.driver.request.AddAddressRequest;
-import com.hu.bep3.vkb5.customer.infrastructure.driver.request.RegisterCustomerRequest;
+import com.hu.bep3.vkb5.customer.infrastructure.driver.web.request.AddAddressRequest;
+import com.hu.bep3.vkb5.customer.infrastructure.driver.web.request.ChangeEmailRequest;
+import com.hu.bep3.vkb5.customer.infrastructure.driver.web.request.RegisterCustomerRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +48,13 @@ public class CustomerController {
 	public Customer addAddress(@PathVariable UUID id, @Valid @RequestBody AddAddressRequest request){
 		return this.commandHandler.handle(
 			new AddAddress(id, new Address(request.street, request.number, request.additionalLetter, request.postalCode))
+		);
+	}
+
+	@PostMapping("/{id}/change-email")
+	public Customer changeEmail(@PathVariable UUID id, @Valid @RequestBody ChangeEmailRequest request){
+		return this.commandHandler.handle(
+				new ChangeEmail(id, request.newEmail)
 		);
 	}
 

@@ -4,6 +4,7 @@ import java.util.*;
 
 import com.hu.bep3.vkb5.customer.Utils;
 import com.hu.bep3.vkb5.customer.core.domain.event.CustomerEvent;
+import com.hu.bep3.vkb5.customer.core.domain.event.EmailChanged;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.InvalidEmailException;
 import lombok.EqualsAndHashCode;
@@ -26,7 +27,7 @@ public class Customer {
 	@Indexed(unique = true)
 	private String email;
 	private Set<Address> addresses;
-	private OrderHistory orderHistory;
+	private Set<UUID> orderHistory;
 	private Set<String> reviews;
 	@Transient
 	private List<CustomerEvent> events = new ArrayList<>();
@@ -37,21 +38,19 @@ public class Customer {
 		this.lastName = lastName;
 		if(this.validateEmail(email)){this.email = email;}
 		this.addresses = new HashSet<>();
-		this.orderHistory = new OrderHistory();
+		this.orderHistory = new HashSet<>();
+		this.reviews = new HashSet<>();
 	}
 
-	public void order(int orderId){
-		// order food
-	}
-
-	public void reviewOrder(int orderId){
-		// review an order here.
+	public void addOrderToHistory(UUID orderId){
+//		orderHistory.add(orderId);
 	}
 
 	public void changeEmail(String newEmail){
 		if(this.validateEmail(newEmail)){
 			this.email = newEmail;
 		}
+		this.events.add(new EmailChanged(id, newEmail));
 	}
 
 	public void addAddress(Address address){
@@ -72,5 +71,13 @@ public class Customer {
 			return true;
 		}
 		throw new InvalidEmailException();
+	}
+
+	public void clearEvents() {
+		this.events.clear();
+	}
+
+	public List<CustomerEvent> listEvents() {
+		return events;
 	}
 }
