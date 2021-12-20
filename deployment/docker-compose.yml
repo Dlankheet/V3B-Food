@@ -15,3 +15,10 @@ services:
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
+  order:
+    build: ../order
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_RABBITMQ_HOST: rabbitmq
