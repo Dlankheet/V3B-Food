@@ -48,7 +48,7 @@ public class Order {
     public void cancelOrder(){
         checkStatus(OrderStatus.ACCEPTED,OrderStatus.CANCELLED );
         this.orderStatus = OrderStatus.CANCELLED;
-        events.add(new OrderCancelled(id));
+        events.add(new OrderCancelled(id, customer));
     }
 
     public void orderReadyToDelivered (){
