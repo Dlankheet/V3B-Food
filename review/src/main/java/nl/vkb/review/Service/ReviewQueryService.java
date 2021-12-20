@@ -5,6 +5,7 @@ import nl.vkb.review.domain.ReviewRepository;
 import nl.vkb.review.domain.Review;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -21,4 +22,7 @@ public class ReviewQueryService {
 		);
 	}
 
+	public List<Review> getAllReviews() {
+		return repository.findAll();
+	}
 }

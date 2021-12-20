@@ -4,6 +4,7 @@ import nl.vkb.review.Exception.ReviewNotFoundException;
 import nl.vkb.review.Service.ReviewCommandService;
 import nl.vkb.review.Service.ReviewQueryService;
 import nl.vkb.review.domain.Review;
+import nl.vkb.review.dto.ReviewDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +23,8 @@ public class ReviewController {
 	}
 
 	@GetMapping("review/{id}")
-	public Review getReview(UUID id) throws ReviewNotFoundException {
-		return this.queryService.getReview(id);
+	public ReviewDTO getReview(UUID id) throws ReviewNotFoundException {
+		return new ReviewDTO(this.queryService.getReview(id));
 	}
 
 	@PostMapping("/review/create")
