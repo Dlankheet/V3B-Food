@@ -1,14 +1,14 @@
 package com.order.core.domain.event;
 
-import com.order.core.domain.OrderStatus;
-
 import java.util.UUID;
 
 public class OrderDelivered extends OrderEvent{
     private final UUID order;
+    private final String customer;
 
-    public OrderDelivered (UUID order) {
+    public OrderDelivered (UUID order, String customer) {
         this.order = order;
+        this.customer = customer;
     }
 
     @Override
@@ -20,4 +20,7 @@ public class OrderDelivered extends OrderEvent{
         return order;
     }
 
+    public String getCustomer ( ) {
+        return customer;
+    }
 }

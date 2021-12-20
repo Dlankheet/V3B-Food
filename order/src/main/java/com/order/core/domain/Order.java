@@ -6,7 +6,6 @@ import com.order.core.domain.exception.OrderStatusException;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -37,13 +36,13 @@ public class Order {
     public void acceptOrder(){
         checkStatus(OrderStatus.PENDING,OrderStatus.ACCEPTED );
         this.orderStatus = OrderStatus.ACCEPTED;
-        events.add(new OrderAccepted(id));
+        events.add(new OrderAccepted(id, customer));
     }
 
     public void denyOrder(){
         checkStatus(OrderStatus.PENDING,OrderStatus.DENIED );
         this.orderStatus = OrderStatus.DENIED;
-        events.add(new OrderDenied(id));
+        events.add(new OrderDenied(id, customer));
     }
 
     public void cancelOrder(){
@@ -55,13 +54,13 @@ public class Order {
     public void orderReadyToDelivered (){
         checkStatus(OrderStatus.ACCEPTED,OrderStatus.DELIVERING );
         this.orderStatus = OrderStatus.DELIVERING;
-        events.add(new OrderDelivering(id));
+        events.add(new OrderDelivering(id, customer));
     }
 
     public void orderDelivered (){
         checkStatus(OrderStatus.DELIVERING,OrderStatus.DELIVERED );
         this.orderStatus = OrderStatus.DELIVERED;
-        events.add(new OrderDelivered(id));
+        events.add(new OrderDelivered(id, customer));
     }
     private void checkStatus(OrderStatus beginStatus, OrderStatus endStatus){
         if (this.orderStatus != beginStatus)

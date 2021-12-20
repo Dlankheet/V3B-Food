@@ -6,9 +6,11 @@ import java.util.UUID;
 
 public class OrderCancelled extends OrderEvent{
     private final UUID order;
+    private final String customer;
 
-    public OrderCancelled (UUID order) {
+    public OrderCancelled (UUID order, String customer) {
         this.order = order;
+        this.customer = customer;
     }
 
     @Override
@@ -20,4 +22,7 @@ public class OrderCancelled extends OrderEvent{
         return order;
     }
 
+    public String getCustomer ( ) {
+        return customer;
+    }
 }
