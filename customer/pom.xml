@@ -11,8 +11,8 @@
     <groupId>com.hu.bep3.VKB5</groupId>
     <artifactId>user</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>user</name>
-    <description>user</description>
+    <name>customer</name>
+    <description>customer</description>
     <properties>
         <java.version>17</java.version>
     </properties>
