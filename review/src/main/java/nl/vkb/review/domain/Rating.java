@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Rating {
 	@Id
 	private UUID id;
-	private double rating;
+	private double ratingNumber;
 
-	public Rating(double rating) {this.rating = rating;}
+	public Rating(double ratingNumber) {this.ratingNumber = ratingNumber;}
 }

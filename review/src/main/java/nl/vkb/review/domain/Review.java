@@ -21,7 +21,7 @@ public class Review {
 		this.description = description;
 		this.pros = pros;
 		this.cons = cons;
-		if (this.rating.getRating() > 0 || this.rating.getRating() < 5){
+		if (this.rating.getRatingNumber() > 0 || this.rating.getRatingNumber() < 5){
 			this.rating = rating;
 		}
 		else throw new ReviewRatingException("rating number is not between 0 and 5");

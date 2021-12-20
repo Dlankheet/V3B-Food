@@ -1,5 +1,6 @@
 package nl.vkb.review.Service;
 
+import nl.vkb.review.Service.Command.MakeReview;
 import nl.vkb.review.domain.ReviewRepository;
 import nl.vkb.review.domain.Rating;
 import nl.vkb.review.domain.Review;
@@ -17,11 +18,16 @@ public class ReviewCommandService {
 		this.repository = repository;
 	}
 
-	public void makeReview(double ratingNumber, String description, List<String> pros,List<String> cons, UUID oId, UUID aId){
-		Rating rating = new Rating(ratingNumber);
-		Review review = new Review(description, pros, cons, rating, oId, aId);
+	public void handle(MakeReview command){
+		Rating rating = new Rating(command.getRating());
+
+		Review review = new Review(command.getDesc(), command.getPros(), command.getCons(), rating,
+				command.getOrderId(), command.getAccountId());
+
 		this.repository.save(review);
 	}
+
+
 
 	public void deleteReview(UUID id){
 		repository.deleteById(id);

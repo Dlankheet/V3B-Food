@@ -1,14 +1,18 @@
 package nl.vkb.review.controller;
 
 import nl.vkb.review.Exception.ReviewNotFoundException;
+import nl.vkb.review.Service.Command.MakeReview;
 import nl.vkb.review.Service.ReviewCommandService;
 import nl.vkb.review.Service.ReviewQueryService;
+import nl.vkb.review.controller.Request.MakeReviewRequest;
 import nl.vkb.review.domain.Review;
 import nl.vkb.review.dto.ReviewDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,8 +32,9 @@ public class ReviewController {
 	}
 
 	@PostMapping("/review/create")
-	public void createReview(double rating, String desc, List<String> pros, List<String> cons, UUID oId, UUID aId) {
-		this.commandService.makeReview(rating, desc, pros, cons, oId, aId);
+	public void createReview(@Valid @RequestBody MakeReviewRequest request) {
+		this.commandService.handle(new MakeReview(request.description, request.pros, request.cons,
+				request.rating, request.orderId, request.accountId));
 	}
 
 	@PostMapping("/review/delete/{id}")
