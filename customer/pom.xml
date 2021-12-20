@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.hu.bep3.VKB5</groupId>
-    <artifactId>user</artifactId>
+    <artifactId>customer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>customer</name>
     <description>customer</description>
