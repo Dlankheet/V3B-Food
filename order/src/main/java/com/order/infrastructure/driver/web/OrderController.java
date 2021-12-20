@@ -6,8 +6,12 @@ import com.order.core.application.command.*;
 import com.order.core.application.query.FindAllOrderByCustomerId;
 import com.order.core.application.query.GetOrderById;
 import com.order.core.domain.Order;
+import com.order.core.domain.exception.OrderNotFoundException;
+import com.order.core.domain.exception.OrderStatusException;
 import com.order.infrastructure.driver.web.request.RegisterOrderRequest;
 import com.order.infrastructure.driver.web.response.OrderDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -60,5 +64,14 @@ public class OrderController {
     public OrderDto deliveringOrder(@PathVariable UUID id){
         Order order = this.commandHandler.handle(new DeliveringOrder(id));
         return new OrderDto(order);
+    }
+    @ExceptionHandler
+    public ResponseEntity<Void> handleCandidateNotFound(OrderNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Void> handleDuplicate(OrderStatusException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 }
