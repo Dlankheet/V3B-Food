@@ -1,7 +1,10 @@
 package nl.vkb.ingredients.core.domain.event;
 
+import lombok.EqualsAndHashCode;
+
 import java.util.UUID;
 
+@EqualsAndHashCode
 public class StockUpdated extends StockEvent {
     private final UUID ingredient;
     private final int stock;

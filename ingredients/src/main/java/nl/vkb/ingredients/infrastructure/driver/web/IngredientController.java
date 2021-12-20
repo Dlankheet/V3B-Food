@@ -30,7 +30,7 @@ public class IngredientController {
 	}
 
 	@GetMapping("/{id}")
-	public Ingredient findJobById(@PathVariable UUID id) {
+	public Ingredient findIngredientById(@PathVariable UUID id) {
 		return this.queryHandler.handle(new GetIngredientById(id));
 	}
 

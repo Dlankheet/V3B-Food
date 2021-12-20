@@ -44,7 +44,7 @@ public class StockCommandHandler {
 		return this.repository.findById(id).orElseThrow(() -> new IngredientNotFound(id.toString()));
 	}
 	private Ingredient publishEventsAndSave(Ingredient ingredient) {
-		List<StockEvent> events = ingredient.listEvents();
+		List<StockEvent> events = ingredient.getEvents();
 		events.forEach(eventPublisher::publish);
 		ingredient.clearEvents();
 

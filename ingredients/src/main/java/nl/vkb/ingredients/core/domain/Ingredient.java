@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import nl.vkb.ingredients.core.domain.event.StockEvent;
 import nl.vkb.ingredients.core.domain.event.StockUpdated;
+import nl.vkb.ingredients.core.domain.exception.InvalidStockException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -30,15 +31,15 @@ public class Ingredient {
 		this.stock=stock;
 	}
 	public void addStock(int stock) {
+		if((this.stock+stock)<0) {
+			throw new InvalidStockException("Stock is too low!");
+		}
 		this.stock+=stock;
 		this.events.add(new StockUpdated(id,this.stock));
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
 		this.events.add(new StockUpdated(id,stock));
-	}
-	public List<StockEvent> listEvents() {
-		return events;
 	}
 
 	public void clearEvents() {
