@@ -1,4 +1,4 @@
-package nl.vkb.review.infrastructure.controller.Request;
+package nl.vkb.review.infrastructure.driver.web.Request;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,6 +1,6 @@
-package nl.vkb.review.infrastructure.controller;
+package nl.vkb.review.infrastructure.driver.web;
 
-import nl.vkb.review.infrastructure.controller.Request.MakeReviewRequest;
+import nl.vkb.review.infrastructure.driver.web.Request.MakeReviewRequest;
 import nl.vkb.review.core.domain.Review;
 import nl.vkb.review.core.Service.Command.DeleteReview;
 import nl.vkb.review.core.Service.Command.MakeReview;
