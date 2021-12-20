@@ -1,9 +1,9 @@
-package nl.vkb.review;
+package nl.vkb.review.infrastructure;
 
 import nl.vkb.review.core.Service.Query.GetReviewById;
 import nl.vkb.review.core.Service.ReviewQueryService;
 import nl.vkb.review.core.domain.Review;
-import nl.vkb.review.core.domain.ReviewRepository;
+import nl.vkb.review.core.port.storage.ReviewRepository;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;

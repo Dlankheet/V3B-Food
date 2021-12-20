@@ -2,7 +2,7 @@ package nl.vkb.review.core.Service;
 
 import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
 import nl.vkb.review.core.Service.Query.GetReviewById;
-import nl.vkb.review.core.domain.ReviewRepository;
+import nl.vkb.review.core.port.storage.ReviewRepository;
 import nl.vkb.review.core.domain.Review;
 import org.springframework.stereotype.Service;
 

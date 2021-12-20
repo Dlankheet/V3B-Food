@@ -5,7 +5,7 @@ import nl.vkb.review.core.Service.Command.MakeReview;
 
 import nl.vkb.review.core.domain.Rating;
 import nl.vkb.review.core.domain.Review;
-import nl.vkb.review.core.domain.ReviewRepository;
+import nl.vkb.review.core.port.storage.ReviewRepository;
 import org.springframework.stereotype.Service;
 
 @Service

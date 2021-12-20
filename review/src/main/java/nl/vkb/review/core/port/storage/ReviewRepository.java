@@ -1,4 +1,4 @@
-package nl.vkb.review.core.domain;
+package nl.vkb.review.core.port.storage;
 
 import nl.vkb.review.core.domain.Review;
 import org.springframework.data.mongodb.repository.MongoRepository;
