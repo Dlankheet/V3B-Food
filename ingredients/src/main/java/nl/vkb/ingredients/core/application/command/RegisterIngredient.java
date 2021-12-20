@@ -1,8 +1,10 @@
 package nl.vkb.ingredients.core.application.command;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Data
+@Getter
+@AllArgsConstructor
 public class RegisterIngredient {
 	private final String name;
 	private final int stock;

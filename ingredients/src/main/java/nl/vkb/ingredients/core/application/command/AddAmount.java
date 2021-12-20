@@ -1,10 +1,12 @@
 package nl.vkb.ingredients.core.application.command;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.UUID;
 
-@Data
+@Getter
+@AllArgsConstructor
 public class AddAmount {
 	private final UUID id;
 	private final int amount;
