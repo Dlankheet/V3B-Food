@@ -1,7 +1,8 @@
-package nl.hu.v3bfood_dishes.core.port;
-
+package nl.hu.v3bfood_dishes.infrastructure.driver.web;
 import nl.hu.v3bfood_dishes.core.domain.Dish;
+import nl.hu.v3bfood_dishes.core.domain.Ingredient;
 import nl.hu.v3bfood_dishes.core.service.DishService;
+import nl.hu.v3bfood_dishes.infrastructure.driver.web.DTO.dishDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +22,8 @@ public class DishController {
     }
 
     @PostMapping("/create")
-    public String createDish(String title, double price){
-        Dish generatedDish = service.createDish(title, price);
+    public String createDish(@RequestBody dishDTO dto){
+        Dish generatedDish = service.createDish(dto.title, dto.price, dto.ingredients);
         return "Generated Succesfully: " + generatedDish;
     }
 
@@ -30,5 +31,10 @@ public class DishController {
     public String generateRandomDish(String id){
         Dish removedDish = service.removeDish(id);
         return "Deleted Succesfully: " + removedDish;
+    }
+
+    @GetMapping("/{id}/isAvailable")
+    public Boolean isDishAvailable(@PathVariable String id){
+        return service.isDishAvailable(id);
     }
 }

@@ -1,27 +1,18 @@
 package nl.hu.v3bfood_dishes.core.domain;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.UUID;
+
+@Getter
+@Setter
 public class Ingredient {
+    private UUID id;
     private int amount;
-    private String name;
-    private List<Allergy> allergies;
 
-    public Ingredient(int amount, String name, List<Allergy> allergies) {
+    public Ingredient(UUID id, int amount) {
+        this.id = id;
         this.amount = amount;
-        this.name = name;
-        this.allergies = allergies;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Allergy> getAllergies() {
-        return allergies;
     }
 }

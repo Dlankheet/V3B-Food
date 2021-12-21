@@ -26,72 +26,13 @@ public class RabbitMqConfig {
     @Value("${spring.rabbitmq.port}")
     private int port;
 
-    @Value("${messaging.exchange.jobboard}")
-    private String jobBoardExchangeName;
+    @Value("${messaging.exchange.food}")
+    private String foodExchangeName;
 
-    @Value("${messaging.queue.candidate-keywords}")
-    private String candidateKeywordsQueueName;
-    @Value("${messaging.queue.job-keywords}")
-    private String jobKeywordsQueueName;
-    @Value("${messaging.queue.all-keywords}")
-    private String allKeywordsQueueName;
-
-    @Value("${messaging.routing-key.candidate-keywords}")
-    private String candidatesKeywordsRoutingKey;
-    @Value("${messaging.routing-key.job-keywords}")
-    private String jobsKeywordsRoutingKey;
-    @Value("${messaging.routing-key.all-keywords}")
-    private String keywordsRoutingKey;
-
-    @Bean
-    public TopicExchange jobBoardExchange() {
-        return new TopicExchange(jobBoardExchangeName);
-    }
-
-    @Bean
-    public Queue candidatesQueue() {
-        return QueueBuilder.durable(candidateKeywordsQueueName).build();
-    }
-
-    @Bean
-    public Binding candidatesKeywordsBinding() {
-        return BindingBuilder
-                .bind(candidatesQueue())
-                .to(jobBoardExchange())
-                .with(candidatesKeywordsRoutingKey);
-    }
-
-    @Bean
-    public Queue jobsQueue() {
-        // Creates a new queue in RabbitMQ
-        return QueueBuilder.durable(jobKeywordsQueueName).build();
-    }
-
-    @Bean
-    public Binding jobsKeywordsBinding() {
-        return BindingBuilder
-                .bind(jobsQueue())
-                .to(jobBoardExchange())
-                .with(jobsKeywordsRoutingKey);
-    }
-
-    @Bean
-    public Queue keywordsQueue() {
-        // Creates a new queue in RabbitMQ
-        return QueueBuilder.durable(allKeywordsQueueName).build();
-    }
-
-    @Bean
-    public Binding keywordsBinding() {
-        return BindingBuilder
-                .bind(keywordsQueue())
-                .to(jobBoardExchange())
-                .with(keywordsRoutingKey);
-    }
 
     @Bean
     public RabbitMqEventPublisher EventPublisher(RabbitTemplate template) {
-        return new RabbitMqEventPublisher(template, jobBoardExchangeName);
+        return new RabbitMqEventPublisher(template, foodExchangeName);
     }
 
     @Bean

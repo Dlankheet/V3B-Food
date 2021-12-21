@@ -1,6 +1,6 @@
 package nl.hu.v3bfood_dishes.core.domain;
 
-public enum Allergy{
+public enum Allergy {
     GLUTEN,
     MILK,
     TREE,
@@ -11,4 +11,4 @@ public enum Allergy{
     WHEAT,
     SHELLFISH,
     SOYBEANS
-        }
+}
