@@ -10,13 +10,12 @@ import nl.vkb.review.core.Service.Query.GetReviewById;
 import nl.vkb.review.core.Service.ReviewCommandService;
 import nl.vkb.review.core.Service.ReviewQueryService;
 import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("/review")
 public class ReviewController {
 	private final ReviewCommandService commandService;
@@ -33,8 +32,8 @@ public class ReviewController {
 	}
 
 	@PostMapping("/create")
-	public void createReview(@Valid @RequestBody MakeReviewRequest request) {
-		this.commandService.handle(new MakeReview(request.description, request.pros, request.cons,
+	public Review createReview(@Valid @RequestBody MakeReviewRequest request) {
+		return this.commandService.handle(new MakeReview(request.description, request.pros, request.cons,
 				request.rating, request.orderId, request.accountId));
 	}
 

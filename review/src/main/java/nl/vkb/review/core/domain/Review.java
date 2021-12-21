@@ -5,21 +5,23 @@ import nl.vkb.review.core.domain.event.ReviewCreated;
 import nl.vkb.review.core.domain.event.ReviewEvent;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Getter
+@Document
 public class Review {
 	@Id
-	private final UUID id;
-	private final String description;
-	private final List<String> pros;
-	private final List<String> cons;
-	private final Rating rating;
-	private final UUID orderId;
-	private final UUID accountId;
+	private UUID id;
+	private String description;
+	private List<String> pros;
+	private List<String> cons;
+	private Rating rating;
+	private UUID orderId;
+	private UUID accountId;
 	@Transient
 	private List<ReviewEvent> events = new ArrayList<>();
 

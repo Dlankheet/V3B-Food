@@ -27,14 +27,14 @@ public class ReviewCommandService {
 		this.eventPublisher = eventPublisher;
 	}
 
-	public void handle(MakeReview command){
+	public Review handle(MakeReview command){
 		Rating rating = new Rating(command.getRating());
 
 		Review review = new Review(command.getDesc(), command.getPros(), command.getCons(), rating,
 				command.getOrderId(), command.getAccountId());
 
 		this.publishEventsFor(review);
-		this.repository.save(review);
+		return this.repository.save(review);
 	}
 
 	public void handle(DeleteReview command){
