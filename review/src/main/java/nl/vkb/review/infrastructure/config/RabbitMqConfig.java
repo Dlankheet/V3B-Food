@@ -22,7 +22,7 @@ public class RabbitMqConfig {
 	private int port;
 
 	@Value("${messaging.exchange.food}")
-	private String reviewExchangeName;
+	private String foodExchangeName;
 
 	@Value("${messaging.queue.review}")
 	private String reviewQueueName;
@@ -38,7 +38,7 @@ public class RabbitMqConfig {
 
 	@Bean
 	public TopicExchange reviewExchange() {
-		return new TopicExchange(reviewExchangeName);
+		return new TopicExchange(foodExchangeName);
 	}
 
 	@Bean
@@ -69,13 +69,15 @@ public class RabbitMqConfig {
 
 	@Bean
 	public RabbitMqEventPublisher EventPublisher(RabbitTemplate template) {
-		return new RabbitMqEventPublisher(template, reviewExchangeName);
+		return new RabbitMqEventPublisher(template, foodExchangeName);
 	}
 
 	@Bean
 	public RabbitTemplate rabbitTemplate(Jackson2JsonMessageConverter converter) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate();
+
 		rabbitTemplate.setConnectionFactory(connectionFactory());
+		rabbitTemplate.setMessageConverter(converter);
 
 		return rabbitTemplate;
 	}
