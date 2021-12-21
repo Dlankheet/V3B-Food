@@ -3,8 +3,8 @@ import nl.hu.v3bfood_dishes.core.domain.Dish;
 import nl.hu.v3bfood_dishes.core.domain.event.DishEvent;
 import java.util.UUID;
 
+//todo use messaging for publishing.
 public class DishAdded extends DishEvent {
-    //todo remove added keyword.
     private final UUID dish;
     private final Dish dishObject;
 

@@ -3,8 +3,7 @@ package nl.hu.v3bfood_dishes.core.domain;
 public enum Allergy {
     GLUTEN,
     MILK,
-    TREE,
-    NUTS,
+    TREENUTS,
     PEANUTS,
     EGGS,
     FISH,
