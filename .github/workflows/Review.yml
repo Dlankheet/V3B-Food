@@ -1,5 +1,5 @@
 #https://stackoverflow.com/questions/63822219/how-to-run-github-action-only-if-the-pushed-files-are-in-a-specific-folder
-name: Ingredient Sonarcloud
+name: Review Sonarcloud
 on:
   push:
     branches: [master]
