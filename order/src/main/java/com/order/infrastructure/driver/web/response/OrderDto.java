@@ -13,11 +13,13 @@ public class OrderDto {
     private OrderStatus status;
     private String customer;
     private Set<String> dishes;
+    private double price;
 
     public OrderDto(Order order){
         this.id = order.getId();
         this.status = order.getOrderStatus();
         this.customer = order.getCustomer();
         this.dishes = order.getDishes();
+        this.price = order.getPrice();
     }
 }

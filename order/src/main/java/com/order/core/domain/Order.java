@@ -20,6 +20,7 @@ public class Order {
     private UUID id;
     private boolean paid;
     private OrderStatus orderStatus;
+    private double price;
     private String customer;
     private Set<String> dishes;
     @Transient

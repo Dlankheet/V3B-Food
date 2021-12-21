@@ -4,11 +4,12 @@ import com.order.core.application.command.*;
 import com.order.core.domain.Order;
 import com.order.core.domain.event.OrderEvent;
 import com.order.core.domain.exception.OrderNotFoundException;
+import com.order.core.port.data.DishRepository;
 import com.order.core.port.data.OrderRepository;
 import com.order.core.port.messaging.OrderEventPublisher;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,13 +17,17 @@ import java.util.UUID;
 public class OrderCommandHandler {
     private final OrderRepository repository;
     private final OrderEventPublisher eventPublisher;
+    private final DishRepository dishGateway;
 
-    public OrderCommandHandler (OrderRepository repository, OrderEventPublisher eventPublisher) {
+    public OrderCommandHandler (OrderRepository repository, OrderEventPublisher eventPublisher, DishRepository dishGateway) {
         this.repository = repository;
         this.eventPublisher = eventPublisher;
+        this.dishGateway = dishGateway;
     }
     public Order handle(RegisterOrder command){
         Order order = new Order(command.getCustomer(), command.getDishes());
+        String dishes = String.join(",", new ArrayList<>(order.getDishes()));
+        order.setPrice(dishGateway.getPriceByDishes(dishes));
         this.publishEventsFor(order);
         this.repository.save(order);
         return order;
