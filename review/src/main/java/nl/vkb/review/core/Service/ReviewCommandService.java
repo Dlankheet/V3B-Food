@@ -1,11 +1,13 @@
 package nl.vkb.review.core.Service;
 
 import nl.vkb.review.core.Service.Command.ChangeRating;
+import nl.vkb.review.core.Service.Command.DeleteAllReviewsByCustomer;
 import nl.vkb.review.core.Service.Command.DeleteReview;
 import nl.vkb.review.core.Service.Command.MakeReview;
 
 import nl.vkb.review.core.domain.Rating;
 import nl.vkb.review.core.domain.Review;
+import nl.vkb.review.core.domain.event.ReviewDeleted;
 import nl.vkb.review.core.domain.event.ReviewEvent;
 import nl.vkb.review.core.port.messaging.ReviewEventPublisher;
 import nl.vkb.review.core.port.storage.ReviewRepository;
@@ -35,8 +37,16 @@ public class ReviewCommandService {
 	}
 
 	public void handle(DeleteReview command){
-		publishEventsFor(getReviewbyId(command.id));
+		Review review = getReviewbyId(command.id);
+		review.getEvents().add(new ReviewDeleted(review.getAccountId()));
+		publishEventsFor(review);
 		repository.deleteById(command.id);
+	}
+
+	public void handle(DeleteAllReviewsByCustomer command) {
+		List<Review> reviewList = repository.findReviewsByAccountId(command.id);
+		this.publishListEventsFor(reviewList);
+		repository.deleteAllByAccountId(command.id);
 	}
 
 	public void handle(ChangeRating command) {
@@ -55,5 +65,9 @@ public class ReviewCommandService {
 		List<ReviewEvent> events = review.getEvents();
 		events.forEach(eventPublisher::publish);
 		review.clearEvents();
+	}
+
+	private void publishListEventsFor(List<Review> reviewList) {
+		reviewList.forEach(this::publishEventsFor);
 	}
 }

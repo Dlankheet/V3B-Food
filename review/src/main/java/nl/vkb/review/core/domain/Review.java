@@ -1,6 +1,7 @@
 package nl.vkb.review.core.domain;
 
 import lombok.Getter;
+import nl.vkb.review.core.domain.event.ReviewCreated;
 import nl.vkb.review.core.domain.event.ReviewEvent;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -30,7 +31,9 @@ public class Review {
 		this.rating = rating;
 		this.orderId = orderId;
 		this.accountId = accountId;
+		this.events.add(new ReviewCreated(this.id, this.accountId));
 	}
+
 
 	public void clearEvents() {
 		this.events.clear();
