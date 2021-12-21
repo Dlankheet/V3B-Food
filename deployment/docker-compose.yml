@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   mongodb:
-    extends: 
+    extends:
       file: ../development/docker-compose.yml
       service: mongodb
   rabbitmq:
@@ -12,6 +12,13 @@ services:
     build: ../ingredients
     ports:
       - "8082:8082"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_RABBITMQ_HOST: rabbitmq
+  dishes:
+    build: ../dishes
+    ports:
+      - "8085:8085"
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
