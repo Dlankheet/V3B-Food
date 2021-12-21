@@ -1,6 +1,5 @@
 package nl.vkb.customer.core.application;
 
-import com.hu.bep3.vkb5.customer.core.application.command.*;
 import nl.vkb.customer.core.domain.event.CustomerDeleted;
 import nl.vkb.customer.core.domain.event.CustomerEvent;
 import nl.vkb.customer.core.domain.exception.AddressAlreadyBoundException;
@@ -11,7 +10,6 @@ import nl.vkb.customer.core.domain.model.Address;
 import nl.vkb.customer.core.domain.model.Customer;
 import nl.vkb.customer.core.port.messaging.CustomerEventPublisher;
 import nl.vkb.customer.core.port.persistence.CustomerRepository;
-import com.vkb.customer.core.application.command.*;
 import lombok.AllArgsConstructor;
 import nl.vkb.customer.core.application.command.*;
 import org.springframework.stereotype.Service;

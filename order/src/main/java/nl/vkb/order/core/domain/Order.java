@@ -1,10 +1,9 @@
 package nl.vkb.order.core.domain;
 
 
-import com.order.core.domain.event.*;
+import nl.vkb.order.core.domain.event.*;
 import nl.vkb.order.core.domain.exception.OrderStatusException;
 import lombok.Data;
-import nl.vkb.order.core.domain.event.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;

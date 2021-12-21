@@ -2,7 +2,6 @@ package nl.vkb.order.infrastructure.driver.web;
 
 import nl.vkb.order.core.application.OrderCommandHandler;
 import nl.vkb.order.core.application.OrderQueryHandler;
-import com.order.core.application.command.*;
 import nl.vkb.order.core.application.command.*;
 import nl.vkb.order.core.application.query.FindAllOrderByCustomerId;
 import nl.vkb.order.core.application.query.GetOrderById;
