@@ -26,10 +26,18 @@ public class RabbitMqConfig {
 	// Queue names
 	@Value("${messaging.queue.customers}")
 	private String customersQueueName;
+	@Value("${messaging.queue.orders}")
+	private String ordersQueueName;
+	@Value("${messaging.queue.reviews}")
+	private String reviewsQueueName;
 
 	// Routing key names
 	@Value("${messaging.routing-key.customers}")
 	private String customersRoutingKey;
+	@Value("${messaging.routing-key.orders}")
+	private String ordersRoutingKey;
+	@Value("${messaging.routing-key.reviews}")
+	private String reviewsRoutingKey;
 
 	// Exchanges
 	@Bean
@@ -42,6 +50,14 @@ public class RabbitMqConfig {
 	public Queue customersQueue() {
 		return QueueBuilder.durable(customersQueueName).build();
 	}
+	@Bean
+	public Queue ordersQueue() {
+		return QueueBuilder.durable(ordersQueueName).build();
+	}
+	@Bean
+	public Queue reviewsQueue() {
+		return QueueBuilder.durable(reviewsQueueName).build();
+	}
 
 	// Bindings
 	@Bean
@@ -50,6 +66,20 @@ public class RabbitMqConfig {
 				.bind(customersQueue())
 				.to(foodExchange())
 				.with(customersRoutingKey);
+	}
+	@Bean
+	public Binding orderBinding() {
+		return BindingBuilder
+				.bind(ordersQueue())
+				.to(foodExchange())
+				.with(ordersRoutingKey);
+	}
+	@Bean
+	public Binding reviewBinding() {
+		return BindingBuilder
+				.bind(reviewsQueue())
+				.to(foodExchange())
+				.with(reviewsRoutingKey);
 	}
 
 	// General RabbitMQ config
