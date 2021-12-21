@@ -3,6 +3,7 @@ package nl.vkb.ingredients.infrastructure.driver.messaging;
 import nl.vkb.ingredients.core.application.StockCommandHandler;
 import nl.vkb.ingredients.core.application.command.AddAmount;
 import nl.vkb.ingredients.infrastructure.driver.messaging.event.StockModifyEvent;
+import nl.vkb.ingredients.infrastructure.driver.messaging.event.UnknownEventException;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class RabbitMqEventListener {
                 );
                 break;
             default:
-                throw new RuntimeException(event.getEventKey()+" is not a known event!");
+                throw new UnknownEventException(event.getEventKey()+" is not a known event!");
         }
     }
 }
