@@ -37,11 +37,6 @@ public class DishService {
         dishRepo.deleteById(id);
         return dish;
     }
-//    public List<Allergy> getAllergiesByDish(String id){
-//        Optional<Dish> optionalDish = dishRepo.findById(id);
-//        Dish dish = optionalDish.orElseThrow();
-//        return dish.getAllergies();
-//    }
 
     public Boolean isDishAvailable(String id) {
         Optional<Dish> optionalDish = dishRepo.findById(id);
