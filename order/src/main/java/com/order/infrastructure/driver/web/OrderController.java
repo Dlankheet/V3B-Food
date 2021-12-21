@@ -8,12 +8,16 @@ import com.order.core.application.query.GetOrderById;
 import com.order.core.domain.Order;
 import com.order.core.domain.exception.OrderNotFoundException;
 import com.order.core.domain.exception.OrderStatusException;
+import com.order.infrastructure.driven.exception.DishServiceUnavailableException;
+import com.order.infrastructure.driven.exception.DishUnavailableException;
+import com.order.infrastructure.driven.storage.DishResult;
 import com.order.infrastructure.driver.web.request.RegisterOrderRequest;
 import com.order.infrastructure.driver.web.response.OrderDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
@@ -65,13 +69,34 @@ public class OrderController {
         Order order = this.commandHandler.handle(new DeliveringOrder(id));
         return new OrderDto(order);
     }
+    @GetMapping("/dish/price/{id}")
+    public DishResult test(@PathVariable String id){
+        DishResult dishResult = new DishResult();
+        if (!id.equals("exception")){
+            dishResult.available = false;
+            dishResult.unavailableDishes = List.of(id.split(","));
+        }
+        else {
+            dishResult.available = true;
+            dishResult.price = 1;
+        }
+        return dishResult;
+    }
     @ExceptionHandler
-    public ResponseEntity<Void> handleCandidateNotFound(OrderNotFoundException exception) {
+    public ResponseEntity<Void> handleOrderNotFound(OrderNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @ExceptionHandler
-    public ResponseEntity<Void> handleDuplicate(OrderStatusException exception) {
+    public ResponseEntity<Void> handleOrderStatus(OrderStatusException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
+    @ExceptionHandler
+    public ResponseEntity<Void> handleDishUnavailable(DishUnavailableException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    }
+    @ExceptionHandler
+    public ResponseEntity<Void> handleDishServiceUnavailable(DishServiceUnavailableException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 }
