@@ -1,8 +1,7 @@
 package com.hu.bep3.vkb5.customer.core.application;
 
-import com.hu.bep3.vkb5.customer.core.application.command.AddAddress;
-import com.hu.bep3.vkb5.customer.core.application.command.ChangeEmail;
-import com.hu.bep3.vkb5.customer.core.application.command.RegisterCustomer;
+import com.hu.bep3.vkb5.customer.core.application.command.*;
+import com.hu.bep3.vkb5.customer.core.domain.event.CustomerDeleted;
 import com.hu.bep3.vkb5.customer.core.domain.event.CustomerEvent;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.CustomerNotFoundException;
@@ -33,6 +32,13 @@ public class CustomerCommandHandler {
 		return customer;
 	}
 
+	public void handle(DeleteCustomer command) {
+		Customer customer = this.getCustomerById(command.getCustomerId());
+		repository.delete(customer);
+		customer.listEvents().add(new CustomerDeleted(command.getCustomerId()));
+		publishEventsFor(customer);
+	}
+
 	public Customer handle(AddAddress command) throws AddressAlreadyBoundException {
 		Customer customer = this.getCustomerById(command.getCustomerId());
 		Address commandAddress = command.getAddress();
@@ -49,12 +55,20 @@ public class CustomerCommandHandler {
 		return customer;
 	}
 
+	public void handle(OrderFood command) {
+		Customer customer = this.getCustomerById(command.getCustomerId());
+		customer.orderFood(command.getOrderId());
+		repository.save(customer);
+	}
+
+	public void handle(ReviewOrder command) {
+		Customer customer = this.getCustomerById(command.getCustomerId());
+		customer.reviewOrder(command.getReviewId());
+		repository.save(customer);
+	}
+
 	private boolean emailAlreadyExists(String email){
-		System.out.println(email);
-		return this
-				.repository
-				.findCustomerByEmailEquals(email)
-				.isPresent();
+		return this.repository.findCustomerByEmail(email).isPresent();
 	}
 
 	private Customer getCustomerById(UUID id) {

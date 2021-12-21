@@ -7,5 +7,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomerRepository extends MongoRepository<Customer, UUID> {
-	Optional<Customer> findCustomerByEmailEquals(String email);
+	Optional<Customer> findCustomerByEmail(String email);
 }

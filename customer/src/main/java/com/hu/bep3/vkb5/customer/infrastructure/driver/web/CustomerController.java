@@ -4,6 +4,7 @@ import com.hu.bep3.vkb5.customer.core.application.CustomerCommandHandler;
 import com.hu.bep3.vkb5.customer.core.application.CustomerQueryHandler;
 import com.hu.bep3.vkb5.customer.core.application.command.AddAddress;
 import com.hu.bep3.vkb5.customer.core.application.command.ChangeEmail;
+import com.hu.bep3.vkb5.customer.core.application.command.DeleteCustomer;
 import com.hu.bep3.vkb5.customer.core.application.command.RegisterCustomer;
 import com.hu.bep3.vkb5.customer.core.application.query.GetCustomerById;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
@@ -37,6 +38,11 @@ public class CustomerController {
 		return this.commandHandler.handle(
 				new RegisterCustomer(request.firstName, request.lastName, request.email)
 		);
+	}
+
+	@DeleteMapping("/{id}")
+	public void unregisterCustomer(@PathVariable UUID id) {
+		this.commandHandler.handle(new DeleteCustomer(id));
 	}
 
 	@GetMapping("/{id}")

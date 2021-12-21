@@ -7,6 +7,7 @@ import com.hu.bep3.vkb5.customer.core.domain.event.CustomerEvent;
 import com.hu.bep3.vkb5.customer.core.domain.event.EmailChanged;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.InvalidEmailException;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -28,8 +29,9 @@ public class Customer {
 	private String email;
 	private Set<Address> addresses;
 	private Set<UUID> orderHistory;
-	private Set<String> reviews;
+	private Set<UUID> reviews;
 	@Transient
+	@Getter(AccessLevel.NONE)
 	private List<CustomerEvent> events = new ArrayList<>();
 
 	public Customer(String firstName, String lastName, String email) {
@@ -42,8 +44,12 @@ public class Customer {
 		this.reviews = new HashSet<>();
 	}
 
-	public void addOrderToHistory(UUID orderId){
-//		orderHistory.add(orderId);
+	public void orderFood(UUID orderId){
+		orderHistory.add(orderId);
+	}
+
+	public void reviewOrder(UUID reviewId) {
+		reviews.add(reviewId);
 	}
 
 	public void changeEmail(String newEmail){
