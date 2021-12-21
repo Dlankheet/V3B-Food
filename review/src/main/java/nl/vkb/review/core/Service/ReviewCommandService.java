@@ -5,6 +5,7 @@ import nl.vkb.review.core.Service.Command.DeleteAllReviewsByCustomer;
 import nl.vkb.review.core.Service.Command.DeleteReview;
 import nl.vkb.review.core.Service.Command.MakeReview;
 
+import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
 import nl.vkb.review.core.domain.Rating;
 import nl.vkb.review.core.domain.Review;
 import nl.vkb.review.core.domain.event.ReviewDeleted;
@@ -58,7 +59,9 @@ public class ReviewCommandService {
 	}
 
 	private Review getReviewbyId(UUID id) {
-		return this.repository.findById(id).get();
+		return this.repository.findById(id).orElseThrow(
+				() -> new ReviewNotFoundException("Does not exist")
+		);
 	}
 
 	private void publishEventsFor(Review review) {

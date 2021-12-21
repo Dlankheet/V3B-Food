@@ -23,11 +23,18 @@ public class RabbitMqConfig {
 
 	@Value("${messaging.exchange.food}")
 	private String reviewExchangeName;
+
 	@Value("${messaging.queue.review}")
 	private String reviewQueueName;
-
 	@Value("${messaging.routing-key.review-update}")
 	private String reviewUpdateRoutingKey;
+
+	@Value("${messaging.queue.customers}")
+	private String customerQueueName;
+	@Value("${messaging.routing-key.customers}")
+	private String customersRoutingKey;
+
+
 
 	@Bean
 	public TopicExchange reviewExchange() {
@@ -40,11 +47,24 @@ public class RabbitMqConfig {
 	}
 
 	@Bean
+	public Queue customersQueue() {
+		return QueueBuilder.durable(customerQueueName).build();
+	}
+
+	@Bean
 	public Binding reviewBinding() {
 		return BindingBuilder
 				.bind(reviewsQueue())
 				.to(reviewExchange())
 				.with(reviewUpdateRoutingKey);
+	}
+
+	@Bean
+	public Binding customersBinding() {
+		return BindingBuilder
+				.bind(customersQueue())
+				.to(reviewExchange())
+				.with(customersRoutingKey);
 	}
 
 	@Bean
