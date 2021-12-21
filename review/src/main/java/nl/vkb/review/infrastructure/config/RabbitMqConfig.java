@@ -21,7 +21,7 @@ public class RabbitMqConfig {
 	@Value("${spring.rabbitmq.port}")
 	private int port;
 
-	@Value("${messaging.exchange.review}")
+	@Value("${messaging.exchange.food}")
 	private String reviewExchangeName;
 	@Value("${messaging.queue.review}")
 	private String reviewQueueName;
