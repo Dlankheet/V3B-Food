@@ -1,19 +1,17 @@
 package nl.vkb.review.core.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import nl.vkb.review.core.domain.Exception.ReviewRatingException;
 import org.springframework.data.annotation.Id;
 
 import java.util.UUID;
 
-@Data
+@Getter
 public class Rating {
-	@Id
-	private UUID id;
-	private double ratingNumber;
+	private final double ratingNumber;
 
 	public Rating(double ratingNumber) {
-		if (this.ratingNumber > 0 && this.ratingNumber <= 5) this.ratingNumber = ratingNumber;
+		if (ratingNumber > 0 && ratingNumber <= 5) this.ratingNumber = ratingNumber;
 		else throw new ReviewRatingException("Could not be created");
 	}
 }

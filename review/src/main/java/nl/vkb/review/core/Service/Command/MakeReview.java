@@ -1,14 +1,15 @@
 package nl.vkb.review.core.Service.Command;
 
 
-import lombok.Data;
-import nl.vkb.review.core.domain.Rating;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.List;
 import java.util.UUID;
 
 
-@Data
+@Getter
+@AllArgsConstructor
 public class MakeReview {
 	private final String desc;
 	private final List<String> pros;
