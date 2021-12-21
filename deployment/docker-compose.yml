@@ -16,7 +16,7 @@ services:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
 
-review:
+  review:
     build: ../review
     ports:
       - "8083:8083"
