@@ -8,18 +8,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RabbitMqEventListener {
-	private final ReviewCommandService commandService;
-
-	public RabbitMqEventListener(ReviewCommandService commandService) {
-		this.commandService = commandService;
-	}
-
-	@RabbitListener(queues = "@{'${messaging.queue.review}'}")
-	void listen(ReviewModifyEvent event) {
-		switch (event.eventKey) {
-			case "review.create":
-				return;
-			//	this.commandService.handle();
-		}
-	}
+//	private final ReviewCommandService commandService;
+//
+//	public RabbitMqEventListener(ReviewCommandService commandService) {
+//		this.commandService = commandService;
+//	}
+//
+//	@RabbitListener(queues = "@{'${messaging.queue.review}'}")
+//	void listen(ReviewModifyEvent event) {
+//		switch (event.eventKey) {
+//			case "review.create":
+//				return;
+//				this.commandService.handle(
+//						new MakeReview(event.)
+//				);
+//		}
+//	}
 }
