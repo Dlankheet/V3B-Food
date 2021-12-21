@@ -11,10 +11,7 @@ import nl.vkb.review.core.Service.ReviewCommandService;
 import nl.vkb.review.core.Service.ReviewQueryService;
 import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.UUID;
@@ -45,7 +42,7 @@ public class ReviewController {
 		this.commandService.handle(new ChangeRating(id, request.rating));
 	}
 
-	@PostMapping("/review/delete/{id}")
+	@DeleteMapping("/review/{id}/delete")
 	public void deleteReview(@PathVariable UUID id) {
 		this.commandService.handle(new DeleteReview(id));
 	}
