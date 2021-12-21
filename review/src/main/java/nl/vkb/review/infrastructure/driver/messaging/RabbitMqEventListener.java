@@ -14,7 +14,7 @@ public class RabbitMqEventListener {
 		this.commandService = commandService;
 	}
 
-	@RabbitListener(queues = "@{'${messaging.queue.customers}'}")
+	@RabbitListener(queues = "#{'${messaging.queue.customers}'}")
 	void listen(CustomerEvent event) {
 		switch (event.getEventKey()) {
 			case "customers.deleted":
