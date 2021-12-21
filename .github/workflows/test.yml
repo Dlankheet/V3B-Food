@@ -32,4 +32,4 @@ jobs:
           java-version: 17
       - name: Build with Maven Wrapper
         run: |
-          cd dish && ./mvnw test -B
+          cd dishes && ./mvnw test -B
