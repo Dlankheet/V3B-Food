@@ -1,5 +1,6 @@
 package nl.vkb.review.core.Service;
 
+import nl.vkb.review.core.Service.Command.ChangeRating;
 import nl.vkb.review.core.Service.Command.DeleteReview;
 import nl.vkb.review.core.Service.Command.MakeReview;
 
@@ -36,6 +37,14 @@ public class ReviewCommandService {
 	public void handle(DeleteReview command){
 		publishEventsFor(getReviewbyId(command.id));
 		repository.deleteById(command.id);
+	}
+
+	public void handle(ChangeRating command) {
+		Review review = getReviewbyId(command.id);
+		review.getRating().changeRating(command.rating);
+
+		publishEventsFor(review);
+		repository.save(review);
 	}
 
 	private Review getReviewbyId(UUID id) {

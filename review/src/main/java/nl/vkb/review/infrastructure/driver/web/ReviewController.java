@@ -1,5 +1,7 @@
 package nl.vkb.review.infrastructure.driver.web;
 
+import nl.vkb.review.core.Service.Command.ChangeRating;
+import nl.vkb.review.infrastructure.driver.web.Request.ChangeRatingRequest;
 import nl.vkb.review.infrastructure.driver.web.Request.MakeReviewRequest;
 import nl.vkb.review.core.domain.Review;
 import nl.vkb.review.core.Service.Command.DeleteReview;
@@ -36,6 +38,11 @@ public class ReviewController {
 	public void createReview(@Valid @RequestBody MakeReviewRequest request) {
 		this.commandService.handle(new MakeReview(request.description, request.pros, request.cons,
 				request.rating, request.orderId, request.accountId));
+	}
+
+	@PostMapping("/review/rating/{id}/change")
+	public void changeRating(@PathVariable UUID id, @Valid @RequestBody ChangeRatingRequest request) {
+		this.commandService.handle(new ChangeRating(id, request.rating));
 	}
 
 	@PostMapping("/review/delete/{id}")
