@@ -6,9 +6,7 @@ on:
 
 jobs:
   ingredients:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Start containers
