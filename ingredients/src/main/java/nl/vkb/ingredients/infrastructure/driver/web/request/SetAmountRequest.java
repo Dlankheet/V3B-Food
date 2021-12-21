@@ -1,5 +1,10 @@
 package nl.vkb.ingredients.infrastructure.driver.web.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public class SetAmountRequest {
-	public int stock;
+	private final int stock;
 }

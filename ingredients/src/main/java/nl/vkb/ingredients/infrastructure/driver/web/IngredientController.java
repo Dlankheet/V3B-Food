@@ -4,7 +4,6 @@ import nl.vkb.ingredients.core.application.StockCommandHandler;
 import nl.vkb.ingredients.core.application.StockQueryHandler;
 import nl.vkb.ingredients.core.application.command.RegisterIngredient;
 import nl.vkb.ingredients.core.application.command.SetAmount;
-import nl.vkb.ingredients.core.application.query.GetAllIngredients;
 import nl.vkb.ingredients.core.application.query.GetIngredientById;
 import nl.vkb.ingredients.core.domain.Ingredient;
 import nl.vkb.ingredients.core.domain.exception.IngredientNotFound;
@@ -36,16 +35,16 @@ public class IngredientController {
 
 	@PostMapping
 	public Ingredient create(@Valid @RequestBody RegisterIngredientRequest request) {
-		return this.commandHandler.handle(new RegisterIngredient(request.name,request.stock));
+		return this.commandHandler.handle(new RegisterIngredient(request.getName(),request.getStock()));
 	}
 
 	@PostMapping("/{id}/set-amount")
 	public Ingredient updateStock(@PathVariable UUID id, @Valid @RequestBody SetAmountRequest request) {
-		return this.commandHandler.handle(new SetAmount(id, request.stock));
+		return this.commandHandler.handle(new SetAmount(id, request.getStock()));
 	}
 	@GetMapping("/all")
 	public List<Ingredient> getAll() {
-		return this.queryHandler.handle(new GetAllIngredients());
+		return this.queryHandler.handle();
 	}
 	@ExceptionHandler
 	public ResponseEntity<Void> handleIngredientNotFound(IngredientNotFound exception) {
