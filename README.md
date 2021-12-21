@@ -1,5 +1,5 @@
 # V3B-Food
-For al your tasty needs.
+For all your tasty needs.
 
 # Mogelijke functionaliteiten
 * Registreren / inloggen verschillende rollen 
