@@ -1,5 +1,5 @@
-# V2B5-Food
-For al your tasty needs.
+# V3B-Food
+For all your tasty needs.
 
 # Mogelijke functionaliteiten
 * Registreren / inloggen verschillende rollen 

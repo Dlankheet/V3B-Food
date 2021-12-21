@@ -18,7 +18,7 @@ jobs:
     - name: Build with Maven Wrapper
       run: |
         cd ingredients && ./mvnw test -B
-
+        
   dish:
     runs-on: ubuntu-latest
 
@@ -33,3 +33,18 @@ jobs:
       - name: Build with Maven Wrapper
         run: |
           cd dishes && ./mvnw test -B
+  customer:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Start containers
+      run: docker-compose -f "development/docker-compose.yml" up -d --build
+    - name: Set up JDK 17
+      uses: actions/setup-java@v1
+      with:
+        java-version: 17
+    - name: Build with Maven Wrapper
+      run: |
+        cd customer && ./mvnw test -B

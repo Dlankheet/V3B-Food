@@ -15,10 +15,20 @@ services:
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
+  
   dishes:
     build: ../dishes
     ports:
       - "8085:8085"
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_RABBITMQ_HOST: rabbitmq
+
+  customer:
+    build: ../customer
+    ports:
+      - "8081:8081"
+
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
