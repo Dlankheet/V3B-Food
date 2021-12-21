@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
+@RequestMapping("/review")
 public class ReviewController {
 	private final ReviewCommandService commandService;
 	private final ReviewQueryService queryService;
@@ -26,23 +27,23 @@ public class ReviewController {
 		this.queryService = queryService;
 	}
 
-	@GetMapping("review/{id}")
+	@GetMapping("/{id}")
 	public Review getReview(@PathVariable UUID id) throws ReviewNotFoundException {
 		return this.queryService.handle(new GetReviewById(id));
 	}
 
-	@PostMapping("/review/create")
+	@PostMapping("/create")
 	public void createReview(@Valid @RequestBody MakeReviewRequest request) {
 		this.commandService.handle(new MakeReview(request.description, request.pros, request.cons,
 				request.rating, request.orderId, request.accountId));
 	}
 
-	@PostMapping("/review/rating/{id}/change")
+	@PostMapping("/rating/{id}/change")
 	public void changeRating(@PathVariable UUID id, @Valid @RequestBody ChangeRatingRequest request) {
 		this.commandService.handle(new ChangeRating(id, request.rating));
 	}
 
-	@DeleteMapping("/review/{id}/delete")
+	@DeleteMapping("/{id}/delete")
 	public void deleteReview(@PathVariable UUID id) {
 		this.commandService.handle(new DeleteReview(id));
 	}
