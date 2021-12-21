@@ -1,0 +1,77 @@
+{
+	"info": {
+		"_postman_id": "a8d4203f-99ea-4faf-a4b4-a41bc6caee7e",
+		"name": "BEP3 - Food - Dish",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "generateDish",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Broodje Bal\",\r\n    \"price\": 100,\r\n    \"ingredients\": [{\"id\": \"f5a708c6-e193-44bc-af00-4aaf9bf7641c\",\r\n    \"amount\": 10}\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/dish/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dish",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IsDishAvailable",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/dish/61c1e48f0177562f7a8bda16/isAvailable",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dish",
+						"61c1e48f0177562f7a8bda16",
+						"isAvailable"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllDishes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/dish/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"dish",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
