@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - deployment
+  workflow_dispatch:
 
 jobs:
   deploy:
