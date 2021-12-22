@@ -1,10 +1,12 @@
 package nl.vkb.order.infrastructure.driven.storage;
 
+import lombok.AllArgsConstructor;
+
 import java.util.List;
 
-
+@AllArgsConstructor
 public class DishResult {
-    public boolean available;
-    public List<String> unavailableDishes;
-    public double price;
+    public final boolean available;
+    public final List<String> unavailableDishes;
+    public final double price;
 }

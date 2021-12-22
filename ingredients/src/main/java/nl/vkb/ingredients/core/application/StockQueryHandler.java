@@ -1,6 +1,5 @@
 package nl.vkb.ingredients.core.application;
 
-import nl.vkb.ingredients.core.application.query.GetAllIngredients;
 import nl.vkb.ingredients.core.application.query.GetIngredientById;
 import nl.vkb.ingredients.core.domain.Ingredient;
 import nl.vkb.ingredients.core.domain.exception.IngredientNotFound;
@@ -16,7 +15,7 @@ public class StockQueryHandler {
 	public StockQueryHandler(IngredientRepository repository) {
 		this.repository = repository;
 	}
-	public List<Ingredient> handle(GetAllIngredients query) {
+	public List<Ingredient> handle() {
 		return this.repository.findAll();
 	}
 	public Ingredient handle(GetIngredientById query) {

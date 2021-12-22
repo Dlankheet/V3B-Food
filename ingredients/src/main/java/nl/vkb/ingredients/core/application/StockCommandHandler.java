@@ -1,6 +1,7 @@
 package nl.vkb.ingredients.core.application;
 
 import nl.vkb.ingredients.core.application.command.AddAmount;
+import nl.vkb.ingredients.core.application.command.DeleteIngredient;
 import nl.vkb.ingredients.core.application.command.RegisterIngredient;
 import nl.vkb.ingredients.core.application.command.SetAmount;
 import nl.vkb.ingredients.core.domain.Ingredient;
@@ -39,7 +40,12 @@ public class StockCommandHandler {
 		ingredient.setStock(command.getAmount());
 		return this.publishEventsAndSave(ingredient);
 	}
-
+	public void handle(DeleteIngredient command) {
+		Ingredient ingredient = getIngredientById(command.getId());
+		ingredient.delete();
+		ingredient=publishEventsAndSave(ingredient);
+		repository.delete(ingredient);
+	}
 	private Ingredient getIngredientById(UUID id) {
 		return this.repository.findById(id).orElseThrow(() -> new IngredientNotFound(id.toString()));
 	}

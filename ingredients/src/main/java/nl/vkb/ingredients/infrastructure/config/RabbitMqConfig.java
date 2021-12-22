@@ -3,7 +3,6 @@ package nl.vkb.ingredients.infrastructure.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.vkb.ingredients.infrastructure.driven.messaging.RabbitMqEventPublisher;
 import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -47,7 +46,7 @@ public class RabbitMqConfig {
 	}
 
 	@Bean
-	public RabbitMqEventPublisher EventPublisher(RabbitTemplate template) {
+	public RabbitMqEventPublisher eventPublisher(RabbitTemplate template) {
 		return new RabbitMqEventPublisher(template, foodExchangeName);
 	}
 	@Bean
