@@ -1,5 +1,6 @@
 package nl.vkb.ingredients.core.domain;
 
+import nl.vkb.ingredients.core.domain.event.StockDeleted;
 import nl.vkb.ingredients.core.domain.event.StockUpdated;
 import nl.vkb.ingredients.core.domain.exception.InvalidStockException;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,5 +31,10 @@ class IngredientTest {
 		this.ingredient.setStock(150);
 		assertEquals(150,this.ingredient.getStock());
 		assertEquals(List.of(new StockUpdated(ingredient.getId(),150)),this.ingredient.getEvents());
+	}
+	@Test
+	void deleteStock() {
+		ingredient.delete();
+		assertEquals(List.of(new StockDeleted(ingredient.getId())),this.ingredient.getEvents());
 	}
 }

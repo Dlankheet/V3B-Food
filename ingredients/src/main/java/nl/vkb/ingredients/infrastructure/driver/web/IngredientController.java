@@ -2,6 +2,7 @@ package nl.vkb.ingredients.infrastructure.driver.web;
 
 import nl.vkb.ingredients.core.application.StockCommandHandler;
 import nl.vkb.ingredients.core.application.StockQueryHandler;
+import nl.vkb.ingredients.core.application.command.DeleteIngredient;
 import nl.vkb.ingredients.core.application.command.RegisterIngredient;
 import nl.vkb.ingredients.core.application.command.SetAmount;
 import nl.vkb.ingredients.core.application.query.GetIngredientById;
@@ -42,6 +43,12 @@ public class IngredientController {
 	public Ingredient updateStock(@PathVariable UUID id, @Valid @RequestBody SetAmountRequest request) {
 		return this.commandHandler.handle(new SetAmount(id, request.getStock()));
 	}
+
+	@DeleteMapping("/{id}")
+	public void deleteIngredient(@PathVariable UUID id) {
+		this.commandHandler.handle(new DeleteIngredient(id));
+	}
+	
 	@GetMapping("/all")
 	public List<Ingredient> getAll() {
 		return this.queryHandler.handle();

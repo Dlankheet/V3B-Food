@@ -1,10 +1,12 @@
 package nl.vkb.ingredients.core.application;
 
 import nl.vkb.ingredients.core.application.command.AddAmount;
+import nl.vkb.ingredients.core.application.command.DeleteIngredient;
 import nl.vkb.ingredients.core.application.command.RegisterIngredient;
 import nl.vkb.ingredients.core.application.command.SetAmount;
 import nl.vkb.ingredients.core.domain.Ingredient;
 import nl.vkb.ingredients.core.domain.exception.IngredientNotFound;
+import nl.vkb.ingredients.core.domain.exception.InvalidStockException;
 import nl.vkb.ingredients.core.ports.storage.IngredientRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,5 +56,10 @@ class StockCommandHandlerTest {
 	void setAmountHandleRequest() {
 		commandHandler.handle(new SetAmount(ingredient.getId(),50));
 		assertEquals(50,repository.findById(ingredient.getId()).get().getStock());
+	}
+	@Test
+	void deleteHandleRequest() {
+		commandHandler.handle(new DeleteIngredient(ingredient.getId()));
+		assertFalse(repository.findById(ingredient.getId()).isPresent());
 	}
 }

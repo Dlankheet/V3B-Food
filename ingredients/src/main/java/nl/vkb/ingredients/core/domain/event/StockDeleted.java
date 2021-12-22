@@ -9,11 +9,10 @@ import java.util.UUID;
 @EqualsAndHashCode
 @AllArgsConstructor
 @Getter
-public class StockUpdated extends StockEvent {
-    private final UUID ingredient;
-    private final int stock;
-    @Override
-    public String getEventKey() {
-        return "stock.updated";
-    }
+public class StockDeleted extends StockEvent {
+	private final UUID ingredient;
+	@Override
+	public String getEventKey() {
+		return "stock.deleted";
+	}
 }
