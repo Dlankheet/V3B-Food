@@ -2,12 +2,12 @@ package nl.vkb.dishes.infrastructure.driver.web;
 
 import nl.vkb.dishes.core.application.DishCommandHandler;
 import nl.vkb.dishes.core.application.DishQueryHandler;
-import nl.vkb.dishes.core.application.command.createDish;
-import nl.vkb.dishes.core.application.command.deleteDish;
+import nl.vkb.dishes.core.application.command.CreateDish;
+import nl.vkb.dishes.core.application.command.DeleteDish;
 import nl.vkb.dishes.core.application.query.ListDishes;
-import nl.vkb.dishes.core.application.query.checkAvailable;
+import nl.vkb.dishes.core.application.query.CheckAvailable;
 import nl.vkb.dishes.core.domain.Dish;
-import nl.vkb.dishes.infrastructure.driver.web.request.createDishRequest;
+import nl.vkb.dishes.infrastructure.driver.web.request.CreateDishRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +25,8 @@ public class DishController {
     }
 
     @PostMapping("/create")
-    public Dish createDish(@RequestBody createDishRequest dto) {
-        return this.commandHandler.handle(new createDish(dto.getTitle(), dto.getPrice(), dto.getIngredients()));
+    public Dish createDish(@RequestBody CreateDishRequest dto) {
+        return this.commandHandler.handle(new CreateDish(dto.getTitle(), dto.getPrice(), dto.getIngredients()));
     }
 
     @GetMapping("/all")
@@ -37,12 +37,12 @@ public class DishController {
 
     @DeleteMapping("/remove")
     public void generateRandomDish(String id) {
-        commandHandler.handle(new deleteDish(UUID.fromString(id)));
+        commandHandler.handle(new DeleteDish(UUID.fromString(id)));
     }
 
     @GetMapping("/{id}/isAvailable")
     public Boolean isDishAvailable(@PathVariable UUID id) {
-        return queryHandler.handle(new checkAvailable(id));
+        return queryHandler.handle(new CheckAvailable(id));
     }
 
 }

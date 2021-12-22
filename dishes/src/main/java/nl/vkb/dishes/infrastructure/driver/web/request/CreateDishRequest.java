@@ -8,7 +8,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter
-public class createDishRequest {
+public class CreateDishRequest {
     private final String title;
     private final double price;
     private final List<Ingredient> ingredients;

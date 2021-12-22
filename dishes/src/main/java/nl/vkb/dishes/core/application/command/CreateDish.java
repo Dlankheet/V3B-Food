@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class createDish{
+public class CreateDish {
     private final String title;
     private final double price;
     private final List<Ingredient> ingredients;

@@ -1,12 +1,11 @@
 package nl.vkb.dishes.core.application;
 
-import nl.vkb.dishes.core.application.command.createDish;
-import nl.vkb.dishes.core.application.command.deleteDish;
+import nl.vkb.dishes.core.application.command.CreateDish;
+import nl.vkb.dishes.core.application.command.DeleteDish;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
 import nl.vkb.dishes.core.domain.event.DishEvent;
 import nl.vkb.dishes.core.port.messaging.DishEventPublisher;
-import nl.vkb.dishes.core.port.storage.StockRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,21 +13,19 @@ import java.util.List;
 @Service
 public class DishCommandHandler {
     private final DishRepository dishRepo;
-    private final StockRepository stockRepository;
     private final DishEventPublisher eventPublisher;
 
-    public DishCommandHandler(DishRepository dishRepo, StockRepository stockRepository, DishEventPublisher eventPublisher) {
+    public DishCommandHandler(DishRepository dishRepo, DishEventPublisher eventPublisher) {
         this.dishRepo = dishRepo;
-        this.stockRepository = stockRepository;
         this.eventPublisher = eventPublisher;
     }
 
-    public Dish handle(createDish command) {
+    public Dish handle(CreateDish command) {
         Dish dish = new Dish(command.getTitle(), command.getPrice(), command.getIngredients());
         return this.publishEventsAndSave(dish);
     }
 
-    public void handle(deleteDish command) {
+    public void handle(DeleteDish command) {
         this.dishRepo.deleteById(command.getId());
     }
 

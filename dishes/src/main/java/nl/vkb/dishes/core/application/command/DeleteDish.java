@@ -1,12 +1,11 @@
-package nl.vkb.dishes.core.application.query;
+package nl.vkb.dishes.core.application.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
-public class checkAvailable {
-    private final UUID id;
+public class DeleteDish {
+    public final UUID id;
 }

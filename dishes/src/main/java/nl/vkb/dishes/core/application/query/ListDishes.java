@@ -1,10 +1,7 @@
 package nl.vkb.dishes.core.application.query;
 
-public class ListDishes {
-    private final String orderBy;
-    private final String direction;
-
-    public ListDishes(String orderBy, String direction) {
+public record ListDishes(String orderBy, String direction) {
+    public ListDishes {
         if (orderBy == null) {
             orderBy = "name";
         }
@@ -13,8 +10,6 @@ public class ListDishes {
             direction = "asc";
         }
 
-        this.orderBy = orderBy;
-        this.direction = direction;
     }
 
     public String getOrderBy() {

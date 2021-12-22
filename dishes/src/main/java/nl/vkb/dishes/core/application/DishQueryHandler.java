@@ -1,7 +1,7 @@
 package nl.vkb.dishes.core.application;
 
 import nl.vkb.dishes.core.application.query.ListDishes;
-import nl.vkb.dishes.core.application.query.checkAvailable;
+import nl.vkb.dishes.core.application.query.CheckAvailable;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
 import nl.vkb.dishes.core.domain.Ingredient;
@@ -22,7 +22,7 @@ public class DishQueryHandler {
         this.stockRepository = stockRepository;
     }
 
-    public Boolean handle(checkAvailable query){
+    public Boolean handle(CheckAvailable query){
         Optional<Dish> optionalDish = dishRepository.findById(query.getId());
         Dish dish = optionalDish.orElseThrow();
         for (Ingredient ingredient : dish.getIngredients()) {
