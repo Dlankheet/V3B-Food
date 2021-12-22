@@ -57,6 +57,15 @@ public class OrderCommandHandler {
         return order;
     }
 
+    public Order handle(DeliveredOrder command) {
+        Order order = this.getOrderById(command.getOrder());
+        order.orderDelivered();
+        this.publishEventsFor(order);
+        this.repository.save(order);
+        return order;
+    }
+
+
     public Order handle(DenyOrder command) {
         Order order = this.getOrderById(command.getOrder());
         order.denyOrder();
