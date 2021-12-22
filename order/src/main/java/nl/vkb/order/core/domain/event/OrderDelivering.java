@@ -4,24 +4,24 @@ import java.util.UUID;
 
 public class OrderDelivering extends OrderEvent{
     private final UUID order;
-    private final String customer;
+    private final UUID customer;
 
 
-    public OrderDelivering (UUID order, String customer) {
+    public OrderDelivering (UUID order, UUID customer) {
         this.order = order;
         this.customer = customer;
     }
 
     @Override
     public String getEventKey ( ) {
-        return null;
+        return "order.readyToDelivering";
     }
 
     public UUID getOrder ( ) {
         return order;
     }
 
-    public String getCustomer ( ) {
+    public UUID getCustomer ( ) {
         return customer;
     }
 }

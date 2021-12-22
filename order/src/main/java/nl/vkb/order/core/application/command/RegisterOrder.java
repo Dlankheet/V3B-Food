@@ -3,14 +3,15 @@ package nl.vkb.order.core.application.command;
 import lombok.Getter;
 
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 public class RegisterOrder {
-    private final String customer;
-    private final Set<String > dishes;
+    private final UUID customer;
+    private final Set<UUID> dishes;
 
 
-    public RegisterOrder (String customer, Set<String> dishes) {
+    public RegisterOrder (UUID customer, Set<UUID> dishes) {
         this.customer = customer;
         this.dishes = dishes;
     }

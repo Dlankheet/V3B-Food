@@ -20,10 +20,11 @@ public class HttpDishRepository implements DishRepository {
     @Override
     public double getPriceByDishes (String dishes) {
         URI uri = URI.create(this.rootPath+"/order/dish/price/"+dishes);
-        double totalPrice = 0;
+        double totalPrice;
         try {
             DishResult dishResult = this.client.getForObject(uri, DishResult.class);
-            if (dishResult.available) {
+            if (dishResult == null) throw new DishServiceUnavailableException();
+            else if (dishResult.available) {
                 totalPrice = dishResult.price;
             }
             else throw new DishUnavailableException(dishResult.unavailableDishes);
