@@ -1,8 +1,8 @@
-package com.hu.bep3.vkb5.customer.core.domain.model;
+package nl.vkb.customer.core.domain.model;
 
-import com.hu.bep3.vkb5.customer.core.domain.event.EmailChanged;
-import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
-import com.hu.bep3.vkb5.customer.core.domain.exception.InvalidEmailException;
+import nl.vkb.customer.core.domain.event.EmailChanged;
+import nl.vkb.customer.core.domain.exception.AddressAlreadyBoundException;
+import nl.vkb.customer.core.domain.exception.InvalidEmailException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -107,6 +108,22 @@ class CustomerTest {
 				Arguments.of("john.doe@gmail.com-"),
 				Arguments.of("john.doe@.com-")
 		);
+	}
+
+	@Test
+	@DisplayName("Order some food")
+	void orderFood(){
+		UUID orderId = UUID.randomUUID();
+		customer.orderFood(orderId);
+		assertEquals(1,customer.getOrderHistory().size());
+	}
+
+	@Test
+	@DisplayName("Review an order")
+	void reviewOrder(){
+		UUID reviewId = UUID.randomUUID();
+		customer.reviewOrder(reviewId);
+		assertEquals(1,customer.getReviews().size());
 	}
 
 	@Test

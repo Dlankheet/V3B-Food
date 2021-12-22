@@ -1,5 +1,7 @@
 package nl.vkb.customer.core.application;
 
+import lombok.AllArgsConstructor;
+import nl.vkb.customer.core.application.command.*;
 import nl.vkb.customer.core.domain.event.CustomerDeleted;
 import nl.vkb.customer.core.domain.event.CustomerEvent;
 import nl.vkb.customer.core.domain.exception.AddressAlreadyBoundException;
@@ -10,8 +12,6 @@ import nl.vkb.customer.core.domain.model.Address;
 import nl.vkb.customer.core.domain.model.Customer;
 import nl.vkb.customer.core.port.messaging.CustomerEventPublisher;
 import nl.vkb.customer.core.port.persistence.CustomerRepository;
-import lombok.AllArgsConstructor;
-import nl.vkb.customer.core.application.command.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,7 +45,10 @@ public class CustomerCommandHandler {
 		return repository.save(customer);
 	}
 
-	public Customer handle(ChangeEmail command) throws InvalidEmailException{
+	public Customer handle(ChangeEmail command) throws InvalidEmailException, EmailAlreadyExistsException{
+		if(this.emailAlreadyExists(command.getNewEmail())){
+			throw new EmailAlreadyExistsException(command.getNewEmail());
+		}
 		Customer customer = this.getCustomerById(command.getCustomerId());
 		customer.changeEmail(command.getNewEmail());
 		this.publishEventsFor(customer);
