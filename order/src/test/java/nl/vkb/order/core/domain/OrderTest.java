@@ -3,6 +3,7 @@ package nl.vkb.order.core.domain;
 import nl.vkb.order.core.domain.exception.OrderStatusException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -22,14 +23,14 @@ class OrderTest {
         order = new Order(UUID.randomUUID(), dishes);
 
     }
-    @Disabled("accept order when the status PENDING")
+    @DisplayName("accept order when the status PENDING")
     @Test
     void acceptOrderHappyFlow ( ) {
         order.acceptOrder();
         assertEquals(OrderStatus.ACCEPTED, order.getOrderStatus());
     }
 
-    @Disabled("accept order when the order status not PENDING")
+    @DisplayName("accept order when the order status not PENDING")
     @Test
     void acceptOrderFailFlow ( ) {
         order.acceptOrder();
@@ -37,21 +38,21 @@ class OrderTest {
     }
 
 
-    @Disabled("deny order when the order status PENDING")
+    @DisplayName("deny order when the order status PENDING")
     @Test
     void denyOrderHappyFlow ( ) {
         order.denyOrder();
         assertEquals(OrderStatus.DENIED, order.getOrderStatus());
     }
 
-    @Disabled("deny order when the order status not PENDING")
+    @DisplayName("deny order when the order status not PENDING")
     @Test
     void denyOrderFailFlow ( ) {
         order.acceptOrder();
         assertThrows(OrderStatusException.class, ()-> order.denyOrder());
     }
 
-    @Disabled("cancel order when the order status ACCEPTED")
+    @DisplayName("cancel order when the order status ACCEPTED")
     @Test
     void cancelOrderHappyFlow ( ) {
         order.acceptOrder();
@@ -59,13 +60,13 @@ class OrderTest {
         assertEquals(OrderStatus.CANCELLED, order.getOrderStatus());
     }
 
-    @Disabled("cancel order when the order status not ACCEPTED")
+    @DisplayName("cancel order when the order status not ACCEPTED")
     @Test
     void cancelOrderFailFlow ( ) {
         assertThrows(OrderStatusException.class, ()-> order.cancelOrder());
     }
 
-    @Disabled("get the order ready from the kitchen when the order status ACCEPTED")
+    @DisplayName("get the order ready from the kitchen when the order status ACCEPTED")
     @Test
     void orderReadyToDeliveredHappyFlow ( ) {
         order.acceptOrder();
@@ -73,13 +74,13 @@ class OrderTest {
         assertEquals(OrderStatus.DELIVERING, order.getOrderStatus());
     }
 
-    @Disabled("get the order ready from the kitchen when the order status not ACCEPTED")
+    @DisplayName("get the order ready from the kitchen when the order status not ACCEPTED")
     @Test
     void orderReadyToDeliveredFailFlow ( ) {
         assertThrows(OrderStatusException.class, ()-> order.orderReadyToDelivered());
     }
 
-    @Disabled("Deliver order when the order status DELIVERING")
+    @DisplayName("Deliver order when the order status DELIVERING")
     @Test
     void orderDeliveredHappyFlow ( ) {
         order.setOrderStatus(OrderStatus.DELIVERING);
@@ -87,13 +88,13 @@ class OrderTest {
         assertEquals(OrderStatus.DELIVERED, order.getOrderStatus());
     }
 
-    @Disabled("Deliver order when the order status not DELIVERING")
+    @DisplayName("Deliver order when the order status not DELIVERING")
     @Test
     void orderDeliveredFailFlow ( ) {
         assertThrows(OrderStatusException.class, ()-> order.orderDelivered());
     }
 
-    @Disabled("clear events list for the order")
+    @DisplayName("clear events list for the order")
     @Test
     void clearEvents ( ) {
         order.acceptOrder();
@@ -103,7 +104,7 @@ class OrderTest {
         assertEquals(0, order.listEvents().size());
     }
 
-    @Disabled("add event to event list")
+    @DisplayName("add event to event list")
     @Test
     void listEvents ( ) {
         order.acceptOrder();
