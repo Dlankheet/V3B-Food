@@ -4,12 +4,17 @@ import nl.vkb.dishes.core.application.DishCommandHandler;
 import nl.vkb.dishes.core.application.DishQueryHandler;
 import nl.vkb.dishes.core.application.command.CreateDish;
 import nl.vkb.dishes.core.application.command.DeleteDish;
+import nl.vkb.dishes.core.application.query.CheckOrderAvailability;
 import nl.vkb.dishes.core.application.query.ListDishes;
 import nl.vkb.dishes.core.application.query.CheckAvailable;
+import nl.vkb.dishes.core.application.results.OrderAvailableResult;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.infrastructure.driver.web.request.CreateDishRequest;
+import nl.vkb.dishes.infrastructure.driver.web.result.WebOrderAvailableResult;
+import nl.vkb.dishes.utils.uuidUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,6 +38,16 @@ public class DishController {
     public List<Dish> getDishes(@RequestParam(required = false) String orderBy,
                                 @RequestParam(required = false) String direction) {
         return this.queryHandler.handle(new ListDishes(orderBy, direction));
+    }
+
+    @GetMapping("/checkorderavailability/{idString}")
+    public WebOrderAvailableResult checkOrderAvailability(@PathVariable String idString) {
+        List<UUID> dishUUIDs = uuidUtils.parseStringToList(idString);
+
+        OrderAvailableResult result = this.queryHandler.handle(new CheckOrderAvailability(dishUUIDs));
+        List<String> resultlist = uuidUtils.parseUUIDtoList(result.getUnavailableDishes());
+
+        return new WebOrderAvailableResult(result.allAvailable, resultlist, result.getTotalPrice());
     }
 
     @DeleteMapping("/remove")
