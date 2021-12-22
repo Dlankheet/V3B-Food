@@ -2,6 +2,7 @@ package nl.vkb.dishes.core.service;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
 import nl.vkb.dishes.core.domain.Ingredient;
+import nl.vkb.dishes.core.port.storage.StockRepository;
 import nl.vkb.dishes.infrastructure.driven.storage.HttpStockRepository;
 import nl.vkb.dishes.infrastructure.driven.storage.StockResult;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,9 @@ import java.util.Optional;
 @Service
 public class DishService {
     private final DishRepository dishRepo;
-    private final HttpStockRepository stockRepository;
+    private final StockRepository stockRepository;
 
-    public DishService(DishRepository dishRepo, HttpStockRepository stockRepository) {
+    public DishService(DishRepository dishRepo, StockRepository stockRepository) {
         this.dishRepo = dishRepo;
         this.stockRepository = stockRepository;
     }
@@ -25,8 +26,7 @@ public class DishService {
 
     public Dish createDish(String title, double price, List<Ingredient> ingredients) {
         Dish dish = new Dish(title, price, ingredients);
-        Dish saveddish = dishRepo.save(dish);
-        return saveddish;
+        return dishRepo.save(dish);
     }
 
     public Dish removeDish(String id){
