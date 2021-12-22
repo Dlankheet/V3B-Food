@@ -31,6 +31,7 @@ services:
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
+      HTTP-CLIENT_ROOT-PATH_DISH: http://dishes:8082
   
   dishes:
     build: ../dishes
@@ -39,6 +40,7 @@ services:
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
+      HTTP-CLIENT_ROOT-PATH_STOCK: http://ingredients:8082
 
   customer:
     build: ../customer
