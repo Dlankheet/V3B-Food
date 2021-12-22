@@ -31,7 +31,7 @@ jobs:
         run: ssh deployment 'cd V3B-Food/deployment && docker-compose down'
 
       - name: Check out the source
-        run: ssh deployment 'cd V3B-Food && git fetch && git reset --hard origin/master'
+        run: ssh deployment "cd V3B-Food && git fetch && git reset --hard origin/master && git checkout $GITHUB_SHA"
 
       - name: Start the server
         run: ssh deployment 'cd V3B-Food/deployment && docker-compose up -d --build'
