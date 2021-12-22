@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderCommandHandler {
@@ -25,7 +26,7 @@ public class OrderCommandHandler {
     }
     public Order handle(RegisterOrder command){
         Order order = new Order(command.getCustomer(), command.getDishes());
-        String dishes = String.join(",", new ArrayList<>(order.getDishes()));
+        String dishes = new ArrayList<>(order.getDishes()).stream().map(UUID::toString).collect(Collectors.joining(","));
         order.setPrice(dishGateway.getPriceByDishes(dishes));
         this.publishEventsFor(order);
         this.repository.save(order);
@@ -55,6 +56,15 @@ public class OrderCommandHandler {
         this.repository.save(order);
         return order;
     }
+
+    public Order handle(DeliveredOrder command) {
+        Order order = this.getOrderById(command.getOrder());
+        order.orderDelivered();
+        this.publishEventsFor(order);
+        this.repository.save(order);
+        return order;
+    }
+
 
     public Order handle(DenyOrder command) {
         Order order = this.getOrderById(command.getOrder());
