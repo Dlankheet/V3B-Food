@@ -18,4 +18,5 @@ public class Rating {
 	public void changeRating(double rNumber) {
 		this.ratingNumber = rNumber;
 	}
+
 }

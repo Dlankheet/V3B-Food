@@ -40,4 +40,6 @@ public class Review {
 	public void clearEvents() {
 		this.events.clear();
 	}
+
+	public double getRatingNumber() {return this.getRating().getRatingNumber();}
 }
