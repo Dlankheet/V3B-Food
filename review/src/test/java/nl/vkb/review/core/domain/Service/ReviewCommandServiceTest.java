@@ -35,6 +35,7 @@ public class ReviewCommandServiceTest {
 
 			this.savedReview = repository.findById(review.getId()).get();
 		}
+
 		@AfterEach
 		void clearRepository(){
 			repository.deleteAll();
