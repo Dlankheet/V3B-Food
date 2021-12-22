@@ -11,8 +11,8 @@ import java.util.UUID;
 public class OrderDto {
     private UUID id;
     private OrderStatus status;
-    private String customer;
-    private Set<String> dishes;
+    private UUID customer;
+    private Set<UUID> dishes;
     private double price;
 
     public OrderDto(Order order){

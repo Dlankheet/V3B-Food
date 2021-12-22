@@ -4,23 +4,23 @@ import java.util.UUID;
 
 public class OrderAccepted extends OrderEvent{
     private final UUID order;
-    private final String customer;
+    private final UUID customer;
 
-    public OrderAccepted (UUID order, String customer) {
+    public OrderAccepted (UUID order, UUID customer) {
         this.order = order;
         this.customer = customer;
     }
 
     @Override
     public String getEventKey ( ) {
-        return "test.order";
+        return "order.accepted";
     }
 
     public UUID getOrder ( ) {
         return order;
     }
 
-    public String getCustomer ( ) {
+    public UUID getCustomer ( ) {
         return customer;
     }
 }

@@ -21,13 +21,13 @@ public class Order {
     private boolean paid;
     private OrderStatus orderStatus;
     private double price;
-    private String customer;
-    private Set<String> dishes;
+    private UUID customer;
+    private Set<UUID> dishes;
     @Transient
     private List<OrderEvent> events = new ArrayList<>();
 
 
-    public Order(String  customer, Set<String> dishes){
+    public Order(UUID  customer, Set<UUID> dishes){
         this.id = UUID.randomUUID();
         this.paid = false;
         this.orderStatus = OrderStatus.PENDING;
