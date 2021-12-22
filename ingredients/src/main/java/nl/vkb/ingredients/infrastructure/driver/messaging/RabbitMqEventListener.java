@@ -17,14 +17,10 @@ public class RabbitMqEventListener {
 
     @RabbitListener(queues = "#{'${messaging.queue.stock}'}")
     void listen(StockModifyEvent event) {
-        switch (event.getEventKey()) {
-            case "stock.update":
-                this.commandHandler.handle(
-                        new AddAmount(event.getIngredient(), event.getAmount())
-                );
-                break;
-            default:
-                throw new UnknownEventException(event.getEventKey()+" is not a known event!");
-        }
+        if ("stock.update".equals(event.getEventKey())) {
+            this.commandHandler.handle(
+                    new AddAmount(event.getIngredient(), event.getAmount())
+            );
+        } else throw new UnknownEventException(event.getEventKey() + " is not a known event!");
     }
 }
