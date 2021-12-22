@@ -1,12 +1,15 @@
 package com.hu.bep3.vkb5.customer.infrastructure.driver.messaging.event;
 
+import lombok.Getter;
+
 import java.time.Instant;
 import java.util.UUID;
 
+@Getter
 public class OrderEvent {
-	public UUID eventId;
-	public Instant eventDate;
-	public String eventKey;
-	public UUID orderId;
-	public UUID customerId;
+	private UUID eventId;
+	private Instant eventDate;
+	private String eventKey;
+	private UUID orderId;
+	private UUID customerId;
 }
