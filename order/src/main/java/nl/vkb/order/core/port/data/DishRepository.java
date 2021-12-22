@@ -1,4 +1,4 @@
-package com.order.core.port.data;
+package nl.vkb.order.core.port.data;
 
 
 public interface DishRepository {

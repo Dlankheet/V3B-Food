@@ -1,14 +1,11 @@
-package com.order.core.domain;
+package nl.vkb.order.core.domain;
 
-import com.order.core.domain.event.OrderAccepted;
-import com.order.core.domain.event.OrderEvent;
-import com.order.core.domain.exception.OrderStatusException;
+import nl.vkb.order.core.domain.exception.OrderStatusException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -106,7 +103,7 @@ class OrderTest {
         assertEquals(0, order.listEvents().size());
     }
 
-    @Disabled("")
+    @Disabled("add event to event list")
     @Test
     void listEvents ( ) {
         order.acceptOrder();

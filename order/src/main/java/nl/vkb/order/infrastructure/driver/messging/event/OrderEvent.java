@@ -1,4 +1,4 @@
-package com.order.infrastructure.driver.messging.event;
+package nl.vkb.order.infrastructure.driver.messging.event;
 
 import java.time.Instant;
 import java.util.UUID;

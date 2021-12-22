@@ -1,4 +1,4 @@
-package com.order.core.domain.event;
+package nl.vkb.order.core.domain.event;
 
 import java.util.UUID;
 
