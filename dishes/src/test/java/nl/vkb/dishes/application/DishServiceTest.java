@@ -1,16 +1,16 @@
 package nl.vkb.dishes.application;
 
+import nl.vkb.dishes.core.application.DishCommandHandler;
+import nl.vkb.dishes.core.application.DishQueryHandler;
+import nl.vkb.dishes.core.application.query.checkAvailable;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
 import nl.vkb.dishes.core.domain.Ingredient;
 import nl.vkb.dishes.core.port.storage.StockRepository;
-import nl.vkb.dishes.core.service.DishService;
 import nl.vkb.dishes.infrastructure.driven.storage.StockResult;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,7 +22,7 @@ import static org.mockito.Mockito.when;
 class DishServiceTest {
     private DishRepository dishRepository;
     private StockRepository stockRepository;
-    private DishService dishService;
+    private DishQueryHandler queryHandler;
     private Dish dish;
     private Ingredient ingredient;
     private Ingredient ingredient1;
@@ -33,7 +33,7 @@ class DishServiceTest {
     void setupTest(){
         this.dishRepository = mock(DishRepository.class);
         this.stockRepository = mock(StockRepository.class);
-        this.dishService = new DishService(dishRepository, stockRepository);
+        this.queryHandler = new DishQueryHandler(dishRepository, stockRepository);
 
         ingredient = new Ingredient(UUID.randomUUID(), 2);
         ingredient1 = new Ingredient(UUID.randomUUID(), 5);
@@ -54,7 +54,7 @@ class DishServiceTest {
         when(stockRepository.findIngredientById(ingredient1.getId())).thenReturn(stock1);
         when(stockRepository.findIngredientById(ingredient2.getId())).thenReturn(stock2);
         when(dishRepository.findById("dishid")).thenReturn(java.util.Optional.ofNullable(dish));
-        assertEquals(true, dishService.isDishAvailable("dishid"));
+        assertEquals(true, queryHandler.handle(new checkAvailable("dishid")));
     }
 
     @Test
@@ -67,6 +67,6 @@ class DishServiceTest {
         when(stockRepository.findIngredientById(ingredient1.getId())).thenReturn(stock1);
         when(stockRepository.findIngredientById(ingredient2.getId())).thenReturn(stock2);
         when(dishRepository.findById("dishid")).thenReturn(java.util.Optional.ofNullable(dish));
-        assertEquals(false, dishService.isDishAvailable("dishid"));
+        assertEquals(false, queryHandler.handle(new checkAvailable("dishid")));
     }
 }

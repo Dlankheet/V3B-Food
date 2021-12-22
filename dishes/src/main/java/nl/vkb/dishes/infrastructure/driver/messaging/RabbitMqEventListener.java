@@ -1,5 +1,4 @@
 package nl.vkb.dishes.infrastructure.driver.messaging;
-import nl.vkb.dishes.core.service.DishService;
 import org.springframework.stereotype.Component;
 
 @Component
