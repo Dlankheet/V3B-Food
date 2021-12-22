@@ -3,7 +3,6 @@ import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
 import nl.vkb.dishes.core.domain.Ingredient;
 import nl.vkb.dishes.core.port.storage.StockRepository;
-import nl.vkb.dishes.infrastructure.driven.storage.HttpStockRepository;
 import nl.vkb.dishes.infrastructure.driven.storage.StockResult;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +40,7 @@ public class DishService {
         Dish dish = optionalDish.orElseThrow();
         for(Ingredient ingredient : dish.getIngredients()){
             StockResult stockIngredient = stockRepository.findIngredientById(ingredient.getId());
-            if(stockIngredient.stock < ingredient.getAmount()){
+            if(stockIngredient.getStock() < ingredient.getAmount()){
                 return false;
             }
         }

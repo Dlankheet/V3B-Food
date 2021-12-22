@@ -4,14 +4,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RabbitMqEventListener {
-    private final DishService dishService;
-
-    public RabbitMqEventListener(DishService dishService) {
-        this.dishService = dishService;
-    }
-
+//    private final DishService dishService;
+//
+//    public RabbitMqEventListener(DishService dishService) {
+//        this.dishService = dishService;
+//    }
 //    @RabbitListener(queues = "#{'${XXXXXXXX}'}")
-//    //TODO set correct queue
 //    void listen(ExampleIncommingEvent event) {
 //        switch (event.eventKey) {
 //            //todo match our project

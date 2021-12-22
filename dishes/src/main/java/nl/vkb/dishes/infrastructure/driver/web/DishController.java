@@ -1,7 +1,7 @@
 package nl.vkb.dishes.infrastructure.driver.web;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.service.DishService;
-import nl.vkb.dishes.infrastructure.driver.web.DTO.dishDTO;
+import nl.vkb.dishes.infrastructure.driver.web.request.createDishRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public class DishController {
     }
 
     @PostMapping("/create")
-    public String createDish(@RequestBody dishDTO dto){
-        Dish generatedDish = service.createDish(dto.title, dto.price, dto.ingredients);
+    public String createDish(@RequestBody createDishRequest dto){
+        Dish generatedDish = service.createDish(dto.getTitle(), dto.getPrice(), dto.getIngredients());
         return "Generated Succesfully: " + generatedDish;
     }
 

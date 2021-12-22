@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -21,4 +22,13 @@ public class Dish {
         this.price = price;
         this.ingredients = ingredients;
     }
+
+    public void addIngredient(Ingredient ingredient){
+        this.ingredients.add(ingredient);
+    }
+
+    public void removeIngredient(UUID id){
+        ingredients.removeIf(ingredient -> ingredient.getId().equals(id));
+    }
+
 }

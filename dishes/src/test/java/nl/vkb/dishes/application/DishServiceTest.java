@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class DishServiceTest {
+class DishServiceTest {
     private DishRepository dishRepository;
     private StockRepository stockRepository;
     private DishService dishService;
