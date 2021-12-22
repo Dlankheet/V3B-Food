@@ -31,7 +31,7 @@ services:
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
-      HTTP-CLIENT_ROOT-PATH_DISH: http://dishes:8082
+      HTTP-CLIENT_ROOT-PATH_DISH: http://dishes:8085
   
   dishes:
     build: ../dishes
