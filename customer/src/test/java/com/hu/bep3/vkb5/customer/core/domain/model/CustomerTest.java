@@ -1,5 +1,6 @@
 package com.hu.bep3.vkb5.customer.core.domain.model;
 
+import com.hu.bep3.vkb5.customer.core.domain.event.EmailChanged;
 import com.hu.bep3.vkb5.customer.core.domain.exception.AddressAlreadyBoundException;
 import com.hu.bep3.vkb5.customer.core.domain.exception.InvalidEmailException;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,7 +30,7 @@ class CustomerTest {
 	@DisplayName("Instantiating a Customer with an invalid email should throw an exception")
 	void newCustomerWithInvalidEmail(){
 		assertThrows(InvalidEmailException.class, ()->{
-			Customer invalidCustomer = new Customer("John", "Doe", this.invalidEmail);
+			new Customer("John", "Doe", this.invalidEmail);
 		});
 	}
 
@@ -106,5 +107,22 @@ class CustomerTest {
 				Arguments.of("john.doe@gmail.com-"),
 				Arguments.of("john.doe@.com-")
 		);
+	}
+
+	@Test
+	@DisplayName("Removing an Address from customer")
+	void removeAddress(){
+		Address address = new Address("Valley View Road", 54, "B", "1324FH");
+		customer.addAddress(address);
+		customer.removeAddress(address);
+		assertEquals(0, customer.getAddresses().size());
+	}
+
+	@Test
+	@DisplayName("Check if clearing the events actually removes them")
+	void clearEvents(){
+		customer.listEvents().add(new EmailChanged(customer.getId(), "johan.doey@hotmail.com"));
+		customer.clearEvents();
+		assertEquals(0, customer.listEvents().size());
 	}
 }

@@ -1,20 +1,39 @@
 package com.hu.bep3.vkb5.customer.core.application;
 
+import com.hu.bep3.vkb5.customer.core.application.command.RegisterCustomer;
+import com.hu.bep3.vkb5.customer.core.domain.model.Customer;
+import com.hu.bep3.vkb5.customer.core.port.messaging.CustomerEventPublisher;
 import com.hu.bep3.vkb5.customer.core.port.persistence.CustomerRepository;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class CustomerCommandHandlerTest {
-	private CustomerRepository repository;
+	private static CustomerCommandHandler handler;
+	private static CustomerRepository repository;
+	private static CustomerEventPublisher publisher;
 
-//	@BeforeEach
-//	void init(){
-//		this.gameRepo = mock(SpringGameRepository.class);
-//
-//		when(wordService.provideRandomWord(5))
-//				.thenReturn("vraag");
-//	}
+	@BeforeAll
+	static void setup(){
+		repository = mock(CustomerRepository.class);
+		publisher = mock(CustomerEventPublisher.class);
+		handler = new CustomerCommandHandler(repository, publisher);
+	}
 
+	@Test
+	@DisplayName("Register a new customer and persist it")
+	void registerCustomerHappyFlow(){
+		RegisterCustomer command = new RegisterCustomer("john", "doe", "john.doe@gmail.com");
+		Customer mockedCustomer = new Customer("john", "doe", "john.doe@gmail.com");
+		Customer expectedCustomer = new Customer("john", "doe", "john.doe@gmail.com");
+		when(repository.save(any(Customer.class)))
+				.thenReturn(mockedCustomer);
+		assertDoesNotThrow(()-> assertEquals(expectedCustomer, handler.handle(command)));
+	}
 }

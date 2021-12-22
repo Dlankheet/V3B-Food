@@ -28,8 +28,7 @@ public class CustomerCommandHandler {
 			throw new EmailAlreadyExistsException(command.getEmail());
 		}
 		Customer customer = new Customer(command.getFirstName(), command.getLastName(), command.getEmail());
-		this.repository.save(customer);
-		return customer;
+		return this.repository.save(customer);
 	}
 
 	public void handle(DeleteCustomer command) {
@@ -43,16 +42,14 @@ public class CustomerCommandHandler {
 		Customer customer = this.getCustomerById(command.getCustomerId());
 		Address commandAddress = command.getAddress();
 		customer.addAddress(commandAddress);
-		repository.save(customer);
-		return customer;
+		return repository.save(customer);
 	}
 
 	public Customer handle(ChangeEmail command) throws InvalidEmailException{
 		Customer customer = this.getCustomerById(command.getCustomerId());
 		customer.changeEmail(command.getNewEmail());
-		repository.save(customer);
 		this.publishEventsFor(customer);
-		return customer;
+		return repository.save(customer);
 	}
 
 	public void handle(OrderFood command) {
