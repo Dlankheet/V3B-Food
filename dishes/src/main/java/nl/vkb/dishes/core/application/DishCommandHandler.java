@@ -29,7 +29,7 @@ public class DishCommandHandler {
     }
 
     public void handle(deleteDish command) {
-        this.dishRepo.deleteById(command.getId().toString());
+        this.dishRepo.deleteById(command.getId());
     }
 
 

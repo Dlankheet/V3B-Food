@@ -1,6 +1,5 @@
 package nl.vkb.dishes.application;
 
-import nl.vkb.dishes.core.application.DishCommandHandler;
 import nl.vkb.dishes.core.application.DishQueryHandler;
 import nl.vkb.dishes.core.application.query.checkAvailable;
 import nl.vkb.dishes.core.domain.Dish;
@@ -41,7 +40,6 @@ class DishServiceTest {
         List<Ingredient> ingredients = List.of(ingredient, ingredient1, ingredient2);
 
         dish = new Dish("Broodje Bal", 10.20, ingredients);
-        dish.setId("dishid");
     }
 
     @Test
@@ -53,8 +51,8 @@ class DishServiceTest {
         when(stockRepository.findIngredientById(ingredient.getId())).thenReturn(stock);
         when(stockRepository.findIngredientById(ingredient1.getId())).thenReturn(stock1);
         when(stockRepository.findIngredientById(ingredient2.getId())).thenReturn(stock2);
-        when(dishRepository.findById("dishid")).thenReturn(java.util.Optional.ofNullable(dish));
-        assertEquals(true, queryHandler.handle(new checkAvailable("dishid")));
+        when(dishRepository.findById(dish.getId())).thenReturn(java.util.Optional.ofNullable(dish));
+        assertEquals(true, queryHandler.handle(new checkAvailable(dish.getId())));
     }
 
     @Test
@@ -66,7 +64,7 @@ class DishServiceTest {
         when(stockRepository.findIngredientById(ingredient.getId())).thenReturn(stock);
         when(stockRepository.findIngredientById(ingredient1.getId())).thenReturn(stock1);
         when(stockRepository.findIngredientById(ingredient2.getId())).thenReturn(stock2);
-        when(dishRepository.findById("dishid")).thenReturn(java.util.Optional.ofNullable(dish));
-        assertEquals(false, queryHandler.handle(new checkAvailable("dishid")));
+        when(dishRepository.findById(dish.getId())).thenReturn(java.util.Optional.ofNullable(dish));
+        assertEquals(false, queryHandler.handle(new checkAvailable(dish.getId())));
     }
 }

@@ -1,6 +1,8 @@
 package nl.vkb.dishes.core.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import nl.vkb.dishes.core.domain.event.DishAdded;
 import nl.vkb.dishes.core.domain.event.DishEvent;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -15,18 +17,21 @@ import java.util.UUID;
 @Document("dishes")
 public class Dish {
     @Id
-    private String id;
+    private UUID id;
     private String title;
     private double price;
     private List<Ingredient> ingredients;
 
     @Transient
+    @JsonIgnore
     private List<DishEvent> events = new ArrayList<>();
 
     public Dish(String title, double price, List<Ingredient> ingredients) {
+        this.id = UUID.randomUUID();
         this.title = title;
         this.price = price;
         this.ingredients = ingredients;
+        events.add(new DishAdded(this.id, this));
     }
 
     public void addIngredient(Ingredient ingredient){

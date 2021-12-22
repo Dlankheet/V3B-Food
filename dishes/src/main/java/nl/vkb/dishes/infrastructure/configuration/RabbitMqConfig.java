@@ -1,6 +1,7 @@
 package nl.vkb.dishes.infrastructure.configuration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.vkb.dishes.infrastructure.driven.messaging.RabbitMqEventPublisher;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -21,6 +22,10 @@ public class RabbitMqConfig {
     @Value("${messaging.exchange.food}")
     private String foodExchangeName;
 
+    @Bean
+    public TopicExchange foodExchange() {
+        return new TopicExchange(foodExchangeName);
+    }
 
     @Bean
     public RabbitMqEventPublisher eventPublisher(RabbitTemplate template) {
