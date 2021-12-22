@@ -8,5 +8,5 @@ import java.util.UUID;
 
 
 public interface OrderRepository extends MongoRepository<Order, UUID> {
-    List<Order> findAllByCustomer(String customer);
+    List<Order> findAllByCustomer(UUID customer);
 }
