@@ -1,6 +1,5 @@
 package nl.vkb.ingredients.core.application;
 
-import nl.vkb.ingredients.core.application.query.GetAllIngredients;
 import nl.vkb.ingredients.core.application.query.GetIngredientById;
 import nl.vkb.ingredients.core.domain.Ingredient;
 import nl.vkb.ingredients.core.domain.exception.IngredientNotFound;
@@ -35,7 +34,7 @@ class StockQueryHandlerTest {
 
 	@Test
 	void getAllIngredientsHandleTest() {
-		assertEquals(ingredientList,queryHandler.handle(new GetAllIngredients()));
+		assertEquals(ingredientList,queryHandler.handle());
 	}
 	@Test
 	void getIngredientHandleTest() {
@@ -43,6 +42,7 @@ class StockQueryHandlerTest {
 	}
 	@Test
 	void getIngredientHandleNotFoundTest() {
-		assertThrows(IngredientNotFound.class,()->queryHandler.handle(new GetIngredientById(UUID.randomUUID())));
+		GetIngredientById getIngredient=new GetIngredientById(UUID.randomUUID());
+		assertThrows(IngredientNotFound.class,()->queryHandler.handle(getIngredient));
 	}
 }

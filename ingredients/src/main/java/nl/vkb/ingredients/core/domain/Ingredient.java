@@ -2,6 +2,7 @@ package nl.vkb.ingredients.core.domain;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import nl.vkb.ingredients.core.domain.event.StockDeleted;
 import nl.vkb.ingredients.core.domain.event.StockEvent;
 import nl.vkb.ingredients.core.domain.event.StockUpdated;
 import nl.vkb.ingredients.core.domain.exception.InvalidStockException;
@@ -41,7 +42,9 @@ public class Ingredient {
 		this.stock = stock;
 		this.events.add(new StockUpdated(id,stock));
 	}
-
+	public void delete() {
+		this.events.add(new StockDeleted(id));
+	}
 	public void clearEvents() {
 		this.events.clear();
 	}
