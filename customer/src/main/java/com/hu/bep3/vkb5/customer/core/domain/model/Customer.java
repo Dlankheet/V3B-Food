@@ -36,10 +36,10 @@ public class Customer {
 
 	/**
 	 * Constructs the Customer, throws an exception if the given email is invalid
-	 * @param firstName
-	 * @param lastName
-	 * @param email
-	 * @exception InvalidEmailException
+	 * @param firstName The first name of the Customer
+	 * @param lastName The last name of the Customer
+	 * @param email The given email of the Customer
+	 * @exception InvalidEmailException throws an exception when the email does not match the given regex pattern
 	 */
 	public Customer(String firstName, String lastName, String email) throws InvalidEmailException {
 		this.id = UUID.randomUUID();
@@ -54,7 +54,7 @@ public class Customer {
 
 	/**
 	 * Add an Order ID to our Order history
-	 * @param orderId
+	 * @param orderId The UUID of an Order to add
 	 */
 	public void orderFood(UUID orderId){
 		orderHistory.add(orderId);
@@ -62,7 +62,7 @@ public class Customer {
 
 	/**
 	 * Add a Review ID to our list of Reviews
-	 * @param reviewId
+	 * @param reviewId The UUID of a Review to add
 	 */
 	public void reviewOrder(UUID reviewId) {
 		reviews.add(reviewId);
@@ -70,8 +70,8 @@ public class Customer {
 
 	/**
 	 * Change the existing email after validating the new email
-	 * @param newEmail
-	 * @exception InvalidEmailException
+	 * @param newEmail The new email that will replace the existing one
+	 * @exception InvalidEmailException throws when the email does not match the given regex pattern
 	 */
 	public void changeEmail(String newEmail){
 		this.validateEmail(newEmail);
@@ -81,8 +81,8 @@ public class Customer {
 
 	/**
 	 * Attempt to add an address to the list of Addresses
-	 * @param address
-	 * @exception AddressAlreadyBoundException
+	 * @param address The new Address, as an object, to be added to the list
+	 * @exception AddressAlreadyBoundException throws when the given Address already exists within this Customers Addresses
 	 */
 	public void addAddress(Address address) throws AddressAlreadyBoundException{
 		boolean added = this.addresses.add(address);
@@ -93,16 +93,16 @@ public class Customer {
 
 	/**
 	 * Remove an Address from the Address list
-	 * @param address
+	 * @param address The Address targeted for deletion
 	 */
 	public void removeAddress(Address address){
 		this.addresses.remove(address);
 	}
 
 	/**
-	 * Validate an Email(String) by checking it against a given regex pattern
-	 * @param email
-	 * @throws InvalidEmailException
+	 * Validate an email(String) by checking it against a given regex pattern
+	 * @param email The email(String) to be validated
+	 * @throws InvalidEmailException throws when the email does not match the given regex pattern
 	 */
 	private void validateEmail(String email) throws InvalidEmailException {
 		String regexPattern = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
