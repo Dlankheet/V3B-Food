@@ -1,6 +1,27 @@
 # V3B-Food
 For all your tasty needs.
 
+# Sonarcloud
+## Customer
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=V3B-Food-Customer&metric=alert_status)](https://sonarcloud.io/summary/overall?id=V3B-Food-Customer)[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=V3B-Food-Customer&metric=bugs)](https://sonarcloud.io/summary/overall?id=V3B-Food-Customer)[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=V3B-Food-Customer&metric=code_smells)](https://sonarcloud.io/summary/overall?id=V3B-Food-Customer)[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=V3B-Food-Customer&metric=coverage)](https://sonarcloud.io/summary/overall?id=V3B-Food-Customer)
+
+## Dishes
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=V3B-Food-Dishes&metric=alert_status)](https://sonarcloud.io/summary/overall?id=V3B-Food-Dishes)[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=V3B-Food-Dishes&metric=bugs)](https://sonarcloud.io/summary/overall?id=V3B-Food-Dishes)[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=V3B-Food-Dishes&metric=code_smells)](https://sonarcloud.io/summary/overall?id=V3B-Food-Dishes)[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=V3B-Food-Dishes&metric=coverage)](https://sonarcloud.io/summary/overall?id=V3B-Food-Dishes)
+
+## Ingredients
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Ingredients&metric=alert_status)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Ingredients)[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Ingredients&metric=bugs)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Ingredients)[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Ingredients&metric=code_smells)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Ingredients)[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Ingredients&metric=coverage)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Ingredients)
+
+## Orders
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Orders&metric=alert_status)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Orders)[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Orders&metric=bugs)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Orders)[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Orders&metric=code_smells)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Orders)[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Orders&metric=coverage)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Orders)
+
+## Reviews
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Reviews&metric=alert_status)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Reviews)[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Reviews&metric=bugs)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Reviews)[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Reviews&metric=code_smells)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Reviews)[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Reviews&metric=coverage)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Reviews)
+
 # Mogelijke functionaliteiten
 * Registreren / inloggen verschillende rollen 
 * Bestellen van één of meer gerechten 
