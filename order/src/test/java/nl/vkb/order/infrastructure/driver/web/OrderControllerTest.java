@@ -80,6 +80,11 @@ class OrderControllerTest {
         assertEquals(1, controller.getAllByCustomer(order.getCustomer().toString()).size());
         assertEquals(order.getId(), controller.getAllByCustomer(order.getCustomer().toString()).get(0).getId());
     }
+    @DisplayName("Get all orders")
+    @Test
+    void getAll ( ) {
+        assertNotNull(controller.getAllOrder());
+    }
     @DisplayName("Accept Order")
     @Test
     void acceptOrder ( ) {
