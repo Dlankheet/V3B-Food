@@ -6,6 +6,7 @@ import nl.vkb.dishes.core.application.command.DishOrdered;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
 import nl.vkb.dishes.core.domain.event.DishEvent;
+import nl.vkb.dishes.core.domain.exceptions.DishNotFoundException;
 import nl.vkb.dishes.core.port.messaging.DishEventPublisher;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class DishCommandHandler {
     }
 
     public void handle(DishOrdered command) {
-        Dish dish=dishRepo.findById(command.getDish()).get();
+        Dish dish=dishRepo.findById(command.getDish()).orElseThrow(()->new DishNotFoundException(command.getDish().toString()));
         dish.order();
         publishEventsAndSave(dish);
     }
