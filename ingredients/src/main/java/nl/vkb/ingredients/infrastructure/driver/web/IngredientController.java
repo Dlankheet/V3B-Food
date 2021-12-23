@@ -54,6 +54,7 @@ public class IngredientController {
 		if(filter==null) return this.queryHandler.handle();
 		else return this.queryHandler.handle(filter);
 	}
+
 	@ExceptionHandler
 	public ResponseEntity<Void> handleIngredientNotFound(IngredientNotFound exception) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

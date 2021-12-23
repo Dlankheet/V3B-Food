@@ -48,7 +48,9 @@ public class DishQueryHandler {
 
     public List<Dish> handle(ListDishesById query) {
         List<Dish> dishes = new ArrayList<>();
-        this.dishRepository.findAllById(query.getDishIds()).forEach(dishes::add);
+        for(UUID id : query.getDishIds()){
+            dishes.add(this.dishRepository.findById(id).orElseThrow(() -> new DishNotFoundException("Dish not found.")));
+        }
         return dishes;
     }
 
@@ -57,13 +59,16 @@ public class DishQueryHandler {
         return this.dishRepository.findAll(sort);
     }
 
+    //Following function checks if each individual dish is available,
+    //but also calculates totalprice if ingredients aren't available.
+    //It also returns allAvailable false if the ingredients of the full order aren't present.
     public OrderAvailableResult handle(CheckOrderAvailability query) {
         boolean allAvailable = true;
         double totalPrice = 0.0;
 
         List<Dish> dishes = handle(new ListDishesById(query.getDishIds()));
         List<UUID> unavailableDishes = new ArrayList<>();
-        System.out.println(dishes);
+
         HashMap<UUID, Integer> totalIngredientsMap = new HashMap<UUID, Integer>();
         ArrayList<Ingredient> totalIngredientsList = new ArrayList<>();
 

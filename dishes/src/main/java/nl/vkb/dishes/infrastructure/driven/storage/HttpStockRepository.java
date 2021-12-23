@@ -25,8 +25,8 @@ public class HttpStockRepository implements StockRepository {
 
     @Override
     public List<StockResult> findIngredientByIds(List<UUID> ingredientIds) {
-        URI uri = URI.create(this.rootPath + "/ingredient/all/?filer=" + uuidUtils.parseUUIDListToString(ingredientIds));
-        StockResultList stockResultList = this.client.getForObject(uri, StockResultList.class);
-        return stockResultList.getResults();
+        URI uri = URI.create(this.rootPath + "/ingredient/all?filer=" + uuidUtils.parseUUIDListToString(ingredientIds));
+        StockResult[] stockResultList = this.client.getForObject(uri, StockResult[].class);
+        return List.of(stockResultList);
     }
 }
