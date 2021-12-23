@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class uuidUtils {
+public class UuidUtils {
+    private UuidUtils() {}
     public static List<UUID> parseStringToList(String idString){
         String[] dishIds = idString.split(",");
         ArrayList<UUID> dishUUIDs = new ArrayList<>();

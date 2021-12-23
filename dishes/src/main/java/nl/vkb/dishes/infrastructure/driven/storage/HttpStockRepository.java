@@ -1,7 +1,7 @@
 package nl.vkb.dishes.infrastructure.driven.storage;
 
 import nl.vkb.dishes.core.port.storage.StockRepository;
-import nl.vkb.dishes.utils.uuidUtils;
+import nl.vkb.dishes.utils.UuidUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -25,7 +25,7 @@ public class HttpStockRepository implements StockRepository {
 
     @Override
     public List<StockResult> findIngredientByIds(List<UUID> ingredientIds) {
-        URI uri = URI.create(this.rootPath + "/ingredient/all?filer=" + uuidUtils.parseUUIDListToString(ingredientIds));
+        URI uri = URI.create(this.rootPath + "/ingredient/all?filer=" + UuidUtils.parseUUIDListToString(ingredientIds));
         StockResult[] stockResultList = this.client.getForObject(uri, StockResult[].class);
         return List.of(stockResultList);
     }
