@@ -27,19 +27,26 @@ public class DishQueryHandler {
     public Boolean handle(CheckAvailable query) {
         Optional<Dish> optionalDish = dishRepository.findById(query.getId());
         Dish dish = optionalDish.orElseThrow(() -> new DishNotFoundException("This dish is not available"));
+        System.out.println(dish.getIngredients());
         return handle(new CheckStock(dish.getIngredients()));
     }
 
     public Boolean handle(CheckStock query) {
         List<Ingredient> neededIngredients = query.getIngredients();
         ArrayList<UUID> ids = new ArrayList<>();
+
         neededIngredients.forEach(ingredient -> ids.add(ingredient.getId()));
         List<StockResult> stockIngredients = stockRepository.findIngredientByIds(ids);
 
         for (StockResult stockIngredient : stockIngredients) {
+            System.out.println(stockIngredient);
             for (Ingredient ingredient : neededIngredients) {
-                if (stockIngredient.getStock() < ingredient.getAmount()) {
-                    return false;
+                System.out.println(ingredient);
+                if(ingredient.getId() == stockIngredient.getId()){
+                    System.out.println("Stock: " + stockIngredient + " Needed: " + ingredient);
+                    if(stockIngredient.getStock() < ingredient.getAmount()){
+                        return false;
+                    }
                 }
             }
         }

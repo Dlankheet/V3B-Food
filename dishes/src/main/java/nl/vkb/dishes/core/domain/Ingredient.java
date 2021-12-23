@@ -2,9 +2,10 @@ package nl.vkb.dishes.core.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.UUID;
-
+@ToString
 @Getter
 @Setter
 public class Ingredient {
