@@ -18,9 +18,6 @@ public class HttpStockRepository implements StockRepository {
     @Override
     public StockResult findIngredientById(UUID ingredientId) {
         URI uri = URI.create(this.rootPath + "/ingredient/" + ingredientId);
-        StockResult sr = this.client.getForObject(uri, StockResult.class);
-        UUID id = sr.getId();
-        System.out.println(id);
-        return sr;
+        return this.client.getForObject(uri, StockResult.class);
     }
 }

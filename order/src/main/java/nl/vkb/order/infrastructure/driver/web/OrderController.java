@@ -76,11 +76,11 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
     @ExceptionHandler
-    public ResponseEntity<Void> handleDishUnavailable(DishUnavailableException exception) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    public ResponseEntity<String> handleDishUnavailable(DishUnavailableException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
     @ExceptionHandler
-    public ResponseEntity<Void> handleDishServiceUnavailable(DishServiceUnavailableException exception) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    public ResponseEntity<String> handleDishServiceUnavailable(DishServiceUnavailableException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
 }
