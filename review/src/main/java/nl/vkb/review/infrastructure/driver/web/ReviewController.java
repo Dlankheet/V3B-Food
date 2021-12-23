@@ -36,13 +36,13 @@ public class ReviewController {
 
 	@PostMapping("/create")
 	public Review createReview(@Valid @RequestBody MakeReviewRequest request) {
-		return this.commandService.handle(new MakeReview(request.description, request.pros, request.cons,
-				request.rating, request.orderId, request.accountId));
+		return this.commandService.handle(new MakeReview(request.getDescription(), request.getPros(), request.getCons(),
+				request.getRating(), request.getOrderId(), request.getAccountId()));
 	}
 
 	@PostMapping("/rating/{id}/change")
 	public void changeRating(@PathVariable UUID id, @Valid @RequestBody ChangeRatingRequest request) {
-		this.commandService.handle(new ChangeRating(id, request.rating));
+		this.commandService.handle(new ChangeRating(id, request.getRating()));
 	}
 
 	@DeleteMapping("/{id}/delete")

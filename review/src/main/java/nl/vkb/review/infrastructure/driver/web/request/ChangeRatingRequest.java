@@ -1,5 +1,10 @@
 package nl.vkb.review.infrastructure.driver.web.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public class ChangeRatingRequest {
-	public double rating;
+	private final double rating;
 }

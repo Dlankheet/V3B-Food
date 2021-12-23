@@ -1,13 +1,18 @@
 package nl.vkb.review.infrastructure.driver.web.request;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.List;
 import java.util.UUID;
 
+@AllArgsConstructor
+@Getter
 public class MakeReviewRequest {
-	public String description;
-	public List<String> pros;
-	public List<String> cons;
-	public double rating;
-	public UUID orderId;
-	public UUID accountId;
+	private final String description;
+	private final List<String> pros;
+	private final List<String> cons;
+	private final double rating;
+	private final UUID orderId;
+	private final UUID accountId;
 }
