@@ -38,10 +38,8 @@ public class DishQueryHandler {
 
         for (StockResult stockIngredient : stockIngredients) {
             for (Ingredient ingredient : neededIngredients) {
-                if(ingredient.getId() == stockIngredient.getId()){
-                    if(stockIngredient.getStock() < ingredient.getAmount()){
-                        return false;
-                    }
+                if(ingredient.getId() == stockIngredient.getId() && stockIngredient.getStock() < ingredient.getAmount()){
+                    return false;
                 }
             }
         }
