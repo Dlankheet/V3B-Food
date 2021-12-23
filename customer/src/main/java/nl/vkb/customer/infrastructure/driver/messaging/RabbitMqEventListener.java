@@ -17,8 +17,8 @@ public class RabbitMqEventListener {
 	@RabbitListener(queues = "#{'${messaging.queue.orders}'}")
 	public void listen(OrderEvent event){
 		switch (event.getEventKey()) {
-			case "order.pending" -> this.commandHandler.handle(
-					new OrderFood(event.getOrderId(), event.getCustomerId())
+			case "order.accepted" -> this.commandHandler.handle(
+					new OrderFood(event.getOrder(), event.getCustomer())
 			);
 			default -> System.out.println(String.format("No listener case for: %s", event.getEventKey()));
 		}
