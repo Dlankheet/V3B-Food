@@ -19,6 +19,17 @@ jobs:
       run: |
         cd ingredients && ./mvnw test -B
 
+    - name: Spring boot start
+      run: cd ingredients && ./mvnw spring-boot:start
+
+    - uses: matt-ball/newman-action@master
+      with:
+        collection: ingredients/Food-stock.postman_collection.json
+        envVar: '[{ "key": "url", "value": "http://localhost:8082" }]'
+    
+    - name: Spring boot stop
+      run: cd ingredients && ./mvnw spring-boot:stop
+
   review:
 
     runs-on: ubuntu-latest
