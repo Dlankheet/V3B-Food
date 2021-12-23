@@ -1,12 +1,14 @@
 package nl.vkb.order.infrastructure.driver.messging.event;
 
+import lombok.ToString;
+
 import java.time.Instant;
 import java.util.UUID;
 
-public class OrderEvent {
+@ToString
+public class CustomerEvent {
     public UUID eventId;
-    public String eventKey;
     public Instant eventDate;
-    public UUID customer;
-    public UUID dish;
+    public String eventKey;
+    public UUID customerId;
 }
