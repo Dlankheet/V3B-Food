@@ -1,6 +1,7 @@
 package nl.vkb.review.infrastructure.driver.web;
 
 import nl.vkb.review.core.Service.Command.ChangeRating;
+import nl.vkb.review.core.domain.Exception.ReviewRatingException;
 import nl.vkb.review.infrastructure.driver.web.Request.ChangeRatingRequest;
 import nl.vkb.review.infrastructure.driver.web.Request.MakeReviewRequest;
 import nl.vkb.review.core.domain.Review;
@@ -10,6 +11,8 @@ import nl.vkb.review.core.Service.Query.GetReviewById;
 import nl.vkb.review.core.Service.ReviewCommandService;
 import nl.vkb.review.core.Service.ReviewQueryService;
 import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -45,5 +48,15 @@ public class ReviewController {
 	@DeleteMapping("/{id}/delete")
 	public void deleteReview(@PathVariable UUID id) {
 		this.commandService.handle(new DeleteReview(id));
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<Void> ReviewNotFound(ReviewNotFoundException exception) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<Void> RatingNotCorrect(ReviewRatingException exception) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 }
