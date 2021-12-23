@@ -7,7 +7,6 @@ import nl.vkb.dishes.core.application.command.RemoveIngredient;
 import nl.vkb.dishes.core.application.command.DishOrdered;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
-import nl.vkb.dishes.core.domain.Exception.DishNotFoundException;
 import nl.vkb.dishes.core.domain.event.DishEvent;
 import nl.vkb.dishes.core.domain.exceptions.DishNotFoundException;
 import nl.vkb.dishes.core.port.messaging.DishEventPublisher;
