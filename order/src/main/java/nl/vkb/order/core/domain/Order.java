@@ -33,6 +33,7 @@ public class Order {
         this.orderStatus = OrderStatus.PENDING;
         this.customer = customer;
         this.dishes = dishes;
+        events.add(new OrderRrgistered(this.id, customer));
     }
     public void acceptOrder(){
         checkStatus(OrderStatus.PENDING,OrderStatus.ACCEPTED );

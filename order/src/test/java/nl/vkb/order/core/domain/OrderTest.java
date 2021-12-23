@@ -107,7 +107,6 @@ class OrderTest {
     @DisplayName("add event to event list")
     @Test
     void listEvents ( ) {
-        order.acceptOrder();
         assertEquals(1, order.listEvents().size());
     }
 }
