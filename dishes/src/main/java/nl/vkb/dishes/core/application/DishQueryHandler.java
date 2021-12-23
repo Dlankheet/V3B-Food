@@ -4,12 +4,11 @@ import nl.vkb.dishes.core.application.query.*;
 import nl.vkb.dishes.core.application.results.OrderAvailableResult;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
-import nl.vkb.dishes.core.domain.Exception.DishNotFoundException;
 import nl.vkb.dishes.core.domain.Ingredient;
+import nl.vkb.dishes.core.domain.exceptions.DishNotFoundException;
 import nl.vkb.dishes.core.port.storage.StockRepository;
 import nl.vkb.dishes.infrastructure.driven.storage.StockResult;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
