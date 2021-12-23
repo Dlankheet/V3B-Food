@@ -15,4 +15,5 @@ public class Ingredient {
         this.id = id;
         this.amount = amount;
     }
+
 }

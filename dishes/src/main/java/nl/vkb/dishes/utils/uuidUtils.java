@@ -20,4 +20,11 @@ public class uuidUtils {
         list.forEach(uuid -> resultlist.add(uuid.toString()));
         return resultlist;
     }
+    public static String parseUUIDListToString(List<UUID> list){
+        StringBuilder string = new StringBuilder();
+        for(UUID id : list){
+            string.append(id.toString()).append(",");
+        }
+        return string.toString();
+    }
 }
