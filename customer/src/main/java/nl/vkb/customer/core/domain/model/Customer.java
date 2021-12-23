@@ -68,6 +68,10 @@ public class Customer {
 		reviews.add(reviewId);
 	}
 
+	public void removeReview(UUID reviewId){
+		reviews.remove(reviewId);
+	}
+
 	/**
 	 * Change the existing email after validating the new email
 	 * @param newEmail The new email that will replace the existing one

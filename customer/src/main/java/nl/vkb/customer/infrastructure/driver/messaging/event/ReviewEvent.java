@@ -10,6 +10,6 @@ public class ReviewEvent {
 	private UUID eventId;
 	private Instant eventDate;
 	private String eventKey;
-	private UUID reviewId;
-	private UUID customerId;
+	private UUID review;
+	private UUID customer;
 }

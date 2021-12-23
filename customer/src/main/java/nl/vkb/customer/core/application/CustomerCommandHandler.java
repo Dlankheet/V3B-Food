@@ -12,6 +12,7 @@ import nl.vkb.customer.core.domain.model.Address;
 import nl.vkb.customer.core.domain.model.Customer;
 import nl.vkb.customer.core.port.messaging.CustomerEventPublisher;
 import nl.vkb.customer.core.port.persistence.CustomerRepository;
+import nl.vkb.customer.core.domain.exception.ReviewNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,8 +63,14 @@ public class CustomerCommandHandler {
 	}
 
 	public void handle(ReviewOrder command) {
-		Customer customer = this.getCustomerById(command.getCustomerId());
-		customer.reviewOrder(command.getReviewId());
+		Customer customer = this.getCustomerById(command.getAccount());
+		customer.reviewOrder(command.getReview());
+		repository.save(customer);
+	}
+
+	public void handle(RemoveReview command) {
+		Customer customer = this.getCustomerByReviewId(command.getReview());
+		customer.removeReview(command.getReview());
 		repository.save(customer);
 	}
 
@@ -74,6 +81,11 @@ public class CustomerCommandHandler {
 	private Customer getCustomerById(UUID id) {
 		return this.repository.findById(id)
 				.orElseThrow(() -> new CustomerNotFoundException(id.toString()));
+	}
+
+	private Customer getCustomerByReviewId(UUID id){
+		return this.repository.getCustomerByReviewsContains(id)
+				.orElseThrow(() -> new ReviewNotFoundException(id.toString()));
 	}
 
 	private void publishEventsFor(Customer customer) {
