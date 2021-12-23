@@ -49,7 +49,7 @@ public class OrderController {
     @GetMapping("/all")
     public List<OrderDto> getAllOrder(){
         return this.queryHandler.handle().stream().
-                map(OrderDto::new).collect(Collectors.toList());
+                map(OrderDto::new).toList();
     }
     @PatchMapping("/accept/{id}")
     public OrderDto acceptOrder(@PathVariable UUID id){
