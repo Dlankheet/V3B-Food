@@ -39,7 +39,7 @@ public class ReviewCommandService {
 
 	public void handle(DeleteReview command){
 		Review review = getReviewbyId(command.id);
-		review.returnEvents().add(new ReviewDeleted(review.getAccountId()));
+		review.getEvents().add(new ReviewDeleted(review.getAccountId()));
 		publishEventsFor(review);
 		repository.deleteById(command.id);
 	}
@@ -65,7 +65,7 @@ public class ReviewCommandService {
 	}
 
 	private void publishEventsFor(Review review) {
-		List<ReviewEvent> events = review.returnEvents();
+		List<ReviewEvent> events = review.getEvents();
 		events.forEach(eventPublisher::publish);
 		review.clearEvents();
 	}
