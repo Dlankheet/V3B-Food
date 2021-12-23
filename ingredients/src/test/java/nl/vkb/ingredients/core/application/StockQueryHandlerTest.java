@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -53,6 +52,10 @@ class StockQueryHandlerTest {
 				.map(Ingredient::getId)
 				.map(UUID::toString)
 				.collect(Collectors.joining(","));
-		assertEquals(ingredientList,queryHandler.handle(filter));
+		List<String> responseStrings=new ArrayList<String>(queryHandler.handle(filter).stream().map(Ingredient::getId).map(UUID::toString).toList());
+		List<String> expectedStrings=new ArrayList<String>(ingredientList.stream().map(Ingredient::getId).map(UUID::toString).toList());
+		Collections.sort(responseStrings);
+		Collections.sort(expectedStrings);
+		assertEquals(expectedStrings,responseStrings);
 	}
 }
