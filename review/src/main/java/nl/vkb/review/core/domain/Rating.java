@@ -1,10 +1,7 @@
 package nl.vkb.review.core.domain;
 
 import lombok.Getter;
-import nl.vkb.review.core.domain.Exception.ReviewRatingException;
-import org.springframework.data.annotation.Id;
-
-import java.util.UUID;
+import nl.vkb.review.core.domain.exception.ReviewRatingException;
 
 @Getter
 public class Rating {

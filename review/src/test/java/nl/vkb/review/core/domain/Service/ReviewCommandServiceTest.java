@@ -1,9 +1,9 @@
 package nl.vkb.review.core.domain.Service;
 
-import nl.vkb.review.core.Service.Command.ChangeRating;
-import nl.vkb.review.core.Service.Command.DeleteReview;
-import nl.vkb.review.core.Service.Command.MakeReview;
-import nl.vkb.review.core.Service.ReviewCommandService;
+import nl.vkb.review.core.service.command.ChangeRating;
+import nl.vkb.review.core.service.command.DeleteReview;
+import nl.vkb.review.core.service.command.MakeReview;
+import nl.vkb.review.core.service.ReviewCommandService;
 import nl.vkb.review.core.domain.Rating;
 import nl.vkb.review.core.domain.Review;
 import nl.vkb.review.core.port.storage.ReviewRepository;

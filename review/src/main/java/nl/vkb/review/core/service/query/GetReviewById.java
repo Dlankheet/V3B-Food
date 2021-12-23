@@ -1,4 +1,4 @@
-package nl.vkb.review.core.Service.Query;
+package nl.vkb.review.core.service.query;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
