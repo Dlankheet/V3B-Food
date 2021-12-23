@@ -51,12 +51,12 @@ public class ReviewController {
 	}
 
 	@ExceptionHandler
-	public ResponseEntity<Void> ReviewNotFound(ReviewNotFoundException exception) {
+	public ResponseEntity<Void> reviewNotFound(ReviewNotFoundException exception) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 
 	@ExceptionHandler
-	public ResponseEntity<Void> RatingNotCorrect(ReviewRatingException exception) {
+	public ResponseEntity<Void> ratingNotCorrect(ReviewRatingException exception) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 }
