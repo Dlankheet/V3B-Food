@@ -69,7 +69,7 @@ public class DishQueryHandler {
         List<Dish> dishes = handle(new ListDishesById(query.getDishIds()));
         List<UUID> unavailableDishes = new ArrayList<>();
 
-        HashMap<UUID, Integer> totalIngredientsMap = new HashMap<UUID, Integer>();
+        HashMap<UUID, Integer> totalIngredientsMap = new HashMap<>();
         ArrayList<Ingredient> totalIngredientsList = new ArrayList<>();
 
         for (Dish dish : dishes) {
@@ -77,7 +77,7 @@ public class DishQueryHandler {
                 totalIngredientsMap.putIfAbsent(ingredient.getId(), ingredient.getAmount());
                 totalIngredientsMap.computeIfPresent(ingredient.getId(), (k, v) -> v + ingredient.getAmount());
             }
-            if (!handle(new CheckAvailable(dish.getId()))) {
+            if (Boolean.FALSE.equals(handle(new CheckAvailable(dish.getId())))) {
                 unavailableDishes.add(dish.getId());
                 allAvailable = false;
             } else {

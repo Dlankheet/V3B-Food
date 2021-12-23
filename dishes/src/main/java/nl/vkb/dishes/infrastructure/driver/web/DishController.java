@@ -11,10 +11,9 @@ import nl.vkb.dishes.core.application.results.OrderAvailableResult;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.infrastructure.driver.web.request.CreateDishRequest;
 import nl.vkb.dishes.infrastructure.driver.web.result.WebOrderAvailableResult;
-import nl.vkb.dishes.utils.uuidUtils;
+import nl.vkb.dishes.utils.UuidUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,9 +41,9 @@ public class DishController {
 
     @GetMapping("/checkorderavailability/{idString}")
     public WebOrderAvailableResult checkOrderAvailability(@PathVariable String idString) {
-        List<UUID> dishUUIDs = uuidUtils.parseStringToList(idString);
+        List<UUID> dishUUIDs = UuidUtils.parseStringToList(idString);
         OrderAvailableResult result = this.queryHandler.handle(new CheckOrderAvailability(dishUUIDs));
-        List<String> resultlist = uuidUtils.parseUUIDtoList(result.getUnavailableDishes());
+        List<String> resultlist = UuidUtils.parseUUIDtoList(result.getUnavailableDishes());
 
         return new WebOrderAvailableResult(result.allAvailable, resultlist, result.getTotalPrice());
     }
