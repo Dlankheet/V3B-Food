@@ -33,12 +33,12 @@ public class Order {
         this.orderStatus = OrderStatus.PENDING;
         this.customer = customer;
         this.dishes = dishes;
-        events.add(new OrderRrgistered(this.id, customer));
+        events.add(new OrderRegistered(this.id, customer));
     }
     public void acceptOrder(){
         checkStatus(OrderStatus.PENDING,OrderStatus.ACCEPTED );
         this.orderStatus = OrderStatus.ACCEPTED;
-        events.add(new OrderAccepted(id, customer));
+        events.add(new OrderAccepted(id, List.copyOf(dishes)));
     }
 
     public void denyOrder(){
