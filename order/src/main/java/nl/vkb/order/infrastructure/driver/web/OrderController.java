@@ -44,6 +44,11 @@ public class OrderController {
     @GetMapping("/customer/{id}")
     public List<OrderDto> getAllByCustomer(@PathVariable String id){
         return this.queryHandler.handle(new FindAllOrderByCustomerId(UUID.fromString(id))).stream().
+                map(OrderDto::new).toList();
+    }
+    @GetMapping("/all")
+    public List<OrderDto> getAllOrder(){
+        return this.queryHandler.handle().stream().
                 map(OrderDto::new).collect(Collectors.toList());
     }
     @PatchMapping("/accept/{id}")
