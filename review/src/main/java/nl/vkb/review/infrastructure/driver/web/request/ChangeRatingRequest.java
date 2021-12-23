@@ -1,4 +1,4 @@
-package nl.vkb.review.infrastructure.driver.web.Request;
+package nl.vkb.review.infrastructure.driver.web.request;
 
 public class ChangeRatingRequest {
 	public double rating;

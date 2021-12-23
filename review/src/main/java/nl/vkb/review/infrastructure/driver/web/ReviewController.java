@@ -2,8 +2,8 @@ package nl.vkb.review.infrastructure.driver.web;
 
 import nl.vkb.review.core.service.command.ChangeRating;
 import nl.vkb.review.core.domain.exception.ReviewRatingException;
-import nl.vkb.review.infrastructure.driver.web.Request.ChangeRatingRequest;
-import nl.vkb.review.infrastructure.driver.web.Request.MakeReviewRequest;
+import nl.vkb.review.infrastructure.driver.web.request.ChangeRatingRequest;
+import nl.vkb.review.infrastructure.driver.web.request.MakeReviewRequest;
 import nl.vkb.review.core.domain.Review;
 import nl.vkb.review.core.service.command.DeleteReview;
 import nl.vkb.review.core.service.command.MakeReview;
