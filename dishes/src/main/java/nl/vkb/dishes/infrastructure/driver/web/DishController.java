@@ -2,19 +2,22 @@ package nl.vkb.dishes.infrastructure.driver.web;
 
 import nl.vkb.dishes.core.application.DishCommandHandler;
 import nl.vkb.dishes.core.application.DishQueryHandler;
+import nl.vkb.dishes.core.application.command.AddIngredient;
 import nl.vkb.dishes.core.application.command.CreateDish;
 import nl.vkb.dishes.core.application.command.DeleteDish;
+import nl.vkb.dishes.core.application.command.RemoveIngredient;
 import nl.vkb.dishes.core.application.query.CheckOrderAvailability;
 import nl.vkb.dishes.core.application.query.ListDishes;
 import nl.vkb.dishes.core.application.query.CheckAvailable;
 import nl.vkb.dishes.core.application.results.OrderAvailableResult;
 import nl.vkb.dishes.core.domain.Dish;
+import nl.vkb.dishes.core.domain.Ingredient;
+import nl.vkb.dishes.infrastructure.driver.web.request.AddIngredientRequest;
 import nl.vkb.dishes.infrastructure.driver.web.request.CreateDishRequest;
 import nl.vkb.dishes.infrastructure.driver.web.result.WebOrderAvailableResult;
-import nl.vkb.dishes.utils.uuidUtils;
+import nl.vkb.dishes.utils.UuidUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,14 +45,20 @@ public class DishController {
 
     @GetMapping("/checkorderavailability/{idString}")
     public WebOrderAvailableResult checkOrderAvailability(@PathVariable String idString) {
-        List<UUID> dishUUIDs = uuidUtils.parseStringToList(idString);
-        System.out.println(dishUUIDs);
+        List<UUID> dishUUIDs = UuidUtils.parseStringToList(idString);
         OrderAvailableResult result = this.queryHandler.handle(new CheckOrderAvailability(dishUUIDs));
-        List<String> resultlist = uuidUtils.parseUUIDtoList(result.getUnavailableDishes());
-
+        List<String> resultlist = UuidUtils.parseUUIDtoList(result.getUnavailableDishes());
         return new WebOrderAvailableResult(result.allAvailable, resultlist, result.getTotalPrice());
     }
 
+    @PatchMapping("/{dishId}/addIngredient")
+    public Dish addIngredientToDish(@PathVariable UUID dishId, @RequestBody AddIngredientRequest ingredient){
+        return this.commandHandler.handle(new AddIngredient(dishId, new Ingredient(ingredient.getId(), ingredient.getAmount())));
+    }
+    @PatchMapping("/{dishId}/removeIngredient")
+    public Dish removeIngredientFromDish(@PathVariable UUID dishId, @RequestParam UUID ingredientId){
+        return this.commandHandler.handle(new RemoveIngredient(dishId, ingredientId));
+    }
     @DeleteMapping("/remove")
     public void generateRandomDish(String id) {
         commandHandler.handle(new DeleteDish(UUID.fromString(id)));

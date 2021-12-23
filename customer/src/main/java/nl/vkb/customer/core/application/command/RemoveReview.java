@@ -7,7 +7,6 @@ import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
-public class ReviewOrder {
-	private final UUID account;
+public class RemoveReview {
 	private final UUID review;
 }

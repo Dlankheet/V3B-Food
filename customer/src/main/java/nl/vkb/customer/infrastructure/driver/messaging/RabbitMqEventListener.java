@@ -2,6 +2,7 @@ package nl.vkb.customer.infrastructure.driver.messaging;
 
 import nl.vkb.customer.core.application.CustomerCommandHandler;
 import nl.vkb.customer.core.application.command.OrderFood;
+import nl.vkb.customer.core.application.command.RemoveReview;
 import nl.vkb.customer.core.application.command.ReviewOrder;
 import nl.vkb.customer.infrastructure.driver.messaging.event.OrderEvent;
 import nl.vkb.customer.infrastructure.driver.messaging.event.ReviewEvent;
@@ -16,7 +17,7 @@ public class RabbitMqEventListener {
 
 	@RabbitListener(queues = "#{'${messaging.queue.orders}'}")
 	public void listen(OrderEvent event){
-		if ("order.accepted".equals(event.getEventKey())) {
+		if ("order.registered".equals(event.getEventKey())) {
 			this.commandHandler.handle(
 					new OrderFood(event.getOrder(), event.getCustomer())
 			);
@@ -27,7 +28,12 @@ public class RabbitMqEventListener {
 	public void listen(ReviewEvent event){
 		if ("event.review.created".equals(event.getEventKey())) {
 			this.commandHandler.handle(
-					new ReviewOrder(event.getCustomerId(), event.getReviewId())
+					new ReviewOrder(event.getAccount(), event.getReview())
+			);
+		}
+		if ("event.review.deleted".equals(event.getEventKey())) {
+			this.commandHandler.handle(
+					new RemoveReview(event.getReview())
 			);
 		}
 	}
