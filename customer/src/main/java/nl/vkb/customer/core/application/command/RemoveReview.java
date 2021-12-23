@@ -8,6 +8,5 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 public class RemoveReview {
-	private final UUID reviewId;
-	private final UUID customerId;
+	private final UUID review;
 }

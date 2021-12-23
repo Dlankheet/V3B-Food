@@ -28,12 +28,12 @@ public class RabbitMqEventListener {
 	public void listen(ReviewEvent event){
 		if ("event.review.created".equals(event.getEventKey())) {
 			this.commandHandler.handle(
-					new ReviewOrder(event.getCustomerId(), event.getReviewId())
+					new ReviewOrder(event.getCustomer(), event.getReview())
 			);
 		}
 		if ("event.review.deleted".equals(event.getEventKey())) {
 			this.commandHandler.handle(
-					new RemoveReview(event.getCustomerId(), event.getReviewId())
+					new RemoveReview(event.getReview())
 			);
 		}
 	}

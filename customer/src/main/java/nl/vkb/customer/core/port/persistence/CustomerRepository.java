@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface CustomerRepository extends MongoRepository<Customer, UUID> {
 	Optional<Customer> findCustomerByEmail(String email);
+	Optional<Customer> getCustomerByReviewsContains(UUID id);
 }
