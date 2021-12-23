@@ -38,8 +38,8 @@ jobs:
         run: ssh deployment 'cd V3B-Food/deployment && docker-compose up -d --build'
 
       - uses: actions/checkout@v2
-      - name: Sleep for 15 seconds
-        run: sleep 15s
+      - name: Sleep for 60 seconds
+        run: sleep 60s
         shell: bash
 
       - name: 'Postman ingredient' 
