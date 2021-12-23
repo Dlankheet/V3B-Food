@@ -5,6 +5,7 @@ import lombok.Setter;
 import lombok.ToString;
 import nl.vkb.dishes.core.domain.event.DishAdded;
 import nl.vkb.dishes.core.domain.event.DishEvent;
+import nl.vkb.dishes.core.domain.event.IngredientOrdered;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -42,6 +43,12 @@ public class Dish {
 
     public void removeIngredient(UUID id){
         ingredients.removeIf(ingredient -> ingredient.getId().equals(id));
+    }
+
+    public void order() {
+        for(Ingredient ingredient: ingredients) {
+            events.add(new IngredientOrdered(ingredient.getId(),ingredient.getAmount()));
+        }
     }
 
     public void clearEvents() {

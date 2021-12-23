@@ -15,7 +15,7 @@ import nl.vkb.dishes.core.domain.Ingredient;
 import nl.vkb.dishes.infrastructure.driver.web.request.AddIngredientRequest;
 import nl.vkb.dishes.infrastructure.driver.web.request.CreateDishRequest;
 import nl.vkb.dishes.infrastructure.driver.web.result.WebOrderAvailableResult;
-import nl.vkb.dishes.utils.uuidUtils;
+import nl.vkb.dishes.utils.UuidUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
