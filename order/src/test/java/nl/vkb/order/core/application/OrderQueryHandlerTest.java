@@ -55,7 +55,7 @@ class OrderQueryHandlerTest {
         assertThrows(OrderNotFoundException.class, ()-> {queryHandler.handle(getOrderById);});
     }
 
-    @DisplayName("Get order based on customer id")
+    @DisplayName("Get orders based on customer id")
     @Test
     void findAllOrderByCustomerId ( ) {
         assertEquals(1, queryHandler.handle(new FindAllOrderByCustomerId(order.getCustomer())).size());

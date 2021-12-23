@@ -1,14 +1,15 @@
 package nl.vkb.order.infrastructure.driver.web.request;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.UUID;
 import javax.validation.constraints.NotBlank;
-@Data
+
+@AllArgsConstructor
 public class RegisterOrderRequest {
     @NotBlank
-    public UUID customer;
+    public final UUID customer;
     @NotBlank
-    public List<UUID> dishes;
+    public final List<UUID> dishes;
 }

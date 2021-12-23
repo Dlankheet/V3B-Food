@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -44,7 +43,12 @@ public class OrderController {
     @GetMapping("/customer/{id}")
     public List<OrderDto> getAllByCustomer(@PathVariable String id){
         return this.queryHandler.handle(new FindAllOrderByCustomerId(UUID.fromString(id))).stream().
-                map(OrderDto::new).collect(Collectors.toList());
+                map(OrderDto::new).toList();
+    }
+    @GetMapping("/all")
+    public List<OrderDto> getAllOrder(){
+        return this.queryHandler.handle().stream().
+                map(OrderDto::new).toList();
     }
     @PatchMapping("/accept/{id}")
     public OrderDto acceptOrder(@PathVariable UUID id){

@@ -1,26 +1,21 @@
 package nl.vkb.order.core.domain.event;
 
-import java.util.UUID;
+import lombok.Getter;
 
+import java.util.List;
+import java.util.UUID;
+@Getter
 public class OrderAccepted extends OrderEvent{
     private final UUID order;
-    private final UUID customer;
+    private List<UUID> dishes;
 
-    public OrderAccepted (UUID order, UUID customer) {
+    public OrderAccepted (UUID order, List<UUID> dishes) {
         this.order = order;
-        this.customer = customer;
+        this.dishes = dishes;
     }
 
     @Override
     public String getEventKey ( ) {
         return "order.accepted";
-    }
-
-    public UUID getOrder ( ) {
-        return order;
-    }
-
-    public UUID getCustomer ( ) {
-        return customer;
     }
 }
