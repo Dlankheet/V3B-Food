@@ -38,9 +38,9 @@ public class ReviewCommandService {
 	}
 
 	public void handle(DeleteReview command){
-//		Review review = getReviewbyId(command.id);
-//		review.getEvents().add(new ReviewDeleted(review.getAccountId()));
-//		publishEventsFor(review);
+		Review review = getReviewbyId(command.id);
+		review.returnEvents().add(new ReviewDeleted(review.getAccountId()));
+		publishEventsFor(review);
 		repository.deleteById(command.id);
 	}
 
