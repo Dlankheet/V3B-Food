@@ -17,7 +17,7 @@ public class RabbitMqEventListener {
 
 	@RabbitListener(queues = "#{'${messaging.queue.orders}'}")
 	public void listen(OrderEvent event){
-		if ("order.accepted".equals(event.getEventKey())) {
+		if ("order.registered".equals(event.getEventKey())) {
 			this.commandHandler.handle(
 					new OrderFood(event.getOrder(), event.getCustomer())
 			);
