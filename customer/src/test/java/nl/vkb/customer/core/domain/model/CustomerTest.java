@@ -1,5 +1,6 @@
 package nl.vkb.customer.core.domain.model;
 
+import nl.vkb.customer.core.domain.event.EmailChanged;
 import nl.vkb.customer.core.domain.exception.AddressAlreadyBoundException;
 import nl.vkb.customer.core.domain.exception.InvalidEmailException;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,6 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,7 +31,7 @@ class CustomerTest {
 	@DisplayName("Instantiating a Customer with an invalid email should throw an exception")
 	void newCustomerWithInvalidEmail(){
 		assertThrows(InvalidEmailException.class, ()->{
-			Customer invalidCustomer = new Customer("John", "Doe", this.invalidEmail);
+			new Customer("John", "Doe", this.invalidEmail);
 		});
 	}
 
@@ -106,5 +108,38 @@ class CustomerTest {
 				Arguments.of("john.doe@gmail.com-"),
 				Arguments.of("john.doe@.com-")
 		);
+	}
+
+	@Test
+	@DisplayName("Order some food")
+	void orderFood(){
+		UUID orderId = UUID.randomUUID();
+		customer.orderFood(orderId);
+		assertEquals(1,customer.getOrderHistory().size());
+	}
+
+	@Test
+	@DisplayName("Review an order")
+	void reviewOrder(){
+		UUID reviewId = UUID.randomUUID();
+		customer.reviewOrder(reviewId);
+		assertEquals(1,customer.getReviews().size());
+	}
+
+	@Test
+	@DisplayName("Removing an Address from customer")
+	void removeAddress(){
+		Address address = new Address("Valley View Road", 54, "B", "1324FH");
+		customer.addAddress(address);
+		customer.removeAddress(address);
+		assertEquals(0, customer.getAddresses().size());
+	}
+
+	@Test
+	@DisplayName("Check if clearing the events actually removes them")
+	void clearEvents(){
+		customer.listEvents().add(new EmailChanged(customer.getId(), "johan.doey@hotmail.com"));
+		customer.clearEvents();
+		assertEquals(0, customer.listEvents().size());
 	}
 }

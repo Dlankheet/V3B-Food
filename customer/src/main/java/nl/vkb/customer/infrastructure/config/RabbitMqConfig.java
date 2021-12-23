@@ -84,7 +84,7 @@ public class RabbitMqConfig {
 
 	// General RabbitMQ config
 	@Bean
-	public RabbitMqEventPublisher EventPublisher(RabbitTemplate template) {
+	public RabbitMqEventPublisher eventPublisher(RabbitTemplate template) {
 		return new RabbitMqEventPublisher(template, foodExchangeName);
 	}
 
