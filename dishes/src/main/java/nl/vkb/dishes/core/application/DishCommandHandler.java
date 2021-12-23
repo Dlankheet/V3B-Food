@@ -2,6 +2,7 @@ package nl.vkb.dishes.core.application;
 
 import nl.vkb.dishes.core.application.command.CreateDish;
 import nl.vkb.dishes.core.application.command.DeleteDish;
+import nl.vkb.dishes.core.application.command.DishOrdered;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
 import nl.vkb.dishes.core.domain.event.DishEvent;
@@ -29,6 +30,11 @@ public class DishCommandHandler {
         this.dishRepo.deleteById(command.getId());
     }
 
+    public void handle(DishOrdered command) {
+        Dish dish=dishRepo.findById(command.getDish()).get();
+        dish.order();
+        publishEventsAndSave(dish);
+    }
 
     private Dish publishEventsAndSave(Dish dish) {
         List<DishEvent> events = dish.getEvents();
