@@ -49,3 +49,8 @@ services:
     environment:
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_RABBITMQ_HOST: rabbitmq
+  
+  proxy:
+    build: ../proxy
+    ports:
+      - "8080:80"
