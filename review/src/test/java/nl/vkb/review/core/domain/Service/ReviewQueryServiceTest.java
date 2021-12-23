@@ -48,8 +48,9 @@ class ReviewQueryServiceTest {
 
 	@Test
 	void getReviewFailTest() {
+		GetReviewById review = new GetReviewById(UUID.randomUUID());
 		Assertions.assertThrows(ReviewNotFoundException.class,
-				() -> service.handle(new GetReviewById(UUID.randomUUID()))
+				() -> service.handle(review)
 		);
 	}
 }
