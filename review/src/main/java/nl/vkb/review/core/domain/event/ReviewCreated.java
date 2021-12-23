@@ -1,7 +1,10 @@
 package nl.vkb.review.core.domain.event;
 
+import lombok.Getter;
+
 import java.util.UUID;
 
+@Getter
 public class ReviewCreated extends ReviewEvent{
 	private final UUID review;
 	private final UUID account;
