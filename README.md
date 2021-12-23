@@ -22,23 +22,21 @@ For all your tasty needs.
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Reviews&metric=alert_status)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Reviews)[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Reviews&metric=bugs)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Reviews)[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Reviews&metric=code_smells)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Reviews)[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=dlankheet_V3B-Food_Reviews&metric=coverage)](https://sonarcloud.io/summary/overall?id=dlankheet_V3B-Food_Reviews)
 
-# Mogelijke functionaliteiten
-* Registreren / inloggen verschillende rollen 
+# Functionaliteiten 
 * Bestellen van één of meer gerechten 
 * Aannemen of afwijzen van bestelling door keuken 
-* Gereedmelding of afmelding van bestelling door keuken 
-* Afrekenen van bestellingen 
-* Bezorging van bestellingen 
-* Near real-time statusupdate over bestelling 
+* Gereedmelding of afmelding van bestelling door keuken
 * Beoordeling van bestelling door klant 
+* Beoordeling aanpassen door klant
 * Bestellingshistorie voor een klant 
 * Overzicht voorraad (bijvoorbeeld ingrediënten van gerechten) 
 * Automatisch verbergen van gerechten waarvan ingrediënten niet op voorraad zijn 
-* Automatisch afwijzen van bestellingen waarvan ingrediënten niet meer op voorraad zijn 
-* Overzicht verkochte gerechten voor restauranthouder 
-* Overzicht financiële gegevens voor restauranthouder
+* Automatisch afwijzen van bestellingen waarvan ingrediënten niet meer op voorraad zijn
+* Recepten aanpassen
+* Adres toevoegen
+* 
 
-# Eisen/Verplichtingen
+# Toegepaste verplichtingen
 * Gebruik van GitHub of Gitlab volgens een geschikte workflow
 * Maak 4 of meer verschillende (micro)services
 * Minstens 4 (micro)services moeten in Java zijn geschreven
@@ -49,8 +47,8 @@ For all your tasty needs.
 * Maak gebruik van standaardoplossingen, zoals frameworks en libraries
 * De code is netjes, leesbaar en niet nodeloos gecompliceerd
 
-
-# Aanbevolen:
-* Maak gebruik van tactical patterns uit Domain Driven Design (DDD)
-* Structureer elke (micro)service volgens een dependency inversion architecture zoals Hexagonal Architecture, Onion Architecture of Clean Architecture
-* De code is voldoende geautomatiseerd getest, bijvoorbeeld met unit en/of integration tests
+# Extra werk
+* Sonarcloud
+* Automatische tests (met coverage checks)
+* Gateway
+* Deployment
