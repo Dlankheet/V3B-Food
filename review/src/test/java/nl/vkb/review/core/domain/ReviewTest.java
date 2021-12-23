@@ -38,15 +38,17 @@ class ReviewTest {
 
 	@Test
 	void changeReviewRatingFailTest() {
+		Rating rating = this.review.getRating();
 		assertThrows(ReviewRatingException.class,
-				() -> this.review.getRating().changeRating(5.1)
+				() -> rating.changeRating(5.1)
 		);
 	}
 
 	@Test
 	void changeReviewRatingFailTest2() {
+		Rating rating = this.review.getRating();
 		assertThrows(ReviewRatingException.class,
-				() -> this.review.getRating().changeRating(0)
+				() -> rating.changeRating(0)
 		);
 	}
 
