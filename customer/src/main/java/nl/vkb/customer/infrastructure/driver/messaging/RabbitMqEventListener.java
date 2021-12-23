@@ -16,21 +16,19 @@ public class RabbitMqEventListener {
 
 	@RabbitListener(queues = "#{'${messaging.queue.orders}'}")
 	public void listen(OrderEvent event){
-		switch (event.getEventKey()) {
-			case "order.accepted" -> this.commandHandler.handle(
+		if ("order.accepted".equals(event.getEventKey())) {
+			this.commandHandler.handle(
 					new OrderFood(event.getOrder(), event.getCustomer())
 			);
-			default -> System.out.println(String.format("No listener case for: %s", event.getEventKey()));
 		}
 	}
 
 	@RabbitListener(queues = "#{'${messaging.queue.reviews}'}")
 	public void listen(ReviewEvent event){
-		switch (event.getEventKey()) {
-			case "event.review.created" -> this.commandHandler.handle(
+		if ("event.review.created".equals(event.getEventKey())) {
+			this.commandHandler.handle(
 					new ReviewOrder(event.getCustomerId(), event.getReviewId())
 			);
-			default -> System.out.println(String.format("No listener case for: %s", event.getEventKey()));
 		}
 	}
 }
