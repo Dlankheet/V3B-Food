@@ -67,6 +67,12 @@ public class CustomerCommandHandler {
 		repository.save(customer);
 	}
 
+	public void handle(RemoveReview command) {
+		Customer customer = this.getCustomerById(command.getCustomerId());
+		customer.removeReview(command.getReviewId());
+		repository.save(customer);
+	}
+
 	private boolean emailAlreadyExists(String email){
 		return this.repository.findCustomerByEmail(email).isPresent();
 	}
