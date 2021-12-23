@@ -37,6 +37,8 @@ jobs:
       - name: Start the server
         run: ssh deployment 'cd V3B-Food/deployment && docker-compose up -d --build'
 
+      - uses: actions/checkout@v2
+
       - name: 'Postman ingredient' 
         uses: matt-ball/newman-action@master
         with:
