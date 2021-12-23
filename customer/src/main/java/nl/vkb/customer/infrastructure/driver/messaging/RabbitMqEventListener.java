@@ -16,18 +16,18 @@ public class RabbitMqEventListener {
 
 	@RabbitListener(queues = "#{'${messaging.queue.orders}'}")
 	public void listen(OrderEvent event){
-		switch (event.eventKey) {
-			case "orders.new" -> this.commandHandler.handle(
-					new OrderFood(event.orderId, event.customerId)
+		if ("order.accepted".equals(event.getEventKey())) {
+			this.commandHandler.handle(
+					new OrderFood(event.getOrder(), event.getCustomer())
 			);
 		}
 	}
 
 	@RabbitListener(queues = "#{'${messaging.queue.reviews}'}")
 	public void listen(ReviewEvent event){
-		switch (event.eventKey) {
-			case "event.review.created" -> this.commandHandler.handle(
-					new ReviewOrder(event.customerId, event.reviewId)
+		if ("event.review.created".equals(event.getEventKey())) {
+			this.commandHandler.handle(
+					new ReviewOrder(event.getCustomerId(), event.getReviewId())
 			);
 		}
 	}

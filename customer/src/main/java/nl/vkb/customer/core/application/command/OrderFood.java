@@ -8,6 +8,6 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 public class OrderFood {
-	private final UUID customerId;
 	private final UUID orderId;
+	private final UUID customerId;
 }
