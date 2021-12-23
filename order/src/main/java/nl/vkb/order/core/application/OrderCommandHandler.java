@@ -1,5 +1,6 @@
 package nl.vkb.order.core.application;
 import nl.vkb.order.core.application.command.*;
+import nl.vkb.order.core.application.event.CustomerDeleted;
 import nl.vkb.order.core.domain.Order;
 import nl.vkb.order.core.domain.event.OrderEvent;
 import nl.vkb.order.core.domain.exception.OrderNotFoundException;
@@ -72,6 +73,14 @@ public class OrderCommandHandler {
         this.publishEventsFor(order);
         this.repository.save(order);
         return order;
+    }
+    public void handle(CustomerDeleted event){
+        List<Order> orders = this.repository.findAllByCustomer(event.getCustomerId());
+        for (Order order : orders){
+            order.setCustomer(null);
+            this.repository.save(order);
+        }
+
     }
 
 

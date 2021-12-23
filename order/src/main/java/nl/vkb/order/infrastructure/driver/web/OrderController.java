@@ -67,13 +67,13 @@ public class OrderController {
         return new OrderDto(order);
     }
     @ExceptionHandler
-    public ResponseEntity<Void> handleOrderNotFound(OrderNotFoundException exception) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<String> handleOrderNotFound(OrderNotFoundException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
     @ExceptionHandler
-    public ResponseEntity<Void> handleOrderStatus(OrderStatusException exception) {
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+    public ResponseEntity<String> handleOrderStatus(OrderStatusException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
     @ExceptionHandler
     public ResponseEntity<String> handleDishUnavailable(DishUnavailableException exception) {

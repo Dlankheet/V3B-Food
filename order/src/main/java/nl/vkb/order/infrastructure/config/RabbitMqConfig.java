@@ -17,17 +17,18 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 public class RabbitMqConfig {
     @Value("${spring.rabbitmq.host}")
     private String host;
-
     @Value("${spring.rabbitmq.port}")
     private int port;
-
     @Value("${messaging.exchange.order}")
     private String orderExchangeName;
-
     @Value("${messaging.queue.order}")
     private String orderQueueName;
+    @Value("${messaging.queue.customers}")
+    private String customerQueueName;
     @Value("${messaging.routing-key.order}")
-    private String routingKey;
+    private String orderRoutingKey;
+    @Value("${messaging.routing-key.customers}")
+    private String customerRoutingKey;
 
     @Bean
     public TopicExchange foodExchange() {
@@ -40,11 +41,23 @@ public class RabbitMqConfig {
     }
 
     @Bean
+    public Queue customerQueue() {
+        return QueueBuilder.durable(customerQueueName).build();
+    }
+
+    @Bean
+    public Binding orderBinding() {
+        return BindingBuilder
+                .bind(orderQueue())
+                .to(foodExchange())
+                .with(orderRoutingKey);
+    }
+    @Bean
     public Binding orderCustomerBinding() {
         return BindingBuilder
                 .bind(orderQueue())
                 .to(foodExchange())
-                .with(routingKey);
+                .with(customerRoutingKey);
     }
 
     @Bean

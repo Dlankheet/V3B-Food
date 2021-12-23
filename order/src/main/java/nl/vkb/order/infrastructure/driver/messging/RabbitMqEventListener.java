@@ -1,7 +1,8 @@
 package nl.vkb.order.infrastructure.driver.messging;
 
 import nl.vkb.order.core.application.OrderCommandHandler;
-import nl.vkb.order.infrastructure.driver.messging.event.OrderEvent;
+import nl.vkb.order.core.application.event.CustomerDeleted;
+import nl.vkb.order.infrastructure.driver.messging.event.CustomerEvent;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,11 @@ public class RabbitMqEventListener {
         this.commandHandler = commandHandler;
     }
 
-    @RabbitListener(queues = "#{'${messaging.queue.order}'}")
-    void listen(OrderEvent orderEvent) {
+
+    @RabbitListener(queues = "#{'${messaging.queue.customers}'}")
+    void listen(CustomerEvent event) {
+        if (event.eventKey.equals("customers.deleted")) {
+            this.commandHandler.handle(new CustomerDeleted(event.customerId));
+        }
     }
 }
