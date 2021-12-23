@@ -17,7 +17,7 @@ public class RabbitMqEventListener {
         this.commandHandler = commandHandler;
     }
 
-    @RabbitListener(queues = "#{'${messaging.queue.stock}'}")
+    @RabbitListener(queues = "#{'${messaging.queue.dishes}'}")
     void listen(OrderAcceptedEvent event) {
         if ("order.accepted".equals(event.getEventKey())) {
             for(UUID dish:event.getDishes()) {

@@ -8,7 +8,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Getter
 public class IngredientOrdered extends DishEvent{
-	private final UUID id;
+	private final UUID ingredient;
 	private final int amount;
 	@Override
 	public String getEventKey() {
