@@ -4,8 +4,8 @@ import nl.vkb.dishes.core.application.query.*;
 import nl.vkb.dishes.core.application.results.OrderAvailableResult;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
-import nl.vkb.dishes.core.domain.Exception.DishNotFoundException;
 import nl.vkb.dishes.core.domain.Ingredient;
+import nl.vkb.dishes.core.domain.exceptions.DishNotFoundException;
 import nl.vkb.dishes.core.port.storage.StockRepository;
 import nl.vkb.dishes.infrastructure.driven.storage.StockResult;
 import org.junit.jupiter.api.BeforeEach;
@@ -72,6 +72,7 @@ class DishQueryHandlerTest {
 
         assertEquals(false, queryHandler.handle(new CheckAvailable(dish.getId())));
     }
+
     @Test
     void checkStockHappyFlow ( ) {
         StockResult stockResult = new StockResult(ingredient.getId(), "gehaktbal", 2);
