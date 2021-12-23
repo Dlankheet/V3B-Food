@@ -23,13 +23,13 @@ public class DishQueryHandler {
         this.stockRepository = stockRepository;
     }
 
-    public Boolean handle(CheckAvailable query) {
+    public boolean handle(CheckAvailable query) {
         Optional<Dish> optionalDish = dishRepository.findById(query.getId());
         Dish dish = optionalDish.orElseThrow(() -> new DishNotFoundException("This dish is not available"));
         return handle(new CheckStock(dish.getIngredients()));
     }
 
-    public Boolean handle(CheckStock query) {
+    public boolean handle(CheckStock query) {
         List<Ingredient> neededIngredients = query.getIngredients();
         ArrayList<UUID> ids = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class DishQueryHandler {
                 totalIngredientsMap.putIfAbsent(ingredient.getId(), ingredient.getAmount());
                 totalIngredientsMap.computeIfPresent(ingredient.getId(), (k, v) -> v + ingredient.getAmount());
             }
-            if (Boolean.FALSE.equals(handle(new CheckAvailable(dish.getId())))) {
+            if (!handle(new CheckAvailable(dish.getId()))) {
                 unavailableDishes.add(dish.getId());
                 allAvailable = false;
             } else {

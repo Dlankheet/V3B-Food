@@ -54,7 +54,7 @@ public class DishController {
     }
 
     @GetMapping("/{id}/isAvailable")
-    public Boolean isDishAvailable(@PathVariable UUID id) {
+    public boolean isDishAvailable(@PathVariable UUID id) {
         return queryHandler.handle(new CheckAvailable(id));
     }
 }
