@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -61,10 +63,11 @@ class DishServiceTest {
         StockResult stock = new StockResult(ingredient.getId(), "gehaktbal", 1);
         StockResult stock1 = new StockResult(ingredient1.getId(), "tomaat", 2);
         StockResult stock2 = new StockResult(ingredient2.getId(), "sla", 1);
-        when(stockRepository.findIngredientById(ingredient.getId())).thenReturn(stock);
-        when(stockRepository.findIngredientById(ingredient1.getId())).thenReturn(stock1);
-        when(stockRepository.findIngredientById(ingredient2.getId())).thenReturn(stock2);
+        List<StockResult> stockList = List.of(stock, stock1, stock2);
+
+        when(stockRepository.findIngredientByIds(anyList())).thenReturn(stockList);
         when(dishRepository.findById(dish.getId())).thenReturn(java.util.Optional.ofNullable(dish));
+
         assertEquals(false, queryHandler.handle(new CheckAvailable(dish.getId())));
     }
 }

@@ -2,6 +2,7 @@ package nl.vkb.dishes.core.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import nl.vkb.dishes.core.domain.event.DishAdded;
 import nl.vkb.dishes.core.domain.event.DishEvent;
 import nl.vkb.dishes.core.domain.event.IngredientOrdered;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@ToString
 @Document("dishes")
 public class Dish {
     @Id

@@ -1,15 +1,18 @@
 package nl.vkb.review.infrastructure.driver.web;
 
-import nl.vkb.review.core.Service.Command.ChangeRating;
-import nl.vkb.review.infrastructure.driver.web.Request.ChangeRatingRequest;
-import nl.vkb.review.infrastructure.driver.web.Request.MakeReviewRequest;
+import nl.vkb.review.core.service.command.ChangeRating;
+import nl.vkb.review.core.domain.exception.ReviewRatingException;
+import nl.vkb.review.infrastructure.driver.web.request.ChangeRatingRequest;
+import nl.vkb.review.infrastructure.driver.web.request.MakeReviewRequest;
 import nl.vkb.review.core.domain.Review;
-import nl.vkb.review.core.Service.Command.DeleteReview;
-import nl.vkb.review.core.Service.Command.MakeReview;
-import nl.vkb.review.core.Service.Query.GetReviewById;
-import nl.vkb.review.core.Service.ReviewCommandService;
-import nl.vkb.review.core.Service.ReviewQueryService;
-import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
+import nl.vkb.review.core.service.command.DeleteReview;
+import nl.vkb.review.core.service.command.MakeReview;
+import nl.vkb.review.core.service.query.GetReviewById;
+import nl.vkb.review.core.service.ReviewCommandService;
+import nl.vkb.review.core.service.ReviewQueryService;
+import nl.vkb.review.core.domain.exception.ReviewNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,17 +36,27 @@ public class ReviewController {
 
 	@PostMapping("/create")
 	public Review createReview(@Valid @RequestBody MakeReviewRequest request) {
-		return this.commandService.handle(new MakeReview(request.description, request.pros, request.cons,
-				request.rating, request.orderId, request.accountId));
+		return this.commandService.handle(new MakeReview(request.getDescription(), request.getPros(), request.getCons(),
+				request.getRating(), request.getOrderId(), request.getAccountId()));
 	}
 
 	@PostMapping("/rating/{id}/change")
 	public void changeRating(@PathVariable UUID id, @Valid @RequestBody ChangeRatingRequest request) {
-		this.commandService.handle(new ChangeRating(id, request.rating));
+		this.commandService.handle(new ChangeRating(id, request.getRating()));
 	}
 
 	@DeleteMapping("/{id}/delete")
 	public void deleteReview(@PathVariable UUID id) {
 		this.commandService.handle(new DeleteReview(id));
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<Void> reviewNotFound(ReviewNotFoundException exception) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<Void> ratingNotCorrect(ReviewRatingException exception) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 }

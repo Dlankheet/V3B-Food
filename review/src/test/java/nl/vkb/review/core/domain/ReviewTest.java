@@ -1,6 +1,6 @@
 package nl.vkb.review.core.domain;
 
-import nl.vkb.review.core.domain.Exception.ReviewRatingException;
+import nl.vkb.review.core.domain.exception.ReviewRatingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

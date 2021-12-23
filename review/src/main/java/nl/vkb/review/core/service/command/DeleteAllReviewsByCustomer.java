@@ -1,4 +1,4 @@
-package nl.vkb.review.core.Service.Command;
+package nl.vkb.review.core.service.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +7,6 @@ import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
-public class DeleteReview {
+public class DeleteAllReviewsByCustomer {
 	public final UUID id;
 }

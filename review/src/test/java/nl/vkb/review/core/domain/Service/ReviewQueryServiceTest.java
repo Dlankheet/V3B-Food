@@ -1,8 +1,8 @@
 package nl.vkb.review.core.domain.Service;
 
-import nl.vkb.review.core.Service.Query.GetReviewById;
-import nl.vkb.review.core.Service.ReviewQueryService;
-import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
+import nl.vkb.review.core.service.query.GetReviewById;
+import nl.vkb.review.core.service.ReviewQueryService;
+import nl.vkb.review.core.domain.exception.ReviewNotFoundException;
 import nl.vkb.review.core.domain.Rating;
 import nl.vkb.review.core.domain.Review;
 import nl.vkb.review.core.port.storage.ReviewRepository;

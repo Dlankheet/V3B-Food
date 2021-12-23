@@ -1,4 +1,4 @@
-package nl.vkb.review.core.Service.Command;
+package nl.vkb.review.core.service.command;
 
 
 import lombok.AllArgsConstructor;

@@ -12,7 +12,7 @@ public class HttpClientConfig {
     private String rootPath;
 
     @Bean
-    public HttpDishRepository httpJobRepository() {
+    public HttpDishRepository httpDishRepository() {
         return new HttpDishRepository(rootPath, restTemplate());
     }
 

@@ -1,5 +1,6 @@
 package nl.vkb.ingredients.core.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import nl.vkb.ingredients.core.domain.event.StockDeleted;
@@ -24,6 +25,7 @@ public class Ingredient {
 	private int stock;
 
 	@Transient
+	@JsonIgnore
 	private List<StockEvent> events = new ArrayList<>();
 
 	public Ingredient(String name, int stock) {

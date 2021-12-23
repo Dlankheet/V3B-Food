@@ -19,7 +19,7 @@ public class HttpDishRepository implements DishRepository {
 
     @Override
     public double getPriceByDishes (String dishes) {
-        URI uri = URI.create(this.rootPath+"/checkorderavailability/"+dishes);
+        URI uri = URI.create(this.rootPath+"/dish/checkorderavailability/"+dishes);
         double totalPrice;
         try {
             DishResult dishResult = this.client.getForObject(uri, DishResult.class);
