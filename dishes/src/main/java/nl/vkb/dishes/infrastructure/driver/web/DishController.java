@@ -12,6 +12,7 @@ import nl.vkb.dishes.core.application.query.CheckAvailable;
 import nl.vkb.dishes.core.application.results.OrderAvailableResult;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.Ingredient;
+import nl.vkb.dishes.infrastructure.driver.web.request.AddIngredientRequest;
 import nl.vkb.dishes.infrastructure.driver.web.request.CreateDishRequest;
 import nl.vkb.dishes.infrastructure.driver.web.result.WebOrderAvailableResult;
 import nl.vkb.dishes.utils.uuidUtils;
@@ -51,8 +52,8 @@ public class DishController {
     }
 
     @PatchMapping("/{dishId}/addIngredient")
-    public Dish addIngredientToDish(@PathVariable UUID dishId, @RequestParam Ingredient ingredient){
-        return this.commandHandler.handle(new AddIngredient(dishId, ingredient));
+    public Dish addIngredientToDish(@PathVariable UUID dishId, @RequestBody AddIngredientRequest ingredient){
+        return this.commandHandler.handle(new AddIngredient(dishId, new Ingredient(ingredient.getId(), ingredient.getAmount())));
     }
     @PatchMapping("/{dishId}/removeIngredient")
     public Dish removeIngredientFromDish(@PathVariable UUID dishId, @RequestParam UUID ingredientId){
