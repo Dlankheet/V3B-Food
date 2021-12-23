@@ -38,6 +38,7 @@ public class RabbitMqConfig {
 	private String ordersRoutingKey;
 	@Value("${messaging.routing-key.reviews}")
 	private String reviewsRoutingKey;
+	@Value("")
 
 	// Exchanges
 	@Bean

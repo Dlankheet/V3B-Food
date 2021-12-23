@@ -28,7 +28,7 @@ public class RabbitMqEventListener {
 	public void listen(ReviewEvent event){
 		if ("event.review.created".equals(event.getEventKey())) {
 			this.commandHandler.handle(
-					new ReviewOrder(event.getCustomer(), event.getReview())
+					new ReviewOrder(event.getAccount(), event.getReview())
 			);
 		}
 		if ("event.review.deleted".equals(event.getEventKey())) {

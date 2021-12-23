@@ -8,6 +8,6 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 public class ReviewOrder {
-	private final UUID review;
 	private final UUID account;
+	private final UUID review;
 }
