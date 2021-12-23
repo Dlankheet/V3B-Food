@@ -246,7 +246,7 @@
 							"pm.test(\"Test response\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.name).to.eql(\"Appel\");",
-							"    pm.expect(jsonData.stock).to.eql(100);",
+							"    pm.expect(jsonData.stock).to.eql(300);",
 							"    pm.collectionVariables.set(\"ingredientId2\", jsonData.id);",
 							"});"
 						],
@@ -284,7 +284,21 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": ""
+					"raw": "{{url}}/ingredient/all/?filter={{ingredientId}},{{ingredientId2}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"ingredient",
+						"all",
+						""
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "{{ingredientId}},{{ingredientId2}}"
+						}
+					]
 				}
 			},
 			"response": []
