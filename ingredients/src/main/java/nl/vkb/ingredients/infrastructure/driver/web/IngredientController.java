@@ -54,7 +54,7 @@ public class IngredientController {
 	@GetMapping("/all")
 	public List<Ingredient> getDishesFiltered(@RequestParam(required = false) String filter) {
 		if(filter==null) return this.queryHandler.handle();
-		else return Arrays.stream(filter.split(",")).map(id->queryHandler.handle(new GetIngredientById(UUID.fromString(id)))).toList();
+		else return this.queryHandler.handle(filter);
 	}
 	@ExceptionHandler
 	public ResponseEntity<Void> handleIngredientNotFound(IngredientNotFound exception) {

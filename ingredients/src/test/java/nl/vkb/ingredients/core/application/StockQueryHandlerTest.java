@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -44,5 +45,14 @@ class StockQueryHandlerTest {
 	void getIngredientHandleNotFoundTest() {
 		GetIngredientById getIngredient=new GetIngredientById(UUID.randomUUID());
 		assertThrows(IngredientNotFound.class,()->queryHandler.handle(getIngredient));
+	}
+	@Test
+	void getMultiple() {
+		Ingredient ingredient3=repository.save(new Ingredient("melk",300));
+		String filter=ingredientList.stream()
+				.map(Ingredient::getId)
+				.map(UUID::toString)
+				.collect(Collectors.joining(","));
+		assertEquals(ingredientList,queryHandler.handle(filter));
 	}
 }
