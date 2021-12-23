@@ -48,11 +48,13 @@ public class IngredientController {
 	public void deleteIngredient(@PathVariable UUID id) {
 		this.commandHandler.handle(new DeleteIngredient(id));
 	}
-	
+
 	@GetMapping("/all")
-	public List<Ingredient> getAll() {
-		return this.queryHandler.handle();
+	public List<Ingredient> getDishesFiltered(@RequestParam(required = false) String filter) {
+		if(filter==null) return this.queryHandler.handle();
+		else return this.queryHandler.handle(filter);
 	}
+
 	@ExceptionHandler
 	public ResponseEntity<Void> handleIngredientNotFound(IngredientNotFound exception) {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
