@@ -68,7 +68,6 @@ public class ReviewCommandService {
 		List<ReviewEvent> events = review.returnEvents();
 		events.forEach(eventPublisher::publish);
 		review.clearEvents();
-		System.out.println("komt hij hier");
 	}
 
 	private void publishListEventsFor(List<Review> reviewList) {
