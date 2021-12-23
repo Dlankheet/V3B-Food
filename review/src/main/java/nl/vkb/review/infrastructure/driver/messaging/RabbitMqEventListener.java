@@ -16,11 +16,10 @@ public class RabbitMqEventListener {
 
 	@RabbitListener(queues = "#{'${messaging.queue.customers}'}")
 	void listen(CustomerEvent event) {
-		switch (event.getEventKey()) {
-			case "customers.deleted":
-				this.commandService.handle(
-						new DeleteAllReviewsByCustomer(event.getCustomerId())
-				);
+		if ("customers.deleted".equals(event.getEventKey())) {
+			this.commandService.handle(
+					new DeleteAllReviewsByCustomer(event.getCustomerId())
+			);
 		}
 	}
 }
