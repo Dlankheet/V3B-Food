@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "a8d4203f-99ea-4faf-a4b4-a41bc6caee7e",
-		"name": "BEP3 - Food - Dish",
+		"name": "BEP3 - Food Dish",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"title\": \"Broodje Bal\",\r\n    \"price\": 100,\r\n    \"ingredients\": [{\"id\": \"f5a708c6-e193-44bc-af00-4aaf9bf7641c\",\r\n    \"amount\": 10}\r\n    ]\r\n}",
+					"raw": "{\r\n    \"title\": \"Broodje Frikandel XXL\",\r\n    \"price\": 5,\r\n    \"ingredients\": [{\"id\": \"038feadb-a4b5-49fd-ab53-c3cbd37fc9c9\",\r\n    \"amount\": 2},{\"id\": \"5588157f-b050-4841-aaa1-f8bdf5b412ce\",\r\n    \"amount\": 5}\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,11 +20,11 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/dish/create",
+					"raw": "localhost:8085/dish/create",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8085",
 					"path": [
 						"dish",
 						"create"
@@ -39,15 +39,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/dish/61c1e48f0177562f7a8bda16/isAvailable",
+					"raw": "http://localhost:8085/dish/177cd4e3-b403-4cb0-94f4-20e8463c1c04/isAvailable",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8085",
 					"path": [
 						"dish",
-						"61c1e48f0177562f7a8bda16",
+						"177cd4e3-b403-4cb0-94f4-20e8463c1c04",
 						"isAvailable"
 					]
 				}
@@ -60,14 +60,98 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/dish/all",
+					"raw": "localhost:8085/dish/all",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8085",
 					"path": [
 						"dish",
 						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DishesAvailableForOrder",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8085/dish/checkorderavailability/177cd4e3-b403-4cb0-94f4-20e8463c1c04,177cd4e3-b403-4cb0-94f4-20e8463c1c04,177cd4e3-b403-4cb0-94f4-20e8463c1c04,177cd4e3-b403-4cb0-94f4-20e8463c1c04",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"dish",
+						"checkorderavailability",
+						"177cd4e3-b403-4cb0-94f4-20e8463c1c04,177cd4e3-b403-4cb0-94f4-20e8463c1c04,177cd4e3-b403-4cb0-94f4-20e8463c1c04,177cd4e3-b403-4cb0-94f4-20e8463c1c04"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddIngredientToDish",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"ingredient\" : {\r\n    \"id\": \"5588157f-b050-4841-aaa1-f8bdf5b412ce\",\r\n    \"amount\": 1\r\n}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/dish/0d21193f-7da7-4fac-802f-72b061f77d47/addIngredient",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"dish",
+						"0d21193f-7da7-4fac-802f-72b061f77d47",
+						"addIngredient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RemoveIngredientFromDish",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ingredientId\": \"5588157f-b050-4841-aaa1-f8bdf5b412ce\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8085/dish/0d21193f-7da7-4fac-802f-72b061f77d47/removeIngredient?ingredientId=5588157f-b050-4841-aaa1-f8bdf5b412ce",
+					"host": [
+						"localhost"
+					],
+					"port": "8085",
+					"path": [
+						"dish",
+						"0d21193f-7da7-4fac-802f-72b061f77d47",
+						"removeIngredient"
+					],
+					"query": [
+						{
+							"key": "ingredientId",
+							"value": "5588157f-b050-4841-aaa1-f8bdf5b412ce"
+						}
 					]
 				}
 			},
