@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 @SpringBootTest
-public class ReviewQueryServiceTest {
+class ReviewQueryServiceTest {
 
 	@Autowired
 	private ReviewRepository repository;

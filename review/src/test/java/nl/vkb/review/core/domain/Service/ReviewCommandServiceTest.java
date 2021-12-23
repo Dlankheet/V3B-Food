@@ -19,7 +19,7 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class ReviewCommandServiceTest {
+class ReviewCommandServiceTest {
 
 		@Autowired
 		private ReviewRepository repository;

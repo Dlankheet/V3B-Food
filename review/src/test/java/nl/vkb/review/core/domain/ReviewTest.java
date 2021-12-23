@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ReviewTest {
+class ReviewTest {
 	private Review review;
 	private Rating rating;
 	private List<String> pros = new ArrayList<>();
