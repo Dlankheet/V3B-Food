@@ -1,11 +1,11 @@
-package nl.vkb.review.core.Service;
+package nl.vkb.review.core.service;
 
-import nl.vkb.review.core.Service.Command.ChangeRating;
-import nl.vkb.review.core.Service.Command.DeleteAllReviewsByCustomer;
-import nl.vkb.review.core.Service.Command.DeleteReview;
-import nl.vkb.review.core.Service.Command.MakeReview;
+import nl.vkb.review.core.service.command.ChangeRating;
+import nl.vkb.review.core.service.command.DeleteAllReviewsByCustomer;
+import nl.vkb.review.core.service.command.DeleteReview;
+import nl.vkb.review.core.service.command.MakeReview;
 
-import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
+import nl.vkb.review.core.domain.exception.ReviewNotFoundException;
 import nl.vkb.review.core.domain.Rating;
 import nl.vkb.review.core.domain.Review;
 import nl.vkb.review.core.domain.event.ReviewDeleted;

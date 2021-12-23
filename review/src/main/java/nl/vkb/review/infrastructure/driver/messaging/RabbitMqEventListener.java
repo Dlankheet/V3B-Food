@@ -1,7 +1,7 @@
 package nl.vkb.review.infrastructure.driver.messaging;
 
-import nl.vkb.review.core.Service.Command.DeleteAllReviewsByCustomer;
-import nl.vkb.review.core.Service.ReviewCommandService;
+import nl.vkb.review.core.service.command.DeleteAllReviewsByCustomer;
+import nl.vkb.review.core.service.ReviewCommandService;
 import nl.vkb.review.infrastructure.driver.messaging.event.CustomerEvent;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;

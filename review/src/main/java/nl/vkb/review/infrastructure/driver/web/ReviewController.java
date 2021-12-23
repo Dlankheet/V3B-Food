@@ -1,16 +1,16 @@
 package nl.vkb.review.infrastructure.driver.web;
 
-import nl.vkb.review.core.Service.Command.ChangeRating;
-import nl.vkb.review.core.domain.Exception.ReviewRatingException;
+import nl.vkb.review.core.service.command.ChangeRating;
+import nl.vkb.review.core.domain.exception.ReviewRatingException;
 import nl.vkb.review.infrastructure.driver.web.Request.ChangeRatingRequest;
 import nl.vkb.review.infrastructure.driver.web.Request.MakeReviewRequest;
 import nl.vkb.review.core.domain.Review;
-import nl.vkb.review.core.Service.Command.DeleteReview;
-import nl.vkb.review.core.Service.Command.MakeReview;
-import nl.vkb.review.core.Service.Query.GetReviewById;
-import nl.vkb.review.core.Service.ReviewCommandService;
-import nl.vkb.review.core.Service.ReviewQueryService;
-import nl.vkb.review.core.domain.Exception.ReviewNotFoundException;
+import nl.vkb.review.core.service.command.DeleteReview;
+import nl.vkb.review.core.service.command.MakeReview;
+import nl.vkb.review.core.service.query.GetReviewById;
+import nl.vkb.review.core.service.ReviewCommandService;
+import nl.vkb.review.core.service.ReviewQueryService;
+import nl.vkb.review.core.domain.exception.ReviewNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
