@@ -67,20 +67,20 @@ public class OrderController {
         return new OrderDto(order);
     }
     @ExceptionHandler
-    public ResponseEntity handleOrderNotFound(OrderNotFoundException exception) {
+    public ResponseEntity<String> handleOrderNotFound(OrderNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
 
     @ExceptionHandler
-    public ResponseEntity handleOrderStatus(OrderStatusException exception) {
+    public ResponseEntity<String> handleOrderStatus(OrderStatusException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
     @ExceptionHandler
-    public ResponseEntity handleDishUnavailable(DishUnavailableException exception) {
+    public ResponseEntity<String> handleDishUnavailable(DishUnavailableException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
     @ExceptionHandler
-    public ResponseEntity handleDishServiceUnavailable(DishServiceUnavailableException exception) {
+    public ResponseEntity<String> handleDishServiceUnavailable(DishServiceUnavailableException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(exception.getMessage());
     }
 }

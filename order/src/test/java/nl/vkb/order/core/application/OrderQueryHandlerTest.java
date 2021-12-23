@@ -51,7 +51,7 @@ class OrderQueryHandlerTest {
     @Test
     void getOrderByIdFailFlow ( ) {
         repository.delete(order);
-        assertThrows(OrderNotFoundException.class,()-> queryHandler.handle(new GetOrderById(order.getId())));
+        assertThrows(OrderNotFoundException.class, ()-> {queryHandler.handle(new GetOrderById(order.getId()));});
     }
 
     @DisplayName("Get order based on customer id")

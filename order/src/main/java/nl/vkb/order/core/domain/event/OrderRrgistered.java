@@ -1,7 +1,5 @@
 package nl.vkb.order.core.domain.event;
 
-import lombok.AllArgsConstructor;
-
 import java.util.UUID;
 
 public class OrderRrgistered extends OrderEvent{
