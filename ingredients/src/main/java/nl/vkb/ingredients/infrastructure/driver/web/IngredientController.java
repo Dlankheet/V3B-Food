@@ -15,8 +15,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ingredient")
@@ -48,10 +50,11 @@ public class IngredientController {
 	public void deleteIngredient(@PathVariable UUID id) {
 		this.commandHandler.handle(new DeleteIngredient(id));
 	}
-	
+
 	@GetMapping("/all")
-	public List<Ingredient> getAll() {
-		return this.queryHandler.handle();
+	public List<Ingredient> getDishesFiltered(@RequestParam(required = false) String filter) {
+		if(filter==null) return this.queryHandler.handle();
+		else return Arrays.stream(filter.split(",")).map(id->queryHandler.handle(new GetIngredientById(UUID.fromString(id)))).toList();
 	}
 	@ExceptionHandler
 	public ResponseEntity<Void> handleIngredientNotFound(IngredientNotFound exception) {

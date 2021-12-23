@@ -232,6 +232,62 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "create 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Test response\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"Appel\");",
+							"    pm.expect(jsonData.stock).to.eql(100);",
+							"    pm.collectionVariables.set(\"ingredientId2\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"Appel\",\n    \"stock\":300\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/ingredient",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"ingredient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMultiple",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -261,6 +317,10 @@
 		},
 		{
 			"key": "ingredientId",
+			"value": ""
+		},
+		{
+			"key": "ingredientId2",
 			"value": ""
 		}
 	]
