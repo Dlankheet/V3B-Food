@@ -4,12 +4,11 @@ import nl.vkb.dishes.core.application.query.*;
 import nl.vkb.dishes.core.application.results.OrderAvailableResult;
 import nl.vkb.dishes.core.domain.Dish;
 import nl.vkb.dishes.core.domain.DishRepository;
-import nl.vkb.dishes.core.domain.Exception.DishNotFoundException;
 import nl.vkb.dishes.core.domain.Ingredient;
+import nl.vkb.dishes.core.domain.exceptions.DishNotFoundException;
 import nl.vkb.dishes.core.port.storage.StockRepository;
 import nl.vkb.dishes.infrastructure.driven.storage.StockResult;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.aggregation.ArrayOperators;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,7 +26,6 @@ public class DishQueryHandler {
     public Boolean handle(CheckAvailable query) {
         Optional<Dish> optionalDish = dishRepository.findById(query.getId());
         Dish dish = optionalDish.orElseThrow(() -> new DishNotFoundException("This dish is not available"));
-        System.out.println(dish.getIngredients());
         return handle(new CheckStock(dish.getIngredients()));
     }
 
@@ -39,14 +37,9 @@ public class DishQueryHandler {
         List<StockResult> stockIngredients = stockRepository.findIngredientByIds(ids);
 
         for (StockResult stockIngredient : stockIngredients) {
-            System.out.println(stockIngredient);
             for (Ingredient ingredient : neededIngredients) {
-                System.out.println(ingredient);
-                if(ingredient.getId() == stockIngredient.getId()){
-                    System.out.println("Stock: " + stockIngredient + " Needed: " + ingredient);
-                    if(stockIngredient.getStock() < ingredient.getAmount()){
-                        return false;
-                    }
+                if(ingredient.getId() == stockIngredient.getId() && stockIngredient.getStock() < ingredient.getAmount()){
+                    return false;
                 }
             }
         }
