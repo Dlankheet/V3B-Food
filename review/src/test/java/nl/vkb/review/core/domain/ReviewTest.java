@@ -52,12 +52,8 @@ class ReviewTest {
 
 	@Test
 	void RatingNotValidTest() {
-		Rating rating = new Rating(5.1);
-		UUID orderId = UUID.randomUUID();
-		UUID accountId = UUID.randomUUID();
 		assertThrows(ReviewRatingException.class,
-				() -> new Review("d", pros, cons,
-						rating, orderId, accountId)
+				() -> new Rating(5.1)
 		);
 	}
 }
