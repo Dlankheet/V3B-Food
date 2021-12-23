@@ -43,7 +43,6 @@ public class DishController {
     @GetMapping("/checkorderavailability/{idString}")
     public WebOrderAvailableResult checkOrderAvailability(@PathVariable String idString) {
         List<UUID> dishUUIDs = uuidUtils.parseStringToList(idString);
-        System.out.println(dishUUIDs);
         OrderAvailableResult result = this.queryHandler.handle(new CheckOrderAvailability(dishUUIDs));
         List<String> resultlist = uuidUtils.parseUUIDtoList(result.getUnavailableDishes());
 
