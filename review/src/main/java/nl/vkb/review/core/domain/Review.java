@@ -1,7 +1,6 @@
 package nl.vkb.review.core.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
 import lombok.Getter;
 import nl.vkb.review.core.domain.event.ReviewCreated;
 import nl.vkb.review.core.domain.event.ReviewEvent;
@@ -38,7 +37,7 @@ public class Review {
 		this.accountId = accountId;
 		this.events.add(new ReviewCreated(this.id, this.accountId));
 	}
-	
+
 	public void clearEvents() {
 		this.events.clear();
 	}
