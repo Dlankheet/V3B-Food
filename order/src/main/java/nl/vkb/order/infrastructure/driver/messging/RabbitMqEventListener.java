@@ -19,7 +19,6 @@ public class RabbitMqEventListener {
     void listen(CustomerEvent event) {
         if (event.eventKey.equals("customers.deleted")) {
             this.commandHandler.handle(new CustomerDeleted(event.customerId));
-            System.out.println(event);
         }
     }
 }
