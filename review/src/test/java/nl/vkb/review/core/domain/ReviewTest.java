@@ -1,7 +1,6 @@
 package nl.vkb.review.core.domain;
 
 import nl.vkb.review.core.domain.Exception.ReviewRatingException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +32,7 @@ public class ReviewTest {
 	@Test
 	void changeReviewRatingTest() {
 			this.review.getRating().changeRating(4.6);
-		assertEquals(4.6, this.review.getRatingNumber());
+		assertEquals(4.6, this.review.getRating().getRatingNumber());
 	}
 		@Test
 		void RatingNotValidTest() {

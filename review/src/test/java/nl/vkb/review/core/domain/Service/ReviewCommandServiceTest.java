@@ -46,16 +46,16 @@ public class ReviewCommandServiceTest {
 			Review cReview = service.handle(new MakeReview("desc", new ArrayList<>(), new ArrayList<>(),
 					4, UUID.randomUUID(), UUID.randomUUID()));
 
-			assertEquals(4, repository.findById(cReview.getId()).get().getRatingNumber());
+			assertEquals(4, repository.findById(cReview.getId()).get().getRating().getRatingNumber());
 		}
 
 		@Test
 		void changeReviewRatingTest() {
-			assertEquals(2.5, this.savedReview.getRatingNumber());
+			assertEquals(2.5, this.savedReview.getRating().getRatingNumber());
 
 			service.handle(new ChangeRating(savedReview.getId(), 4.8));
 
-			assertEquals(4.8, this.repository.findById(savedReview.getId()).get().getRatingNumber());
+			assertEquals(4.8, this.repository.findById(savedReview.getId()).get().getRating().getRatingNumber());
 		}
 
 		@Test

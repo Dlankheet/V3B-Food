@@ -43,7 +43,7 @@ public class ReviewQueryServiceTest {
 		Assertions.assertEquals("desc", savedReview.getDescription());
 		Assertions.assertTrue(savedReview.getPros().isEmpty());
 		Assertions.assertTrue(savedReview.getPros().isEmpty());
-		Assertions.assertEquals(2.5, savedReview.getRatingNumber());
+		Assertions.assertEquals(2.5, savedReview.getRating().getRatingNumber());
 	}
 
 	@Test

@@ -1,5 +1,6 @@
 package nl.vkb.review.core.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import nl.vkb.review.core.domain.event.ReviewCreated;
 import nl.vkb.review.core.domain.event.ReviewEvent;
@@ -23,6 +24,7 @@ public class Review {
 	private UUID orderId;
 	private UUID accountId;
 	@Transient
+	@Getter(AccessLevel.NONE)
 	private List<ReviewEvent> events = new ArrayList<>();
 
 	public Review(String description, List<String> pros, List<String> cons, Rating rating, UUID orderId, UUID accountId){
@@ -41,5 +43,5 @@ public class Review {
 		this.events.clear();
 	}
 
-	public double getRatingNumber() {return this.getRating().getRatingNumber();}
+	public List<ReviewEvent> returnEvents() { return events; }
 }
