@@ -6,9 +6,14 @@ import lombok.Getter;
 import java.util.UUID;
 
 @Getter
-@AllArgsConstructor
 public class StockResult {
     private final UUID id;
     private final String name;
     private final int stock;
+
+    public StockResult(UUID id, String name, int stock) {
+        this.id = id;
+        this.name = name;
+        this.stock = stock;
+    }
 }

@@ -59,5 +59,4 @@ public class DishController {
     public Boolean isDishAvailable(@PathVariable UUID id) {
         return queryHandler.handle(new CheckAvailable(id));
     }
-
 }
