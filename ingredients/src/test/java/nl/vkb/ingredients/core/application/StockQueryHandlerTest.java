@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
@@ -21,11 +20,13 @@ class StockQueryHandlerTest {
 	@Autowired
 	private IngredientRepository repository;
 	private Ingredient ingredient;
+	private Ingredient ingredient2;
 	private List<Ingredient> ingredientList;
 	@BeforeEach
 	void saveIngredients() {
 		ingredient=repository.save(new Ingredient("eggs",100));
-		ingredientList=List.of(ingredient,repository.save(new Ingredient("eggs2",200)));
+		ingredient2=repository.save(new Ingredient("eggs2", 200));
+		ingredientList= new ArrayList<>(List.of(ingredient, ingredient2));
 	}
 	@AfterEach
 	void clearRepository(){
@@ -47,15 +48,11 @@ class StockQueryHandlerTest {
 	}
 	@Test
 	void getMultiple() {
-		Ingredient ingredient3=repository.save(new Ingredient("melk",300));
-		String filter=ingredientList.stream()
-				.map(Ingredient::getId)
-				.map(UUID::toString)
-				.collect(Collectors.joining(","));
-		List<String> responseStrings=new ArrayList<String>(queryHandler.handle(filter).stream().map(Ingredient::getId).map(UUID::toString).toList());
-		List<String> expectedStrings=new ArrayList<String>(ingredientList.stream().map(Ingredient::getId).map(UUID::toString).toList());
-		Collections.sort(responseStrings);
-		Collections.sort(expectedStrings);
-		assertEquals(expectedStrings,responseStrings);
+		repository.save(new Ingredient("melk",300));
+		String filter=ingredient.getId()+","+ingredient2.getId();
+		List<Ingredient> responseList=queryHandler.handle(filter);
+		responseList.sort(Comparator.comparing(Ingredient::getId));
+		ingredientList.sort(Comparator.comparing(Ingredient::getId));
+		assertEquals(ingredientList,responseList);
 	}
 }
