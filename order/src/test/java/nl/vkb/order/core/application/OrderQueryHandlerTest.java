@@ -43,7 +43,8 @@ class OrderQueryHandlerTest {
     @DisplayName("Get order based on his id ")
     @Test
     void getOrderByIdHappyFlow ( ) {
-        assertEquals(order, queryHandler.handle(new GetOrderById(order.getId())));
+        assertEquals(order.getId(), queryHandler.handle(new GetOrderById(order.getId())).getId());
+        assertEquals(order.getDishes(), queryHandler.handle(new GetOrderById(order.getId())).getDishes());
     }
 
     @DisplayName("Get order based on his id when not found")
@@ -56,8 +57,9 @@ class OrderQueryHandlerTest {
     @DisplayName("Get order based on customer id")
     @Test
     void findAllOrderByCustomerId ( ) {
-        List<Order> orders = List.of(order);
-        assertEquals(orders, queryHandler.handle(new FindAllOrderByCustomerId(order.getCustomer())));
+        assertEquals(1, queryHandler.handle(new FindAllOrderByCustomerId(order.getCustomer())).size());
+        assertEquals(order.getId(), queryHandler.handle(new FindAllOrderByCustomerId(order.getCustomer())).get(0).getId());
+
     }
     @DisplayName("Get all order")
     @Test
